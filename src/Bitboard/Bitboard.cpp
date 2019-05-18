@@ -2,48 +2,49 @@
 
 using namespace Piranhas;
 
-FieldType Bitboard::GetFieldTypeAtPosition(const Position &pos) {
-    if (redFields[pos.y * 10 + pos.x] == 1) {
+FieldType Bitboard::GetFieldTypeAtPosition(const Position &pos) const {
+    int index = pos.y * 10 + pos.x;
+    if (redFields[index] == 1) {
         return FieldType::Red;
-    } else if (blueFields[pos.y * 10 + pos.x] == 1) {
+    } else if (blueFields[index] == 1) {
         return FieldType::Blue;
-    } else if (obstacleFields[pos.y * 10 + pos.x] == 1) {
+    } else if (obstacleFields[index] == 1) {
         return FieldType::Obstacle;
     } else {
         return FieldType::Empty;
     }
 }
 
-FieldType Bitboard::SetFieldTypeAtPosition(const Position &pos, FieldType fieldType) {
-
+void Bitboard::SetFieldTypeAtPosition(const Position &pos, FieldType fieldType) {
+    int index = pos.y * 10 + pos.x;
     if (fieldType == FieldType::Red) {
-        redFields[pos.y * 10 + pos.x] = 1;
-        blueFields[pos.y * 10 + pos.x] = 0;
-        obstacleFields[pos.y * 10 + pos.x] = 0;
-        emptyFields[pos.y * 10 + pos.x] = 0;
+        redFields[index] = 1;
+        blueFields[index] = 0;
+        obstacleFields[index] = 0;
+        emptyFields[index] = 0;
     } else if (fieldType == FieldType::Blue) {
-        redFields[pos.y * 10 + pos.x] = 0;
-        blueFields[pos.y * 10 + pos.x] = 1;
-        obstacleFields[pos.y * 10 + pos.x] = 0;
-        emptyFields[pos.y * 10 + pos.x] = 0;
+        redFields[index] = 0;
+        blueFields[index] = 1;
+        obstacleFields[index] = 0;
+        emptyFields[index] = 0;
     } else if (fieldType == FieldType::Obstacle) {
-        redFields[pos.y * 10 + pos.x] = 0;
-        blueFields[pos.y * 10 + pos.x] = 0;
-        obstacleFields[pos.y * 10 + pos.x] = 1;
-        emptyFields[pos.y * 10 + pos.x] = 0;
+        redFields[index] = 0;
+        blueFields[index] = 0;
+        obstacleFields[index] = 1;
+        emptyFields[index] = 0;
     } else {
-        redFields[pos.y * 10 + pos.x] = 0;
-        blueFields[pos.y * 10 + pos.x] = 0;
-        obstacleFields[pos.y * 10 + pos.x] = 0;
-        emptyFields[pos.y * 10 + pos.x] = 1;
+        redFields[index] = 0;
+        blueFields[index] = 0;
+        obstacleFields[index] = 0;
+        emptyFields[index] = 1;
     }
 }
 
 Bitboard::Bitboard() {
-    redFields = std::bitset<100>();
-    blueFields = std::bitset<100>();
-    obstacleFields = std::bitset<100>();
-    emptyFields = std::bitset<100>();
+    //redFields = std::bitset<100>(0);
+    //blueFields = std::bitset<100>(0);
+    //obstacleFields = std::bitset<100>(0);
+    //emptyFields = std::bitset<100>(0);
 }
 
 Bitboard::Bitboard(Bitboard &bitboard) {
@@ -52,10 +53,18 @@ Bitboard::Bitboard(Bitboard &bitboard) {
     this->obstacleFields = std::bitset<100>(bitboard.obstacleFields);
     this->emptyFields = std::bitset<100>(bitboard.emptyFields);
 }
+Bitboard::Bitboard(const Bitboard &bitboard) {
+    this->redFields = std::bitset<100>(bitboard.redFields);
+    this->blueFields = std::bitset<100>(bitboard.blueFields);
+    this->obstacleFields = std::bitset<100>(bitboard.obstacleFields);
+    this->emptyFields = std::bitset<100>(bitboard.emptyFields);
+}
 
-Field &Bitboard::GetField(const Position &pos) {
-    Field field = Field(GetFieldTypeAtPosition(pos), Position(pos));
-    return field;
+Field Bitboard::GetField(const Position &pos) const {
+    //FieldType fieldType = GetFieldTypeAtPosition(pos);
+    //Position position = Position(pos);
+    //Field field = Field(GetFieldTypeAtPosition(pos), Position(pos));
+    return Field(GetFieldTypeAtPosition(pos), Position(pos));
 }
 
 void Bitboard::SetField(const Position &pos, FieldType fieldType) {

@@ -13,11 +13,6 @@ void Bench2();
 int main() {
     cout << "Hello, World!\n";
 
-    Board board = Board();
-    Field f = board.GetField(0, 0);
-
-    GameState gameState = GameState(PlayerColor::Red);
-
     while (true) {
         Bench1();
         Bench2();

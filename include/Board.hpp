@@ -1,17 +1,17 @@
 #pragma once
 
+#include <array>
 #include <unordered_set>
 #include <vector>
-#include <array>
 
 #include "Bitboard.hpp"
-#include "Position.hpp"
-#include "PlayerColor.hpp"
 #include "Direction.hpp"
+#include "Field.hpp"
 #include "FieldType.hpp"
 #include "Move.hpp"
-#include "Field.hpp"
 #include "Player.hpp"
+#include "PlayerColor.hpp"
+#include "Position.hpp"
 
 namespace std {
     template <>
@@ -38,7 +38,7 @@ namespace Piranhas {
         std::vector<Field> GetFieldsDownRightUpLeft(const Position &includedPos);
 
         std::unordered_set<Field> GetSwarm(std::vector<Field> &found, std::unordered_set<Field> &swarm, int index);
-        std::unordered_set<Field> GetGreatestSwarmFromParentSet(std::vector<Field> fieldsToSearch); 
+        std::unordered_set<Field> GetGreatestSwarmFromParentSet(std::vector<Field> fieldsToSearch);
 
     public:
         Board();
@@ -47,11 +47,11 @@ namespace Piranhas {
 
         void Populate();
 
-        Bitboard& GetBitboard();
+        Bitboard GetBitboard() const;
         void SetBitboard(const Bitboard &bitboard);
 
-        Field& GetField(const Position &pos);
-        Field& GetField(int x, int y);
+        Field GetField(const Position &pos) const;
+        Field GetField(int x, int y) const;
         void SetField(Field field);
         void SetFieldType(const Position &position, FieldType fieldType);
 

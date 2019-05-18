@@ -22,6 +22,10 @@ Board::Board(Board &board) {
     this->SetBitboard(bitboard);
 }
 
+Board::Board(const Board &board) {
+    this->bitboard = Bitboard(board.bitboard);
+}
+
 void Board::Populate() {
     SetEmpty();
     SetCheckers();
@@ -31,7 +35,7 @@ void Board::Populate() {
 void Board::SetEmpty() {
     for (int x = 0; x < 10; x++) {
         for (int y = 0; y < 10; y++) {
-            SetField(Field(FieldType::Empty, Position(x, y)));
+            SetFieldType(Position(x, y), FieldType::Empty);
         }
     }
 }
@@ -246,18 +250,20 @@ int Board::GetCheckerCountInDirection(const std::vector<Field> &fieldsInDirectio
     return count;
 }
 
-Bitboard &Board::GetBitboard() {
+Bitboard Board::GetBitboard() const {
     return bitboard;
 }
 void Board::SetBitboard(const Bitboard &bitboard) {
     this->bitboard = bitboard;
 }
 
-Field &Board::GetField(const Position &position) {
+Field Board::GetField(const Position &position) const {
     return bitboard.GetField(position);
 }
-Field &Board::GetField(int x, int y) {
-    return bitboard.GetField(Position(x, y));
+Field Board::GetField(int x, int y) const {
+    Position pos = Position(x,y);
+    Field field = bitboard.GetField(pos);
+    return field;
 }
 void Board::SetField(Field field) {
     bitboard.SetField(field.position, field.fieldType);
