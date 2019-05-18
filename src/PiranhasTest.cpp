@@ -1,11 +1,13 @@
 #include <chrono>
 #include <iostream>
 
+#include "PiranhasClient.hpp"
 #include "GameState.hpp"
 #include "PlayerColor.hpp"
 
 using namespace std;
 using namespace Piranhas;
+using namespace Piranhas::Client;
 
 void Bench1();
 void Bench2();
@@ -13,10 +15,13 @@ void Bench2();
 int main() {
     cout << "Hello, World!\n";
 
-    while (true) {
+    PiranhasClient piranhasClient;
+    piranhasClient.Start("127.0.0.1", 13050);
+
+    /*while (true) {
         Bench1();
         Bench2();
-    }
+    }*/
 
     std::getchar();
     return 0;

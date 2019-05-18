@@ -53,6 +53,9 @@
         "iomanip": "cpp",
         "iostream": "cpp",
         "memory": "cpp",
-        "mutex": "cpp"
+        "mutex": "cpp",
+        "codecvt": "cpp",
+        "typeindex": "cpp",
+        "*.ipp": "cpp"
     }
 }
