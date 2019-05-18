@@ -19,7 +19,7 @@ void TCP_Client::SendMessage(std::string message) {
 std::string TCP_Client::ReadMessage() {
     boost::system::error_code errorCode;
     streambuf receiveBuffer;
-    read(socket, receiveBuffer, transfer_at_least(10), errorCode);
+    read(socket, receiveBuffer, transfer_at_least(1000), errorCode);
     if (errorCode) {
         std::cout << "Receiving failed: " << errorCode.message() << "\n";
         return "";

@@ -2,6 +2,7 @@ CXX ?= g++
 
 # path #
 SRC_PATH = src
+INCLUDE_PATH = include
 BUILD_PATH = build
 BIN_PATH = $(BUILD_PATH)/bin
 
@@ -10,11 +11,13 @@ BIN_NAME = PiranhasTest
 
 # extensions #
 SRC_EXT = cpp
+INCLUDES_EXT = hpp
 
 # code lists #
 # Find all source files in the source directory, sorted by
 # most recently modified
-SOURCES = $(shell find $(SRC_PATH) -name '*.$(SRC_EXT)' | sort -k 1nr | cut -f2-)
+SOURCES = $(shell find $(SRC_PATH) -maxdepth 5 -name '*.$(SRC_EXT)' | sort -k 1nr | cut -f2-)
+INCLUDES = $(shell find $(INCLUDE_PATH) -maxdepth 5 -name '*.$(INCLUDES_EXT)' | sort -k 1nr | cut -f2-)
 # Set the object file names, with the source directory stripped
 # from the path, and the build path prepended in its place
 OBJECTS = $(SOURCES:$(SRC_PATH)/%.$(SRC_EXT)=$(BUILD_PATH)/%.o)

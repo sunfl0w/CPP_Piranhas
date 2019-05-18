@@ -2,7 +2,7 @@
 
 #include <boost/asio.hpp>
 #include <iostream>
-#include <string.h>
+#include <string>
 
 using namespace boost::asio;
 using boost::asio::ip::tcp;
