@@ -261,9 +261,9 @@ Field Board::GetField(const Position &position) const {
     return bitboard.GetField(position);
 }
 Field Board::GetField(int x, int y) const {
-    Position pos = Position(x,y);
-    Field field = bitboard.GetField(pos);
-    return field;
+    //Position pos = Position(x,y);
+    //Field field = bitboard.GetField(pos);
+    return bitboard.GetField(Position(x, y));
 }
 void Board::SetField(Field field) {
     bitboard.SetField(field.position, field.fieldType);
