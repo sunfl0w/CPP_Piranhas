@@ -14,12 +14,12 @@
 using namespace Piranhas;
 
 Board::Board() {
-    fields = std::array<Field, 100>();
+    bitboard = Bitboard();
 }
 
 Board::Board(Board &board) {
-    std::array<Field, 100> fields(board.GetFields());
-    this->SetFields(fields);
+    Bitboard bitboard (board.bitboard);
+    this->SetBitboard(bitboard);
 }
 
 void Board::Populate() {
@@ -246,24 +246,24 @@ int Board::GetCheckerCountInDirection(const std::vector<Field> &fieldsInDirectio
     return count;
 }
 
-std::array<Field, 100> Board::GetFields() {
-    return fields;
+Bitboard &Board::GetBitboard() {
+    return bitboard;
 }
-void Board::SetFields(const std::array<Field, 100> &fields) {
-    this->fields = fields;
+void Board::SetBitboard(const Bitboard &bitboard) {
+    this->bitboard = bitboard;
 }
 
-const Field &Board::GetField(const Position &position) const {
-    return fields[10 * position.y + position.x];
+Field &Board::GetField(const Position &position) {
+    return bitboard.GetField(position);
 }
-const Field &Board::GetField(int x, int y) const {
-    return fields[10 * y + x];
+Field &Board::GetField(int x, int y) {
+    return bitboard.GetField(Position(x, y));
 }
 void Board::SetField(Field field) {
-    fields[10 * field.position.y + field.position.x] = field;
+    bitboard.SetField(field.position, field.fieldType);
 }
 void Board::SetFieldType(const Position &position, FieldType fieldType) {
-    fields[10 * position.y + position.x].fieldType = fieldType;
+    bitboard.SetField(position, fieldType);
 }
 
 bool Board::IsPositionOnBoard(const Position &position) {

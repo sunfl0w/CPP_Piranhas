@@ -4,6 +4,7 @@
 #include <vector>
 #include <array>
 
+#include "Bitboard.hpp"
 #include "Position.hpp"
 #include "PlayerColor.hpp"
 #include "Direction.hpp"
@@ -24,7 +25,7 @@ namespace std {
 
 namespace Piranhas {
     class Board {
-        std::array<Field, 100> fields;
+        Bitboard bitboard;
 
     private:
         void SetEmpty();
@@ -42,14 +43,15 @@ namespace Piranhas {
     public:
         Board();
         Board(Board &board);
+        Board(const Board &board);
 
         void Populate();
 
-        std::array<Field, 100> GetFields();
-        void SetFields(const std::array<Field, 100> &fields);
+        Bitboard& GetBitboard();
+        void SetBitboard(const Bitboard &bitboard);
 
-        const Field& GetField(const Position &pos) const;
-        const Field& GetField(int x, int y) const;
+        Field& GetField(const Position &pos);
+        Field& GetField(int x, int y);
         void SetField(Field field);
         void SetFieldType(const Position &position, FieldType fieldType);
 
