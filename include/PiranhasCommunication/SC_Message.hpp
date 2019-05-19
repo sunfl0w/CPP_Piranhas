@@ -9,6 +9,6 @@ namespace Piranhas::Communication {
         std::string content;
         SC_MessageType messageType;
 
-        SC_Message(std::string messageString, SC_MessageType messageType) {}
+        SC_Message(std::string messageString, SC_MessageType messageType);
     };
 }

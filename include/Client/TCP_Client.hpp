@@ -12,6 +12,8 @@ namespace Networking_Client {
         io_service ioService;
         tcp::socket socket;
 
+        const std::string delimiter = "\r\n\r\n";
+
         public:
         TCP_Client();
 
