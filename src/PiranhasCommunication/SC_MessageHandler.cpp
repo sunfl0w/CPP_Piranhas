@@ -64,6 +64,8 @@ std::vector<SC_Message> SC_MessageHandler::SplitInputMessagesIntoValidSC_Message
                     scMessageType = SC_MessageType::GameState;
                 } else if (classAttributeValue == "sc.framework.plugins.protocol.MoveRequest") {
                     scMessageType = SC_MessageType::MoveRequest;
+                } else if (classAttributeValue == "result") {
+                    scMessageType = SC_MessageType::Result;
                 }
             }
             xmlStringWriter xmlStringWriter;
@@ -136,7 +138,7 @@ PlayerColor SC_MessageHandler::GetPlayerColorFromWelcomeMessage(SC_Message messa
 std::string SC_MessageHandler::GetRoomIDFromJoinedMessage(SC_Message message) {
     pugi::xml_document scMessageDoc;
     scMessageDoc.load_string(message.content.data());
-    std::string roomID(scMessageDoc.child("room").attribute("roomId").value());
+    std::string roomID(scMessageDoc.child("joined").attribute("roomId").value());
     return roomID;
 }
 GameState SC_MessageHandler::GetGameStateFromGameStateMessage(SC_Message message) {
@@ -177,14 +179,15 @@ GameState SC_MessageHandler::GetGameStateFromGameStateMessage(SC_Message message
                 } else if(fieldAttributeName == "y") {
                     fieldPos.y = std::stoi(std::string(fieldAttribute.value()));
                 } else if(fieldAttributeName == "state") {
-                    if(std::string(fieldAttribute.value) == "RED") {
-                        fieldType == FieldType::Red;
-                    } else if(std::string(fieldAttribute.value) == "BLUE") {
-                        fieldType == FieldType::Blue;
-                    } else if(std::string(fieldAttribute.value) == "OBSTRUCTED") {
-                        fieldType == FieldType::Obstacle;
-                    } else if(std::string(fieldAttribute.value) == "EMPTY") {
-                        fieldType == FieldType::Empty;
+                    std::string fieldAttributeValue(fieldAttribute.value());
+                    if(fieldAttributeValue == "RED") {
+                        fieldType = FieldType::Red;
+                    } else if(fieldAttributeValue == "BLUE") {
+                        fieldType = FieldType::Blue;
+                    } else if(fieldAttributeValue == "OBSTRUCTED") {
+                        fieldType = FieldType::Obstacle;
+                    } else if(fieldAttributeValue == "EMPTY") {
+                        fieldType = FieldType::Empty;
                     }
                 }
             }
