@@ -4,18 +4,22 @@
 #include <pugixml.hpp>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "GameState.hpp"
 #include "Move.hpp"
 #include "PlayerColor.hpp"
 #include "SC_Message.hpp"
+#include "XmlStringWriter.hpp"
 
 namespace Piranhas::Communication {
     class SC_MessageHandler {
+    private:
+        std::vector<SC_Message> FilterProtocolMessages(std::string &inputStream);
     public:
         SC_MessageHandler();
 
-        std::vector<SC_Message> SplitInputMessagesIntoValidXMLMessages(std::string inputStream);
+        std::vector<SC_Message> SplitInputMessagesIntoValidSC_Messages(std::string inputStream);
 
         std::vector<SC_Message> ClassifyXMLMessages(std::vector<std::string>);
 

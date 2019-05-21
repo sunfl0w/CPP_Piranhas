@@ -5,7 +5,8 @@ build/PiranhasTest.o: src/PiranhasTest.cpp \
  include/FieldType.hpp include/Move.hpp include/Position.hpp \
  include/Direction.hpp include/Board.hpp include/Bitboard.hpp \
  include/Field.hpp include/PiranhasCommunication/SC_Message.hpp \
- include/PiranhasCommunication/SC_MessageType.hpp
+ include/PiranhasCommunication/SC_MessageType.hpp \
+ include/PugiXmlAdditions/XmlStringWriter.hpp
 
 include/Client/PiranhasClient.hpp:
 
@@ -36,3 +37,5 @@ include/Field.hpp:
 include/PiranhasCommunication/SC_Message.hpp:
 
 include/PiranhasCommunication/SC_MessageType.hpp:
+
+include/PugiXmlAdditions/XmlStringWriter.hpp:

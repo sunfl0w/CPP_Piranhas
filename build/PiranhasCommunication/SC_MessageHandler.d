@@ -5,7 +5,8 @@ build/PiranhasCommunication/SC_MessageHandler.o: \
  include/FieldType.hpp include/Move.hpp include/Position.hpp \
  include/Direction.hpp include/Board.hpp include/Bitboard.hpp \
  include/Field.hpp include/PiranhasCommunication/SC_Message.hpp \
- include/PiranhasCommunication/SC_MessageType.hpp
+ include/PiranhasCommunication/SC_MessageType.hpp \
+ include/PugiXmlAdditions/XmlStringWriter.hpp
 
 include/PiranhasCommunication/SC_MessageHandler.hpp:
 
@@ -32,3 +33,5 @@ include/Field.hpp:
 include/PiranhasCommunication/SC_Message.hpp:
 
 include/PiranhasCommunication/SC_MessageType.hpp:
+
+include/PugiXmlAdditions/XmlStringWriter.hpp:
