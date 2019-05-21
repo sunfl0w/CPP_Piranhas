@@ -13,6 +13,7 @@ namespace Piranhas {
         Board board;
         int turnCount;
         Player currentPlayer;
+        Player startingPlayer;
         Move lastPerformedMove;
 
     public:

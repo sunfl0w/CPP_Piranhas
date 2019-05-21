@@ -21,8 +21,6 @@ namespace Piranhas::Communication {
 
         std::vector<SC_Message> SplitInputMessagesIntoValidSC_Messages(std::string inputStream);
 
-        std::vector<SC_Message> ClassifyXMLMessages(std::vector<std::string>);
-
         SC_Message CreateProtocolMessage();
         SC_Message CreateProtocolEndMessage();
         SC_Message CreateJoinRequestMessage();
