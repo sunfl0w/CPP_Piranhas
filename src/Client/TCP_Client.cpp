@@ -4,8 +4,16 @@ using namespace Networking_Client;
 
 TCP_Client::TCP_Client() : socket(ioService) {}
 
-void TCP_Client::Connect(std::string address, unsigned short port) {
+void TCP_Client::ConnectWithIP(std::string address, unsigned short port) {
     socket.connect(tcp::endpoint(ip::address::from_string(address), port));
+}
+
+void TCP_Client::ConnectWithHostname(std::string hostName, unsigned short port) {
+    tcp::resolver resolver(ioService);
+    tcp::resolver::query query(hostName, "");
+    tcp::resolver::iterator iterator = resolver.resolve(query);
+    boost::asio::ip::tcp::endpoint endpoint = *iterator;
+    socket.connect(endpoint);
 }
 
 void TCP_Client::SendMessage(std::string message) {

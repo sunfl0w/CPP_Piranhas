@@ -43,7 +43,7 @@
             "command": "make clean",
             // use options.cwd property if the Makefile is not in the project root ${workspaceRoot} dir
             "options": {
-                //"cwd": "${workspaceFolder}/Makefile"
+                "cwd": "${workspaceFolder}"
             },
             // start the build without prompting for task selection, use "group": "build" otherwise
             "group": {

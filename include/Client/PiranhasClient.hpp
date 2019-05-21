@@ -27,6 +27,9 @@ namespace Piranhas::Client {
         GameState currentGameState;
         bool gameOver = false;
 
+
+        void ClientLoop();
+
         std::vector<SC_Message> HandleIncomingMessagesAndGenerateRespones(std::vector<SC_Message> incomingMessages);
 
         Move GetNextMove();
@@ -34,5 +37,6 @@ namespace Piranhas::Client {
     public:
         PiranhasClient();
         void Start(std::string address, unsigned short port);
+        void StartReserved(std::string hostanme, unsigned short port, std::string reservationCode);
     };
 } // namespace Piranhas::Client

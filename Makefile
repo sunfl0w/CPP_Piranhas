@@ -7,7 +7,7 @@ BUILD_PATH = build
 BIN_PATH = $(BUILD_PATH)/bin
 
 # executable # 
-BIN_NAME = PiranhasTest
+BIN_NAME = PiranhasClientCPP
 
 # extensions #
 SRC_EXT = cpp
@@ -25,10 +25,10 @@ OBJECTS = $(SOURCES:$(SRC_PATH)/%.$(SRC_EXT)=$(BUILD_PATH)/%.o)
 DEPS = $(OBJECTS:.o=.d)
 
 # flags #
-COMPILE_FLAGS = -std=c++11 -Wall -Wextra -g
-INCLUDES = -I include/ -I include/Client/ -I include/PiranhasCommunication/ -I include/PugiXmlAdditions/ -I /usr/local/include
+COMPILE_FLAGS = -Wall -Wextra
+INCLUDES = -I include/ -I include/Client/ -I include/PiranhasCommunication/ -I include/PugiXmlAdditions/ -I /usr/local/include -I /usr/lib/
 # Space-separated pkg-config libraries used by this project
-LIBS = -L /usr/lib/ -lboost_system -lboost_thread -lpthread
+LIBS = -static -L /usr/lib/ -lboost_system -lboost_thread -lpthread -lboost_program_options
 
 .PHONY: default_target
 default_target: release

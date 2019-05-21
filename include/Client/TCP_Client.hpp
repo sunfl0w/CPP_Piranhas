@@ -17,7 +17,8 @@ namespace Networking_Client {
         public:
         TCP_Client();
 
-        void Connect(std::string address, unsigned short port);
+        void ConnectWithIP(std::string address, unsigned short port);
+        void ConnectWithHostname(std::string address, unsigned short port);
 
         void SendMessage(std::string message);
 
