@@ -1,41 +1,43 @@
 build/Client/PiranhasClient.o: src/Client/PiranhasClient.cpp \
  include/Client/PiranhasClient.hpp include/Client/TCP_Client.hpp \
- include/PiranhasCommunication/SC_MessageHandler.hpp \
- include/GameState.hpp include/PlayerColor.hpp include/Player.hpp \
- include/FieldType.hpp include/Move.hpp include/Position.hpp \
- include/Direction.hpp include/Board.hpp include/Bitboard.hpp \
- include/Field.hpp include/PiranhasCommunication/SC_Message.hpp \
- include/PiranhasCommunication/SC_MessageType.hpp \
+ include/Piranhas/Communication/SC_MessageHandler.hpp \
+ include/Piranhas/GameState.hpp include/Piranhas/PlayerColor.hpp \
+ include/Piranhas/Player.hpp include/Piranhas/FieldType.hpp \
+ include/Piranhas/Move.hpp include/Piranhas/Position.hpp \
+ include/Piranhas/Direction.hpp include/Piranhas/Board.hpp \
+ include/Piranhas/Bitboard.hpp include/Piranhas/Field.hpp \
+ include/Piranhas/Communication/SC_Message.hpp \
+ include/Piranhas/Communication/SC_MessageType.hpp \
  include/PugiXmlAdditions/XmlStringWriter.hpp
 
 include/Client/PiranhasClient.hpp:
 
 include/Client/TCP_Client.hpp:
 
-include/PiranhasCommunication/SC_MessageHandler.hpp:
+include/Piranhas/Communication/SC_MessageHandler.hpp:
 
-include/GameState.hpp:
+include/Piranhas/GameState.hpp:
 
-include/PlayerColor.hpp:
+include/Piranhas/PlayerColor.hpp:
 
-include/Player.hpp:
+include/Piranhas/Player.hpp:
 
-include/FieldType.hpp:
+include/Piranhas/FieldType.hpp:
 
-include/Move.hpp:
+include/Piranhas/Move.hpp:
 
-include/Position.hpp:
+include/Piranhas/Position.hpp:
 
-include/Direction.hpp:
+include/Piranhas/Direction.hpp:
 
-include/Board.hpp:
+include/Piranhas/Board.hpp:
 
-include/Bitboard.hpp:
+include/Piranhas/Bitboard.hpp:
 
-include/Field.hpp:
+include/Piranhas/Field.hpp:
 
-include/PiranhasCommunication/SC_Message.hpp:
+include/Piranhas/Communication/SC_Message.hpp:
 
-include/PiranhasCommunication/SC_MessageType.hpp:
+include/Piranhas/Communication/SC_MessageType.hpp:
 
 include/PugiXmlAdditions/XmlStringWriter.hpp:
