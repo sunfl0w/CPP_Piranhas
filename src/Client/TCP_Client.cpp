@@ -4,16 +4,16 @@ using namespace Networking_Client;
 
 TCP_Client::TCP_Client() : socket(ioService) {}
 
-void TCP_Client::ConnectWithIP(std::string address, unsigned short port) {
-    socket.connect(tcp::endpoint(ip::address::from_string(address), port));
+void TCP_Client::ConnectWithIP(ip::address address, unsigned short port) {
+    socket.connect(tcp::endpoint(address, port));
 }
 
-void TCP_Client::ConnectWithHostname(std::string hostName, unsigned short port) {
-    tcp::resolver resolver(ioService);
-    tcp::resolver::query query(hostName, "");
-    tcp::resolver::iterator iterator = resolver.resolve(query);
-    boost::asio::ip::tcp::endpoint endpoint = *iterator;
-    socket.connect(endpoint);
+ip::address TCP_Client::ResolveHostnameToIP(std::string hostname) {
+    boost::asio::ip::tcp::resolver resolver(ioService);
+    boost::asio::ip::tcp::resolver::query query(hostname, "");
+    boost::asio::ip::tcp::resolver::iterator i = resolver.resolve(query);
+    boost::asio::ip::tcp::endpoint endpoint = *i;
+    return endpoint.address();
 }
 
 void TCP_Client::SendMessage(std::string message) {
@@ -33,7 +33,7 @@ std::string TCP_Client::ReadMessage() {
         std::cout << "Receiving failed: " << errorCode.message() << "\n";
         return "";
     } else {
-        const char* message = buffer_cast<const char*>(receiveBuffer.data());
+        const char *message = buffer_cast<const char *>(receiveBuffer.data());
         return std::string(message);
     }
 }

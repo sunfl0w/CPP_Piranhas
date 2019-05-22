@@ -48,15 +48,15 @@ Move PiranhasClient::GetNextMove() {
     return possibleMoves[0];
 }
 
-void PiranhasClient::Start(std::string address, unsigned short port) {
+void PiranhasClient::Start(ip::address address, unsigned short port) {
     tcpClient.ConnectWithIP(address, port);
     tcpClient.SendMessage("<protocol>");
-    tcpClient.SendMessage("<join gameType=\"swc_2019_piranhas\"/>");
+    tcpClient.SendMessage(scMessageHandler.CreateJoinRequestMessage().content);
     ClientLoop();
 }
 
-void PiranhasClient::StartReserved(std::string address, unsigned short port, std::string reservationCode) {
-    tcpClient.ConnectWithIP(address, port);
+void PiranhasClient::StartReserved(std::string hostname, unsigned short port, std::string reservationCode) {
+    tcpClient.ConnectWithIP(tcpClient.ResolveHostnameToIP(hostname), port);
     tcpClient.SendMessage("<protocol>");
     tcpClient.SendMessage(scMessageHandler.CreateJoinReservedRequestMessage(reservationCode).content);
     ClientLoop();

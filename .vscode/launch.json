@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/PiranhasTest",
+            "program": "${workspaceFolder}/PiranhasClientCPP",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

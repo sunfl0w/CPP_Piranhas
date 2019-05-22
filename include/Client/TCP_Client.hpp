@@ -12,13 +12,11 @@ namespace Networking_Client {
         io_service ioService;
         tcp::socket socket;
 
-        const std::string delimiter = "\r\n\r\n";
-
         public:
         TCP_Client();
 
-        void ConnectWithIP(std::string address, unsigned short port);
-        void ConnectWithHostname(std::string address, unsigned short port);
+        void ConnectWithIP(ip::address address, unsigned short port);
+        ip::address ResolveHostnameToIP(std::string hostname);
 
         void SendMessage(std::string message);
 

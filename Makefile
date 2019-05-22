@@ -25,7 +25,7 @@ OBJECTS = $(SOURCES:$(SRC_PATH)/%.$(SRC_EXT)=$(BUILD_PATH)/%.o)
 DEPS = $(OBJECTS:.o=.d)
 
 # flags #
-COMPILE_FLAGS = -Wall -Wextra
+COMPILE_FLAGS = -std=c++11 -Wall -Wextra -Ofast
 INCLUDES = -I include/ -I include/Client/ -I include/PiranhasCommunication/ -I include/PugiXmlAdditions/ -I /usr/local/include -I /usr/lib/
 # Space-separated pkg-config libraries used by this project
 LIBS = -static -L /usr/lib/ -lboost_system -lboost_thread -lpthread -lboost_program_options

@@ -316,7 +316,7 @@ std::vector<Field> Board::GetFieldsMovePasses(const Move &move) {
     std::vector<Field> passedFields;
     passedFields.reserve(moveDistance);
 
-    for (int i = 1; i <= moveDistance; i++) {
+    for (int i = 1; i < moveDistance; i++) {
         int x = move.GetStartPosition().x + moveShiftPosition.x * i;
         int y = move.GetStartPosition().y + moveShiftPosition.y * i;
         if (IsPositionOnBoard(Position(x, y))) {
@@ -332,7 +332,7 @@ std::vector<Field> Board::GetFieldsMovePasses(const Move &move, const std::vecto
     std::vector<Field> passedFields;
     passedFields.reserve(moveDistance);
 
-    for (int i = 1; i <= moveDistance; i++) {
+    for (int i = 1; i < moveDistance; i++) {
         int x = move.GetStartPosition().x + moveShiftPosition.x * i;
         int y = move.GetStartPosition().y + moveShiftPosition.y * i;
         if (IsPositionOnBoard(Position(x, y))) {

@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 #include <vector>
+#include <boost/asio.hpp>
 
 #include "TCP_Client.hpp"
 #include "SC_MessageHandler.hpp"
@@ -36,7 +37,7 @@ namespace Piranhas::Client {
 
     public:
         PiranhasClient();
-        void Start(std::string address, unsigned short port);
+        void Start(ip::address, unsigned short port);
         void StartReserved(std::string hostanme, unsigned short port, std::string reservationCode);
     };
 } // namespace Piranhas::Client
