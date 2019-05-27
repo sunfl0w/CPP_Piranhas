@@ -37,15 +37,15 @@ void GameState::SwapPlayers() {
     }
 }
 
-Player GameState::GetCurrentPlayer() {
+Player GameState::GetCurrentPlayer() const {
     return currentPlayer;
 }
 
-Player GameState::GetOtherPlayer() {
+Player GameState::GetOtherPlayer() const {
     return currentPlayer.GetOppositePlayer();
 }
 
-bool GameState::IsMoveValid(Move &move) {
+bool GameState::IsMoveValid(Move &move) const {
     if (!board.IsPositionOnBoard(move.GetStartPosition())) {
         return false;
     }
@@ -68,7 +68,7 @@ bool GameState::IsMoveValid(Move &move) {
     }
 }
 
-bool GameState::IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirection) {
+bool GameState::IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirection) const {
     if (!board.IsPositionOnBoard(move.GetStartPosition())) {
         return false;
     }
@@ -91,7 +91,7 @@ bool GameState::IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirectio
     }
 }
 
-std::vector<Move> GameState::GetPossibleMoves() {
+std::vector<Move> GameState::GetPossibleMoves() const {
     const std::vector<Direction> directions{Direction::Up, Direction::Up_Right, Direction::Right, Direction::Down_Right, Direction::Down, Direction::Down_Left, Direction::Left, Direction::Up_Left};
     std::vector<Move> possibleMoves;
     std::vector<Field> occupiedFields = board.GetAllFieldsOfSameType(currentPlayer.fieldType);
@@ -129,7 +129,7 @@ void GameState::PerformMove(Move &move) {
     }
 }
 
-bool GameState::IsGameOver() {
+bool GameState::IsGameOver() const {
     if (turnCount >= 60) {
         return true;
     } else if (currentPlayer.color == PlayerColor::Red && board.IsSwarmComplete(PlayerColor::Red)) {
@@ -141,7 +141,7 @@ bool GameState::IsGameOver() {
     }
 }
 
-Player GameState::GetVictoriousPlayer() {
+Player GameState::GetVictoriousPlayer() const {
     if (turnCount >= 60) {
         if (board.GetBiggestSwarmSize(PlayerColor::Red) > board.GetBiggestSwarmSize(PlayerColor::Blue)) {
             return Player(PlayerColor::Red);

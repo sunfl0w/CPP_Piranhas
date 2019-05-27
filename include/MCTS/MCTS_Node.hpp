@@ -11,6 +11,8 @@ namespace Search::MCTS {
         int visits;
         int wins;
 
+        GameState gameState;
+
         MCTS_Node* parentNode;
         std::vector<MCTS_Node> childNodes;
 

@@ -74,7 +74,7 @@ void Board::SetObstacles() {
     }
 }
 
-std::vector<Field> Board::GetFieldsInDirection(const Position &includedPos, Direction direction) {
+std::vector<Field> Board::GetFieldsInDirection(const Position &includedPos, Direction direction) const {
     switch (direction) {
     case Direction::Up:
         return GetFieldsVertical(includedPos);
@@ -99,7 +99,7 @@ std::vector<Field> Board::GetFieldsInDirection(const Position &includedPos, Dire
     std::vector<Field> empty;
     return empty;
 }
-std::vector<Field> Board::GetFieldsVertical(const Position &includedPos) {
+std::vector<Field> Board::GetFieldsVertical(const Position &includedPos) const {
     std::vector<Field> fields;
     fields.reserve(10);
     for (int y = 0; y < 10; y++) {
@@ -107,7 +107,7 @@ std::vector<Field> Board::GetFieldsVertical(const Position &includedPos) {
     }
     return fields;
 }
-std::vector<Field> Board::GetFieldsHorizontal(const Position &includedPos) {
+std::vector<Field> Board::GetFieldsHorizontal(const Position &includedPos) const {
     std::vector<Field> fields;
     fields.reserve(10);
     for (int x = 0; x < 10; x++) {
@@ -115,7 +115,7 @@ std::vector<Field> Board::GetFieldsHorizontal(const Position &includedPos) {
     }
     return fields;
 }
-std::vector<Field> Board::GetFieldsDownLeftUpRight(const Position &includedPos) {
+std::vector<Field> Board::GetFieldsDownLeftUpRight(const Position &includedPos) const {
     std::vector<Field> fields;
     fields.reserve(10);
     int x = includedPos.x;
@@ -137,7 +137,7 @@ std::vector<Field> Board::GetFieldsDownLeftUpRight(const Position &includedPos) 
     }
     return fields;
 }
-std::vector<Field> Board::GetFieldsDownRightUpLeft(const Position &includedPos) {
+std::vector<Field> Board::GetFieldsDownRightUpLeft(const Position &includedPos) const {
     std::vector<Field> fields;
     fields.reserve(10);
     int x = includedPos.x;
@@ -160,7 +160,7 @@ std::vector<Field> Board::GetFieldsDownRightUpLeft(const Position &includedPos) 
     return fields;
 }
 
-std::unordered_set<Field> Board::GetSwarm(std::vector<Field> &found, std::unordered_set<Field> &swarm, int index) {
+std::unordered_set<Field> Board::GetSwarm(std::vector<Field> &found, std::unordered_set<Field> &swarm, int index) const {
     if (swarm.size() == 0 && found.size() > 0) {
         Field field = found[index];
         swarm.insert(field);
@@ -201,7 +201,7 @@ std::unordered_set<Field> Board::GetSwarm(std::vector<Field> &found, std::unorde
     return swarm;
 }
 
-std::unordered_set<Field> Board::GetGreatestSwarmFromParentSet(std::vector<Field> fieldsToSearch) {
+std::unordered_set<Field> Board::GetGreatestSwarmFromParentSet(std::vector<Field> fieldsToSearch) const {
     std::unordered_set<Field> greatestSwarm;
     int maxSize = 0;
 
@@ -216,7 +216,7 @@ std::unordered_set<Field> Board::GetGreatestSwarmFromParentSet(std::vector<Field
     return greatestSwarm;
 }
 
-int Board::GetFieldCountOfTypeInDirection(const Position &includedPos, const std::vector<FieldType> &fieldTypeMask, Direction direction) {
+int Board::GetFieldCountOfTypeInDirection(const Position &includedPos, const std::vector<FieldType> &fieldTypeMask, Direction direction) const {
     int count = 0;
     std::vector<Field> fieldsInDirection = std::vector<Field>(GetFieldsInDirection(includedPos, direction));
     for (Field field : fieldsInDirection) {
@@ -229,7 +229,7 @@ int Board::GetFieldCountOfTypeInDirection(const Position &includedPos, const std
     return count;
 }
 
-int Board::GetCheckerCountInDirection(const Position &includedPos, Direction direction) {
+int Board::GetCheckerCountInDirection(const Position &includedPos, Direction direction) const {
     int count = 0;
     std::vector<Field> fieldsInDirection = GetFieldsInDirection(includedPos, direction);
     for (Field field : fieldsInDirection) {
@@ -240,7 +240,7 @@ int Board::GetCheckerCountInDirection(const Position &includedPos, Direction dir
     return count;
 }
 
-int Board::GetCheckerCountInDirection(const std::vector<Field> &fieldsInDirection) {
+int Board::GetCheckerCountInDirection(const std::vector<Field> &fieldsInDirection) const {
     int count = 0;
     for (Field field : fieldsInDirection) {
         if (field.IsChecker()) {
@@ -272,11 +272,11 @@ void Board::SetFieldType(const Position &position, FieldType fieldType) {
     bitboard.SetField(position, fieldType);
 }
 
-bool Board::IsPositionOnBoard(const Position &position) {
+bool Board::IsPositionOnBoard(const Position &position) const {
     return !(position.x < 0 || position.x > 9 || position.y < 0 || position.y > 9);
 }
 
-std::vector<Field> Board::GetNeighbouringFields(const Position &position) {
+std::vector<Field> Board::GetNeighbouringFields(const Position &position) const {
     std::vector<Field> neighbouringFields;
     neighbouringFields.reserve(8);
     for (int x = -1; x <= 1; x++) {
@@ -291,7 +291,7 @@ std::vector<Field> Board::GetNeighbouringFields(const Position &position) {
     return neighbouringFields;
 }
 
-std::vector<Field> Board::GetNeighbouringFieldsOfType(const Position &position, const std::vector<FieldType> &fieldTypeMask) {
+std::vector<Field> Board::GetNeighbouringFieldsOfType(const Position &position, const std::vector<FieldType> &fieldTypeMask) const {
     std::vector<Field> neighbouringFields;
     neighbouringFields.reserve(8);
     for (int x = -1; x <= 1; x++) {
@@ -310,7 +310,7 @@ std::vector<Field> Board::GetNeighbouringFieldsOfType(const Position &position, 
     return neighbouringFields;
 }
 
-std::vector<Field> Board::GetFieldsMovePasses(const Move &move) {
+std::vector<Field> Board::GetFieldsMovePasses(const Move &move) const {
     Position moveShiftPosition = move.GetShiftPosition();
     int moveDistance = GetMoveDistance(move);
     std::vector<Field> passedFields;
@@ -326,7 +326,7 @@ std::vector<Field> Board::GetFieldsMovePasses(const Move &move) {
     return passedFields;
 }
 
-std::vector<Field> Board::GetFieldsMovePasses(const Move &move, const std::vector<Field> &fieldsInMoveDirection) {
+std::vector<Field> Board::GetFieldsMovePasses(const Move &move, const std::vector<Field> &fieldsInMoveDirection) const {
     Position moveShiftPosition = move.GetShiftPosition();
     int moveDistance = GetMoveDistance(move, fieldsInMoveDirection);
     std::vector<Field> passedFields;
@@ -342,7 +342,7 @@ std::vector<Field> Board::GetFieldsMovePasses(const Move &move, const std::vecto
     return passedFields;
 }
 
-std::vector<Field> Board::GetAllFieldsOfSameType(FieldType fieldType) {
+std::vector<Field> Board::GetAllFieldsOfSameType(FieldType fieldType) const {
     std::vector<Field> fields;
 
     int size = 0;
@@ -357,15 +357,15 @@ std::vector<Field> Board::GetAllFieldsOfSameType(FieldType fieldType) {
     return fields;
 }
 
-int Board::GetMoveDistance(const Move &move) {
+int Board::GetMoveDistance(const Move &move) const {
     return GetCheckerCountInDirection(move.GetStartPosition(), move.GetDirection());
 }
 
-int Board::GetMoveDistance(const Move &move, const std::vector<Field> &fieldsInMoveDirection) {
+int Board::GetMoveDistance(const Move &move, const std::vector<Field> &fieldsInMoveDirection) const {
     return GetCheckerCountInDirection(fieldsInMoveDirection);
 }
 
-Position Board::GetDestinationPositionOfMove(const Move &move, int moveDistance) {
+Position Board::GetDestinationPositionOfMove(const Move &move, int moveDistance) const {
     Position destinationPos = move.GetStartPosition();
 
     switch (move.GetDirection()) {
@@ -401,12 +401,12 @@ Position Board::GetDestinationPositionOfMove(const Move &move, int moveDistance)
     return destinationPos;
 }
 
-Position Board::GetDestinationPositionOfMove(const Move &move) {
+Position Board::GetDestinationPositionOfMove(const Move &move) const{
     int moveDistance = GetMoveDistance(move);
     return GetDestinationPositionOfMove(move, moveDistance);
 }
 
-bool Board::IsMovePathBlocked(const Move &move, FieldType blockingFieldType) {
+bool Board::IsMovePathBlocked(const Move &move, FieldType blockingFieldType) const {
     for (Field field : GetFieldsMovePasses(move)) {
         if (field.fieldType == blockingFieldType) {
             return true;
@@ -415,7 +415,7 @@ bool Board::IsMovePathBlocked(const Move &move, FieldType blockingFieldType) {
     return false;
 }
 
-bool Board::IsMovePathBlocked(const Move &move, FieldType blockingFieldType, const std::vector<Field> &fieldsInMoveDirection) {
+bool Board::IsMovePathBlocked(const Move &move, FieldType blockingFieldType, const std::vector<Field> &fieldsInMoveDirection) const {
     for (Field field : GetFieldsMovePasses(move, fieldsInMoveDirection)) {
         if (field.fieldType == blockingFieldType) {
             return true;
@@ -424,17 +424,17 @@ bool Board::IsMovePathBlocked(const Move &move, FieldType blockingFieldType, con
     return false;
 }
 
-int Board::GetBiggestSwarmSize(const Player &player) {
+int Board::GetBiggestSwarmSize(const Player &player) const {
     std::vector<Field> checkerFields = GetAllFieldsOfSameType(player.fieldType);
     return GetBiggestSwarmSize(checkerFields);
 }
 
-int Board::GetBiggestSwarmSize(std::vector<Field> checkerFields) {
+int Board::GetBiggestSwarmSize(std::vector<Field> checkerFields) const {
     std::unordered_set<Field> swarmFields = GetGreatestSwarmFromParentSet(checkerFields);
     return swarmFields.size();
 }
 
-bool Board::IsSwarmComplete(const Player &player) {
+bool Board::IsSwarmComplete(const Player &player) const {
     std::vector<Field> checkerFields = GetAllFieldsOfSameType(player.fieldType);
     if (checkerFields.size() == GetBiggestSwarmSize(checkerFields)) {
         return true;
@@ -443,7 +443,7 @@ bool Board::IsSwarmComplete(const Player &player) {
     }
 }
 
-bool Board::IsSwarmComplete(std::vector<Field> checkerFields) {
+bool Board::IsSwarmComplete(std::vector<Field> checkerFields) const {
     if (checkerFields.size() == GetBiggestSwarmSize(checkerFields)) {
         return true;
     } else {

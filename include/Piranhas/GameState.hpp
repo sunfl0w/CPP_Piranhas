@@ -24,16 +24,16 @@ namespace Piranhas {
 
         void SwapPlayers();
 
-        Player GetCurrentPlayer();
-        Player GetOtherPlayer();
+        Player GetCurrentPlayer() const;
+        Player GetOtherPlayer() const;
 
-        bool IsMoveValid(Move &move);
-        bool IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirection);
+        bool IsMoveValid(Move &move) const;
+        bool IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirection) const;
 
-        std::vector<Move> GetPossibleMoves();
+        std::vector<Move> GetPossibleMoves() const;
         void PerformMove(Move &move);
 
-        bool IsGameOver();
-        Player GetVictoriousPlayer();
+        bool IsGameOver() const;
+        Player GetVictoriousPlayer() const;
     };
 } // namespace Piranhas

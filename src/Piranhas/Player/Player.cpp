@@ -14,7 +14,7 @@ Player::Player(PlayerColor playerColor) {
     this->fieldType = PlayerColorToFieldType(playerColor);
 }
 
-FieldType Player::PlayerColorToFieldType(PlayerColor playerColor) {
+FieldType Player::PlayerColorToFieldType(PlayerColor playerColor) const {
     if(playerColor == PlayerColor::Red) {
         return FieldType::Red;
     } else {
@@ -22,7 +22,7 @@ FieldType Player::PlayerColorToFieldType(PlayerColor playerColor) {
     }
 }
 
-Player Player::GetOppositePlayer() {
+Player Player::GetOppositePlayer() const {
     if(color == PlayerColor::Red) {
         return Player(PlayerColor::Blue);
     } else {

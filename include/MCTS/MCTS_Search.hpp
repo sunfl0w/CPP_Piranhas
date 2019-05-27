@@ -11,7 +11,7 @@ using namespace Piranhas;
 namespace Search::MCTS {
     class MCTS_Search {
         MCTS_Node Select(const MCTS_Node &mctsNode);
-        MCTS_Node Expand(const MCTS_Node &leafNode);
+        MCTS_Node Expand(const MCTS_Node &mctsNode);
         bool Simulate(const MCTS_Node &expandedNode);
         void Backpropagate(MCTS_Node &terminalNode);
         public:

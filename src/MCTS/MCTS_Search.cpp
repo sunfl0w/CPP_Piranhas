@@ -3,14 +3,16 @@
 
 MCTS_Node MCTS_Search::Select(const MCTS_Node &mctsNode) {
     if(!mctsNode.IsFullyExpanded()) {
-        return mctsNode.GetNextUnvisitedChildNode();
+        return mctsNode;
     } else {
-        return mctsNode.GetBestChildNode();
+        return Select(mctsNode.GetBestChildNode());
     }
 }
 
-MCTS_Node MCTS_Search::Expand(const MCTS_Node &leafNode) {
-
+MCTS_Node MCTS_Search::Expand(const MCTS_Node &mctsNode) {
+    if(mctsNode.gameState.IsGameOver()) {
+        
+    }
 }
 
 bool MCTS_Search::Simulate(const MCTS_Node &expandedNode) {

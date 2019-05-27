@@ -13,7 +13,7 @@ namespace Piranhas {
         Player();
         Player(PlayerColor color);
 
-        FieldType PlayerColorToFieldType(PlayerColor playerColor);
-        Player GetOppositePlayer();
+        FieldType PlayerColorToFieldType(PlayerColor playerColor) const;
+        Player GetOppositePlayer() const;
     };
 } // namespace Pirnhas
