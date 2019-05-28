@@ -12,7 +12,9 @@ build/Starter/Starter.o: src/Starter/Starter.cpp \
  include/PugiXmlAdditions/XmlStringWriter.hpp \
  include/Logic/PiranhasLogic.hpp include/Logic/Piranhas_MCTS_Logic.hpp \
  include/MCTS/MCTS_Search.hpp include/MCTS/MCTS_Node.hpp \
- include/MCTS/MCTS_Tree.hpp
+ include/MCTS/MCTS_Tree.hpp include/Logic/Piranhas_Negamax_Logic.hpp \
+ include/Negamax/Negamax_Search.hpp \
+ include/Negamax/EvaluatedGameState.hpp include/Evaluation/Evaluator.hpp
 
 include/Piranhas/GameState.hpp:
 
@@ -57,3 +59,11 @@ include/MCTS/MCTS_Search.hpp:
 include/MCTS/MCTS_Node.hpp:
 
 include/MCTS/MCTS_Tree.hpp:
+
+include/Logic/Piranhas_Negamax_Logic.hpp:
+
+include/Negamax/Negamax_Search.hpp:
+
+include/Negamax/EvaluatedGameState.hpp:
+
+include/Evaluation/Evaluator.hpp:

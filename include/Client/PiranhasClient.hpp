@@ -16,6 +16,7 @@
 #include "GameState.hpp"
 #include "PiranhasLogic.hpp"
 #include "Piranhas_MCTS_Logic.hpp"
+#include "Piranhas_Negamax_Logic.hpp"
 
 using namespace Networking_Client;
 using namespace Piranhas::Communication;
@@ -31,7 +32,7 @@ namespace Piranhas::Client {
         GameState currentGameState;
         bool gameOver = false;
 
-        PiranhasLogic *logic = new Piranhas_MCTS_Logic(1600);
+        PiranhasLogic *logic = new Piranhas_Negamax_Logic(1600);
 
 
         void ClientLoop();

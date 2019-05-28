@@ -1,14 +1,14 @@
 #pragma once
 
+#include <chrono>
 #include <random>
 #include <time.h>
-#include <chrono>
 
+#include "GameResult.hpp"
+#include "GameState.hpp"
 #include "MCTS_Node.hpp"
 #include "MCTS_Tree.hpp"
-#include "GameState.hpp"
 #include "Move.hpp"
-#include "GameResult.hpp"
 
 using namespace Search::MCTS;
 using namespace Piranhas;
@@ -21,8 +21,9 @@ namespace Search::MCTS {
         MCTS_Node *Expand(MCTS_Node *mctsNode);
         bool Simulate(const MCTS_Node *expandedNode);
         void Backpropagate(MCTS_Node *expandedNode, bool simulationResult);
-        public:
+
+    public:
         MCTS_Search(PlayerColor maximizingPlayerColor);
         Move GetNextMove(GameState currentGameState, int searchTimeInMs);
     };
-}
+} // namespace Search::MCTS
