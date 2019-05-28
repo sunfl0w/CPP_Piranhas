@@ -14,6 +14,7 @@ using namespace boost::program_options;
 
 void Bench1();
 void Bench2();
+void Bench3();
 
 int main(int argc, char *argv[]) {
     cout << "Hello, World! I am a c++ client!\n";
@@ -25,8 +26,8 @@ int main(int argc, char *argv[]) {
     variables_map varibaleMap;
     store(command_line_parser(argc, argv).options(optionsDesribtion).run(), varibaleMap);
 
-    std::string hostname;
-    unsigned short hostPort;
+    std::string hostname = "localhost";
+    unsigned short hostPort = 13050;
     std::string reservationCode;
 
     if (varibaleMap.count("host")) {
@@ -56,6 +57,7 @@ int main(int argc, char *argv[]) {
     /*while (true) {
         Bench1();
         Bench2();
+        Bench3();
     }*/
 
     std::getchar();
@@ -82,4 +84,17 @@ void Bench2() {
         searchCount++;
     }
     std::cout << "Searched swarm " + std::to_string(searchCount) + " times in 1600ms\n";
+}
+
+void Bench3() {
+    int count = 0;
+    Move move = Move(Position(0, 1), Direction::Up);
+    GameState gameState = GameState(PlayerColor::Red);
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    while (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count() < 1600) {
+        GameState clonedGameState = GameState(gameState);
+        clonedGameState.PerformMove(move);
+        count++;
+    }
+    std::cout << "Cloned GS and performed move " + std::to_string(count) + " times in 1600ms\n";
 }

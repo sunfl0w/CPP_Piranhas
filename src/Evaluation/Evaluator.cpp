@@ -10,11 +10,11 @@ float Evaluator::EvaluateGameState(GameState gameState, PlayerColor maximizingPl
 
     float redCheckerCount = redFields.size();
     float blueCheckerCount = blueFields.size();
-    
+
     float materialEval = 0.0f;
-    if(redCheckerCount > 4 && blueCheckerCount > 4) {
-        	materialEval += (redCheckerCount - blueCheckerCount) * 2.0f;
-        }
+    if (redCheckerCount > 4 && blueCheckerCount > 4) {
+        materialEval += (redCheckerCount - blueCheckerCount) * 10.0f;
+    }
 
     float swarmEval = 0.0f;
 
