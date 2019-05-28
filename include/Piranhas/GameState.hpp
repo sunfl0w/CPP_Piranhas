@@ -6,6 +6,7 @@
 #include "Player.hpp"
 #include "Move.hpp"
 #include "Board.hpp"
+#include "GameResult.hpp"
 
 namespace Piranhas {
     class GameState {
@@ -34,6 +35,6 @@ namespace Piranhas {
         void PerformMove(Move &move);
 
         bool IsGameOver() const;
-        Player GetVictoriousPlayer() const;
+        GameResult GetGameResult() const;
     };
 } // namespace Piranhas

@@ -14,9 +14,12 @@
 #include "PlayerColor.hpp"
 #include "Move.hpp"
 #include "GameState.hpp"
+#include "PiranhasLogic.hpp"
+#include "Piranhas_MCTS_Logic.hpp"
 
 using namespace Networking_Client;
 using namespace Piranhas::Communication;
+using namespace Piranhas::Logic;
 
 namespace Piranhas::Client {
     class PiranhasClient {
@@ -27,6 +30,8 @@ namespace Piranhas::Client {
         PlayerColor ownPlayerColor;
         GameState currentGameState;
         bool gameOver = false;
+
+        PiranhasLogic *logic = new Piranhas_MCTS_Logic(1600);
 
 
         void ClientLoop();

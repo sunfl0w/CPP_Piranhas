@@ -3,6 +3,7 @@
 #include <array>
 #include <unordered_set>
 #include <vector>
+#include <iostream>
 
 #include "Bitboard.hpp"
 #include "Direction.hpp"
@@ -45,6 +46,8 @@ namespace Piranhas {
         Board(Board &board);
         Board(const Board &board);
 
+        void Print() const;
+
         void Populate();
 
         Bitboard GetBitboard() const;
@@ -83,5 +86,6 @@ namespace Piranhas {
 
         bool IsSwarmComplete(const Player &player) const;
         bool IsSwarmComplete(std::vector<Field> checkerFields) const;
+        bool IsSwarmComplete(const Player &player, int swarmSize) const;
     };
 } // namespace Piranhas

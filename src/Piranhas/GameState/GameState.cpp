@@ -24,9 +24,18 @@ GameState::GameState(GameState &gameState) {
     board = Board(gameState.board);
     turnCount = gameState.turnCount;
     currentPlayer = Player(gameState.currentPlayer);
-    if (&gameState.lastPerformedMove != NULL) {
-        lastPerformedMove = Move(lastPerformedMove);
-    }
+    //if (&gameState.lastPerformedMove != NULL) {
+        lastPerformedMove = Move(gameState.lastPerformedMove);
+    //}
+}
+
+GameState::GameState(const GameState &gameState) {
+    board = Board(gameState.board);
+    turnCount = gameState.turnCount;
+    currentPlayer = Player(gameState.currentPlayer);
+    //if (&gameState.lastPerformedMove != NULL) {
+        lastPerformedMove = Move(gameState.lastPerformedMove);
+    //}
 }
 
 void GameState::SwapPlayers() {
@@ -110,10 +119,10 @@ std::vector<Move> GameState::GetPossibleMoves() const {
 
 void GameState::PerformMove(Move &move) {
     if (IsGameOver()) {
-        std::cout << "Game is over. Move will not be performed.\n";
+        std::cout << "Game is over. Move will not be performed." << "\n";
     }
     if (&move == NULL) {
-        std::cout << "Move is null. Move will not be performed.\n";
+        std::cout << "Move is null. Move will not be performed." << "\n";
     } else if (IsMoveValid(move)) {
         Position destinationPos = board.GetDestinationPositionOfMove(move);
         Position startPos = move.GetStartPosition();
@@ -122,10 +131,11 @@ void GameState::PerformMove(Move &move) {
 
         turnCount++;
         SwapPlayers();
-        lastPerformedMove = move;
+        lastPerformedMove = Move(move);
+        //std::cout << "";
 
     } else {
-        std::cout << "Move is invalid. Move will not be performed.\n";
+        std::cout << "Move is invalid. Move will not be performed." << "\n";
     }
 }
 
@@ -141,17 +151,25 @@ bool GameState::IsGameOver() const {
     }
 }
 
-Player GameState::GetVictoriousPlayer() const {
+GameResult GameState::GetGameResult() const {
+    int swarmSizeRed = board.GetBiggestSwarmSize(PlayerColor::Red);
+    int swarmSizeBlue = board.GetBiggestSwarmSize(PlayerColor::Blue);
+
+    bool isRedSwarmComplete = board.IsSwarmComplete(Player(PlayerColor::Red), swarmSizeRed);
+    bool isBlueSwarmComplete = board.IsSwarmComplete(Player(PlayerColor::Blue), swarmSizeBlue);
     if (turnCount >= 60) {
-        if (board.GetBiggestSwarmSize(PlayerColor::Red) > board.GetBiggestSwarmSize(PlayerColor::Blue)) {
-            return Player(PlayerColor::Red);
-        } else if (board.GetBiggestSwarmSize(PlayerColor::Red) < board.GetBiggestSwarmSize(PlayerColor::Blue)) {
-            return Player(PlayerColor::Blue);
+        if (swarmSizeRed > swarmSizeBlue) {
+            return GameResult::RedWin;
+        } else if (swarmSizeRed < swarmSizeBlue) {
+            return GameResult::BlueWin;
         }
-    } else if (board.IsSwarmComplete(PlayerColor::Red)) {
-        return Player(PlayerColor::Red);
-    } else if (board.IsSwarmComplete(PlayerColor::Blue)) {
-        return Player(PlayerColor::Blue);
+    } else if (isRedSwarmComplete) {
+        return GameResult::RedWin;
+    } else if (isBlueSwarmComplete) {
+        return GameResult::BlueWin;
+    } else {
+        return GameResult::Draw;
     }
-    std::cout << "Victorious player could not be identified.\n";
+    //board.Print();
+    //std::cout << "Victorious player could not be identified." << "\n";
 }

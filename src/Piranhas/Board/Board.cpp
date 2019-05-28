@@ -250,6 +250,23 @@ int Board::GetCheckerCountInDirection(const std::vector<Field> &fieldsInDirectio
     return count;
 }
 
+void Board::Print() const {
+    for(int y = 9; y >= 0; y--) {
+        for(int x = 9; x >= 0; x--) {
+            if(GetField(x, y).fieldType == FieldType::Red) {
+                std::cout << "R";
+            } else if(GetField(x, y).fieldType == FieldType::Blue) {
+                std::cout << "B";
+            } else if(GetField(x, y).fieldType == FieldType::Obstacle) {
+                std::cout << "O";
+            } else {
+                std::cout << " ";
+            }
+        }
+        std::cout << "\n";
+    }
+}
+
 Bitboard Board::GetBitboard() const {
     return bitboard;
 }
@@ -445,6 +462,15 @@ bool Board::IsSwarmComplete(const Player &player) const {
 
 bool Board::IsSwarmComplete(std::vector<Field> checkerFields) const {
     if (checkerFields.size() == GetBiggestSwarmSize(checkerFields)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Board::IsSwarmComplete(const Player &player, int swarmSize) const {
+    std::vector<Field> checkerFields = GetAllFieldsOfSameType(player.fieldType);
+    if (checkerFields.size() == swarmSize) {
         return true;
     } else {
         return false;

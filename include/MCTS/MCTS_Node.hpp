@@ -1,25 +1,33 @@
 #pragma once
 
 #include <vector>
+#include <math.h>
 
-#include "UCB.hpp"
+#include "GameState.hpp"
 
-using namespace Search::MCTS;
+using namespace Piranhas;
 
 namespace Search::MCTS {
     struct MCTS_Node {
-        int visits;
-        int wins;
+        int visits = 0;
+        int wins = 0;
 
         GameState gameState;
 
         MCTS_Node* parentNode;
-        std::vector<MCTS_Node> childNodes;
+        std::vector<MCTS_Node*> childNodes;
+
+        MCTS_Node(const GameState &gameState, MCTS_Node* parentNode);
+
+        void PopulateChildNodes();
+
+        float UCB(float explorationFactor) const;
 
         const bool IsParentNull() const;
         const bool IsFullyExpanded() const;
 
-        MCTS_Node GetNextUnvisitedChildNode() const;
-        MCTS_Node GetBestChildNode() const;
+        MCTS_Node *GetNextUnvisitedChildNode();
+        MCTS_Node *GetBestChildNode();
+        MCTS_Node *GetBestChildNodeUCB();
     };
 }

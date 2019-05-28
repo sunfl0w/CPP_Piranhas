@@ -44,8 +44,9 @@ std::vector<SC_Message> PiranhasClient::HandleIncomingMessagesAndGenerateRespone
 }
 
 Move PiranhasClient::GetNextMove() {
-    std::vector<Move> possibleMoves = currentGameState.GetPossibleMoves();
-    return possibleMoves[0];
+    //std::vector<Move> possibleMoves = currentGameState.GetPossibleMoves();
+    //return possibleMoves[0];
+    return logic->GetNextMove(currentGameState);
 }
 
 void PiranhasClient::Start(ip::address address, unsigned short port) {
