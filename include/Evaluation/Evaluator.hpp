@@ -1,6 +1,10 @@
 #pragma once
 
 #include "GameState.hpp"
+#include "CentralisationEvaluation.hpp"
+#include "CenterOfMassEvaluation.hpp"
+#include "ConnectednessEvaluation.hpp"
+#include "UniformityEvaluation.hpp"
 
 using namespace Piranhas;
 

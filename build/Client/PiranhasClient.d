@@ -14,7 +14,12 @@ build/Client/PiranhasClient.o: src/Client/PiranhasClient.cpp \
  include/MCTS/MCTS_Search.hpp include/MCTS/MCTS_Node.hpp \
  include/MCTS/MCTS_Tree.hpp include/Logic/Piranhas_Negamax_Logic.hpp \
  include/Negamax/Negamax_Search.hpp \
- include/Negamax/EvaluatedGameState.hpp include/Evaluation/Evaluator.hpp
+ include/Negamax/EvaluatedGameState.hpp include/Evaluation/Evaluator.hpp \
+ include/Evaluation/CentralisationEvaluation.hpp \
+ include/Evaluation/CenterOfMassEvaluation.hpp \
+ include/Piranhas/PositionF.hpp \
+ include/Evaluation/ConnectednessEvaluation.hpp \
+ include/Evaluation/UniformityEvaluation.hpp
 
 include/Client/PiranhasClient.hpp:
 
@@ -67,3 +72,13 @@ include/Negamax/Negamax_Search.hpp:
 include/Negamax/EvaluatedGameState.hpp:
 
 include/Evaluation/Evaluator.hpp:
+
+include/Evaluation/CentralisationEvaluation.hpp:
+
+include/Evaluation/CenterOfMassEvaluation.hpp:
+
+include/Piranhas/PositionF.hpp:
+
+include/Evaluation/ConnectednessEvaluation.hpp:
+
+include/Evaluation/UniformityEvaluation.hpp:
