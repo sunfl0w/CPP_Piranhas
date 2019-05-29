@@ -32,7 +32,7 @@ namespace Piranhas::Client {
         GameState currentGameState;
         bool gameOver = false;
 
-        PiranhasLogic *logic = new Piranhas_Negamax_Logic(1800);
+        PiranhasLogic *logic = new Piranhas_Negamax_Logic(1700);
 
 
         void ClientLoop();
