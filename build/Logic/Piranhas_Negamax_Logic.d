@@ -14,7 +14,7 @@ build/Logic/Piranhas_Negamax_Logic.o: \
  include/Piranhas/PositionF.hpp \
  include/Evaluation/ConnectednessEvaluation.hpp \
  include/Evaluation/UniformityEvaluation.hpp \
- include/Logic/PiranhasLogic.hpp
+ include/Logic/PiranhasLogic.hpp include/Negamax/MoveSearch.hpp
 
 include/Logic/Piranhas_Negamax_Logic.hpp:
 
@@ -59,3 +59,5 @@ include/Evaluation/ConnectednessEvaluation.hpp:
 include/Evaluation/UniformityEvaluation.hpp:
 
 include/Logic/PiranhasLogic.hpp:
+
+include/Negamax/MoveSearch.hpp:

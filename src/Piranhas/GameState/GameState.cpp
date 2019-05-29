@@ -121,9 +121,7 @@ void GameState::PerformMove(Move &move) {
     if (IsGameOver()) {
         std::cout << "Game is over. Move will not be performed." << "\n";
     }
-    if (&move == NULL) {
-        std::cout << "Move is null. Move will not be performed." << "\n";
-    } else if (IsMoveValid(move)) {
+    if (IsMoveValid(move)) {
         Position destinationPos = board.GetDestinationPositionOfMove(move);
         Position startPos = move.GetStartPosition();
         board.SetFieldType(startPos, FieldType::Empty);

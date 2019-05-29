@@ -28,5 +28,5 @@ float UniformityEvaluation::GetAreaCheckersCover(const std::vector<Field> &check
 }
 
 float UniformityEvaluation::Evaluate(const std::vector<Field> &checkers) {
-    return 1 / GetAreaCheckersCover(checkers);
+    return 1.0f / GetAreaCheckersCover(checkers);
 }

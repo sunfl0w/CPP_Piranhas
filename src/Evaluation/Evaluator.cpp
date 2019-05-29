@@ -13,15 +13,15 @@ float Evaluator::EvaluateGameState(GameState gameState, PlayerColor maximizingPl
 
     float materialEval = 0.0f;
     if (redCheckerCount > 4 && blueCheckerCount > 4) {
-        materialEval += (redCheckerCount - blueCheckerCount) * 10.0f;
+        materialEval += (redCheckerCount - blueCheckerCount) * 3.0f;
     }
 
     float swarmEval = 0.0f;
 
-    if (gameState.turnCount > 12) {
+    if (gameState.turnCount > 16) {
         int redSwarmSize = gameState.board.GetBiggestSwarmSize(redFields);
         int blueSwarmSize = gameState.board.GetBiggestSwarmSize(blueFields);
-        swarmEval += (redSwarmSize / redCheckerCount - blueSwarmSize / blueCheckerCount) * 100.0f;
+        swarmEval += (float)((float)redSwarmSize / redCheckerCount - (float)blueSwarmSize / blueCheckerCount) * 5.0f;
         if (gameState.turnCount > 26) {
             swarmEval += (redSwarmSize - blueSwarmSize) * 1.0f;
         }
@@ -34,10 +34,10 @@ float Evaluator::EvaluateGameState(GameState gameState, PlayerColor maximizingPl
         }
     }
 
-    float centralisationEval = (CentralisationEvaluation::Evaluate(redFields) - CentralisationEvaluation::Evaluate(blueFields)) * 1.0f;
+    float centralisationEval = (CentralisationEvaluation::Evaluate(redFields) - CentralisationEvaluation::Evaluate(blueFields)) * 1.5f;
     float centerOfMassEval = (CenterOfMassEvaluation::Evaluate(redFields) - CenterOfMassEvaluation::Evaluate(blueFields)) * 0.0f;
-    float connectednessEval = (ConnectednessEvaluation::Evaluate(redFields, gameState.board) - ConnectednessEvaluation::Evaluate(blueFields, gameState.board)) * 0.5f;
-    float uniformityEval = (UniformityEvaluation::Evaluate(redFields) - UniformityEvaluation::Evaluate(blueFields)) * 5.0f;
+    float connectednessEval = (ConnectednessEvaluation::Evaluate(redFields, gameState.board) - ConnectednessEvaluation::Evaluate(blueFields, gameState.board)) * 0.1f;
+    float uniformityEval = (UniformityEvaluation::Evaluate(redFields) - UniformityEvaluation::Evaluate(blueFields)) * 0.0f;
 
     float eval = materialEval + swarmEval + centralisationEval + centerOfMassEval + connectednessEval + uniformityEval;
 

@@ -4,20 +4,30 @@ using namespace Piranhas;
 
 FieldType Bitboard::GetFieldTypeAtPosition(const Position &pos) const {
     int index = pos.y * 10 + pos.x;
-    if (redFields[index] == 1) {
+    if(emptyFields[index] == 1) {
+        return FieldType::Empty;
+    } else if (redFields[index] == 1) {
         return FieldType::Red;
     } else if (blueFields[index] == 1) {
         return FieldType::Blue;
-    } else if (obstacleFields[index] == 1) {
-        return FieldType::Obstacle;
     } else {
-        return FieldType::Empty;
+        return FieldType::Obstacle;
     }
 }
 
 void Bitboard::SetFieldTypeAtPosition(const Position &pos, FieldType fieldType) {
     int index = pos.y * 10 + pos.x;
-    if (fieldType == FieldType::Red) {
+    if (fieldType == FieldType::Empty) {
+        //std::bitset<100> test(1);
+        //test <<= (index);
+
+        //emptyFields |= test;
+
+        redFields[index] = 0;
+        blueFields[index] = 0;
+        obstacleFields[index] = 0;
+        emptyFields[index] = 1;
+    } else if (fieldType == FieldType::Red) {
         redFields[index] = 1;
         blueFields[index] = 0;
         obstacleFields[index] = 0;
@@ -27,16 +37,11 @@ void Bitboard::SetFieldTypeAtPosition(const Position &pos, FieldType fieldType) 
         blueFields[index] = 1;
         obstacleFields[index] = 0;
         emptyFields[index] = 0;
-    } else if (fieldType == FieldType::Obstacle) {
+    } else {
         redFields[index] = 0;
         blueFields[index] = 0;
         obstacleFields[index] = 1;
         emptyFields[index] = 0;
-    } else {
-        redFields[index] = 0;
-        blueFields[index] = 0;
-        obstacleFields[index] = 0;
-        emptyFields[index] = 1;
     }
 }
 

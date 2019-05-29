@@ -14,6 +14,6 @@ namespace Piranhas::Logic {
 
     public:
         PiranhasLogic(int searchTimeInMs);
-        virtual Move GetNextMove(GameState currentGameState) = 0;
+        virtual Move GetNextMove(GameState currentGameState, PlayerColor ownPlayerColor) = 0;
     };
 } // namespace Piranhas::Logic

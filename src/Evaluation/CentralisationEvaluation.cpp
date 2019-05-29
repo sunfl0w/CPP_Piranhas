@@ -7,7 +7,7 @@ CentralisationEvaluation::CentralisationEvaluation() {}
 float CentralisationEvaluation::GetAverageCheckerValues(const std::vector<Field> &checkers) {
     float sumOfCheckerValues = GetSumOfCheckerValues(checkers);
     int checkerCount = checkers.size();
-    float averageCheckerValues = sumOfCheckerValues;// / checkerCount;
+    float averageCheckerValues = sumOfCheckerValues;// / (float)checkerCount;
     return averageCheckerValues;
 }
 

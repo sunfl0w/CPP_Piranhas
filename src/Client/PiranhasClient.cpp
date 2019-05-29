@@ -7,16 +7,15 @@ PiranhasClient::PiranhasClient() {}
 
 void PiranhasClient::ClientLoop() {
     while (!gameOver) {
-        std::cout << "Listening"
-                  << "\n";
+        //std::cout << "Listening" << "\n";
         std::string inputStream = tcpClient.ReadMessage();
         std::vector<SC_Message> messages = scMessageHandler.SplitInputMessagesIntoValidSC_Messages(inputStream);
         for (SC_Message message : messages) {
-            std::cout << message.content << "\n";
+            //std::cout << message.content << "\n";
         }
         std::vector<SC_Message> responses = HandleIncomingMessagesAndGenerateRespones(messages);
         for (SC_Message response : responses) {
-            std::cout << response.content << "\n";
+            //std::cout << response.content << "\n";
             tcpClient.SendMessage(response.content);
         }
         //std::cout << "Message: " << tcpClient.ReadMessage() << "\n";
@@ -47,7 +46,7 @@ std::vector<SC_Message> PiranhasClient::HandleIncomingMessagesAndGenerateRespone
 Move PiranhasClient::GetNextMove() {
     //std::vector<Move> possibleMoves = currentGameState.GetPossibleMoves();
     //return possibleMoves[0];
-    return logic->GetNextMove(currentGameState);
+    return logic->GetNextMove(currentGameState, ownPlayerColor);
 }
 
 void PiranhasClient::Start(ip::address address, unsigned short port) {
@@ -60,6 +59,7 @@ void PiranhasClient::Start(ip::address address, unsigned short port) {
 void PiranhasClient::StartReserved(std::string hostname, unsigned short port, std::string reservationCode) {
     if (hostname == "localhost") {
         tcpClient.ConnectWithIP(ip::address::from_string("127.0.0.1"), port);
+        //tcpClient.ConnectWithIP(tcpClient.ResolveHostnameToIP(hostname), port);
     } else {
         tcpClient.ConnectWithIP(tcpClient.ResolveHostnameToIP(hostname), port);
     }

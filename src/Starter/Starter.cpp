@@ -15,6 +15,7 @@ using namespace boost::program_options;
 void Bench1();
 void Bench2();
 void Bench3();
+void Test();
 
 int main(int argc, char *argv[]) {
     cout << "Hello, World! I am a c++ client!\n";
@@ -59,6 +60,7 @@ int main(int argc, char *argv[]) {
         Bench2();
         Bench3();
     }*/
+    //Test();
 
     std::getchar();
     return 0;
@@ -97,4 +99,17 @@ void Bench3() {
         count++;
     }
     std::cout << "Cloned GS and performed move " + std::to_string(count) + " times in 1600ms\n";
+}
+
+void Test() {
+    Move move = Move(Position(0, 1), Direction::Up);
+    GameState gameState = GameState(PlayerColor::Red);
+
+    GameState clonedGameState = GameState(gameState);
+    clonedGameState.PerformMove(move);
+
+    float eval = Search::Evaluation::Evaluator::EvaluateGameState(clonedGameState, PlayerColor::Red, true);
+
+    float x = 0.0f;
+    std::cout << "Score: " << std::to_string(eval) << "\n";
 }

@@ -9,6 +9,8 @@ namespace Search::Negamax {
         float eval;
         GameState gameState;
 
+        EvaluatedGameState() {}
+
         EvaluatedGameState(GameState gameState, float eval) {
             this->eval = eval;
             this->gameState = gameState;

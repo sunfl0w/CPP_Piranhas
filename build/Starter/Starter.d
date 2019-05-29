@@ -20,7 +20,8 @@ build/Starter/Starter.o: src/Starter/Starter.cpp \
  include/Evaluation/CenterOfMassEvaluation.hpp \
  include/Piranhas/PositionF.hpp \
  include/Evaluation/ConnectednessEvaluation.hpp \
- include/Evaluation/UniformityEvaluation.hpp
+ include/Evaluation/UniformityEvaluation.hpp \
+ include/Negamax/MoveSearch.hpp
 
 include/Piranhas/GameState.hpp:
 
@@ -85,3 +86,5 @@ include/Piranhas/PositionF.hpp:
 include/Evaluation/ConnectednessEvaluation.hpp:
 
 include/Evaluation/UniformityEvaluation.hpp:
+
+include/Negamax/MoveSearch.hpp:

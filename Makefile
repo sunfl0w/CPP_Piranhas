@@ -26,7 +26,7 @@ DEPS = $(OBJECTS:.o=.d)
 
 # flags #
 COMPILE_FLAGS = -std=c++14 -Wall -Wextra -Ofast
-COMPILE_FLAGS_DEBUG = -std=c++14 -Wall -Wextra -g
+COMPILE_FLAGS_DEBUG = -std=c++14 -Wall -Wextra -g -Og
 INCLUDES = -I include/ -I include/Logic/ -I include/MCTS/ -I include/Negamax/ -I include/Evaluation/ -I include/Client/ -I include/Piranhas/ -I include/Piranhas/Communication/ -I include/PugiXmlAdditions/ -I /usr/local/include -I /usr/lib/
 # Space-separated pkg-config libraries used by this project
 LIBS = -static -L /usr/lib/ -lboost_system -lboost_thread -lpthread -lboost_program_options
