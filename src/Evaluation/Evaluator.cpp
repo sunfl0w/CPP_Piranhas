@@ -34,7 +34,7 @@ float Evaluator::EvaluateGameState(GameState gameState, PlayerColor maximizingPl
         }
     }
 
-    float centralisationEval = (CentralisationEvaluation::Evaluate(redFields) - CentralisationEvaluation::Evaluate(blueFields)) * 1.5f;
+    float centralisationEval = (CentralisationEvaluation::Evaluate(redFields) - CentralisationEvaluation::Evaluate(blueFields)) * 1.2f;
     float centerOfMassEval = (CenterOfMassEvaluation::Evaluate(redFields) - CenterOfMassEvaluation::Evaluate(blueFields)) * 0.0f;
     float connectednessEval = (ConnectednessEvaluation::Evaluate(redFields, gameState.board) - ConnectednessEvaluation::Evaluate(blueFields, gameState.board)) * 0.1f;
     float uniformityEval = (UniformityEvaluation::Evaluate(redFields) - UniformityEvaluation::Evaluate(blueFields)) * 0.0f;
