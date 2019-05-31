@@ -12,6 +12,8 @@ namespace Piranhas::Communication {
         GameState,
         Move,
         MoveRequest,
+        Left,
         Result,
+        Error,
     };
 }

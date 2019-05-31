@@ -56,6 +56,8 @@ std::vector<SC_Message> SC_MessageHandler::SplitInputMessagesIntoValidSC_Message
                 scMessageType = SC_MessageType::JoinRequestPrepared;
             } else if (childNodeName == "joined") {
                 scMessageType = SC_MessageType::Joined;
+            } else if (childNodeName == "left") {
+                scMessageType = SC_MessageType::Left;
             } else if (childNodeName == "room") {
                 std::string classAttributeValue = childNode.child("data").attribute("class").value();
                 if (classAttributeValue == "welcomeMessage") {
@@ -66,6 +68,8 @@ std::vector<SC_Message> SC_MessageHandler::SplitInputMessagesIntoValidSC_Message
                     scMessageType = SC_MessageType::MoveRequest;
                 } else if (classAttributeValue == "result") {
                     scMessageType = SC_MessageType::Result;
+                } else if (classAttributeValue == "MSG") {
+                    scMessageType = SC_MessageType::Error;
                 }
             }
             xmlStringWriter xmlStringWriter;

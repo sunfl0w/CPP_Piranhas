@@ -21,7 +21,7 @@ PositionF CenterOfMassEvaluation::GetCenterOfMassPos(const std::vector<Field> &c
 }
 
 float CenterOfMassEvaluation::Evaluate(const std::vector<Field> &checkers) {
-    int centerOfMassTable[] = {-1, 0, 0, 0, 0, 0, 0, 0, 0, -1,
+    int centerOfMassTable[100] = {-1, 0, 0, 0, 0, 0, 0, 0, 0, -1,
                                0, 0, 1, 1, 1, 1, 1, 1, 0, 0,
                                0, 1, 1, 2, 2, 2, 2, 1, 1, 0,
                                0, 1, 2, 2, 2, 2, 2, 2, 1, 0,
@@ -32,5 +32,21 @@ float CenterOfMassEvaluation::Evaluate(const std::vector<Field> &checkers) {
                                0, 0, 1, 1, 1, 1, 1, 1, 0, 0,
                                -1, 0, 0, 0, 0, 0, 0, 0, 0, -1};
     PositionF centerOfMassPos = GetCenterOfMassPos(checkers);
-    return centerOfMassTable[(int)std::round(centerOfMassPos.y) * 10 + (int)std::round(centerOfMassPos.x)];
+    int x = std::round(centerOfMassPos.x);
+    int y = std::round(centerOfMassPos.y);
+
+    if(x < 0) {
+        x = 0;
+    } else if(x > 9) {
+        x = 9;
+    }
+
+    if(y < 0) {
+        y = 0;
+    } else if(y > 9) {
+        y = 9;
+    }
+
+    float eval = centerOfMassTable[y * 10 + x];
+    return eval;
 }

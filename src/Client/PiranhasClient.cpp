@@ -23,6 +23,10 @@ void PiranhasClient::ClientLoop() {
     }
 }
 
+void PiranhasClient::Shutdown() {
+    tcpClient.SendMessage(scMessageHandler.CreateProtocolEndMessage().content);
+}
+
 std::vector<SC_Message> PiranhasClient::HandleIncomingMessagesAndGenerateRespones(std::vector<SC_Message> incomingMessages) {
     std::vector<SC_Message> responseMessages;
     for (SC_Message message : incomingMessages) {
@@ -35,8 +39,47 @@ std::vector<SC_Message> PiranhasClient::HandleIncomingMessagesAndGenerateRespone
             GameState gameState = scMessageHandler.GetGameStateFromGameStateMessage(message);
             currentGameState = gameState;
         } else if (message.messageType == SC_MessageType::MoveRequest) {
-            responseMessages.push_back(scMessageHandler.CreateMoveMessage(GetNextMove(), roomID));
+            Move nextMove = GetNextMove();
+            if (!currentGameState.IsMoveValid(nextMove)) {
+                currentGameState.board.Print();
+                std::string direction = "??";
+                switch (nextMove.GetDirection()) {
+                case Direction::Up_Right:
+                    direction = "Up_Right";
+                    break;
+                case Direction::Up:
+                    direction = "Up";
+                    break;
+                case Direction::Down_Right:
+                    direction = "Down_Right";
+                    break;
+                case Direction::Right:
+                    direction = "Right";
+                    break;
+                case Direction::Down_Left:
+                    direction = "Down_Left";
+                    break;
+                case Direction::Down:
+                    direction = "Down";
+                    break;
+                case Direction::Up_Left:
+                    direction = "Up_Left";
+                    break;
+                case Direction::Left:
+                    direction = "Left";
+                    break;
+                }
+
+                std::cout << "Move: " << nextMove.GetStartPosition().x << "|" << nextMove.GetStartPosition().y << "|" << direction << "\n";
+            }
+            responseMessages.push_back(scMessageHandler.CreateMoveMessage(nextMove, roomID));
+        } else if (message.messageType == SC_MessageType::Left) {
+            gameOver = true;
         } else if (message.messageType == SC_MessageType::Result) {
+            gameOver = true;
+        } else if (message.messageType == SC_MessageType::Error) {
+            gameOver = true;
+        } else if (message.messageType == SC_MessageType::ProtocolEnd) {
             gameOver = true;
         }
     }
@@ -54,6 +97,9 @@ void PiranhasClient::Start(ip::address address, unsigned short port) {
     tcpClient.SendMessage("<protocol>");
     tcpClient.SendMessage(scMessageHandler.CreateJoinRequestMessage().content);
     ClientLoop();
+    Shutdown();
+    std::cout << "Disconnect complete. Bye."
+              << "\n";
 }
 
 void PiranhasClient::StartReserved(std::string hostname, unsigned short port, std::string reservationCode) {
@@ -66,4 +112,7 @@ void PiranhasClient::StartReserved(std::string hostname, unsigned short port, st
     tcpClient.SendMessage("<protocol>");
     tcpClient.SendMessage(scMessageHandler.CreateJoinReservedRequestMessage(reservationCode).content);
     ClientLoop();
+    Shutdown();
+    std::cout << "Disconnect complete. Bye."
+              << "\n";
 }

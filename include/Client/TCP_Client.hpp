@@ -16,6 +16,9 @@ namespace Networking_Client {
         TCP_Client();
 
         void ConnectWithIP(ip::address address, unsigned short port);
+
+        void Disconnect();
+
         ip::address ResolveHostnameToIP(std::string hostname);
 
         void SendMessage(std::string message);

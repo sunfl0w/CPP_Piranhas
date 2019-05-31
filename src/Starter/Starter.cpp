@@ -62,7 +62,6 @@ int main(int argc, char *argv[]) {
     }*/
     //Test();
 
-    std::getchar();
     return 0;
 }
 

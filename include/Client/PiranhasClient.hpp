@@ -36,6 +36,7 @@ namespace Piranhas::Client {
 
 
         void ClientLoop();
+        void Shutdown();
 
         std::vector<SC_Message> HandleIncomingMessagesAndGenerateRespones(std::vector<SC_Message> incomingMessages);
 

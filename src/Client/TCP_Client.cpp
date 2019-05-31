@@ -16,6 +16,11 @@ ip::address TCP_Client::ResolveHostnameToIP(std::string hostname) {
     return endpoint.address();
 }
 
+void TCP_Client::Disconnect() {
+    socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+    socket.close();
+}
+
 void TCP_Client::SendMessage(std::string message) {
     boost::system::error_code errorCode;
     write(socket, buffer(message), errorCode);
