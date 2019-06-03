@@ -11,17 +11,27 @@ build/Starter/Starter.o: src/Starter/Starter.cpp \
  include/Piranhas/Communication/SC_MessageType.hpp \
  include/PugiXmlAdditions/XmlStringWriter.hpp \
  include/Logic/PiranhasLogic.hpp include/Logic/Piranhas_MCTS_Logic.hpp \
- include/MCTS/MCTS_Search.hpp include/MCTS/MCTS_Node.hpp \
- include/MCTS/MCTS_Tree.hpp include/Logic/Piranhas_Negamax_Logic.hpp \
- include/Negamax/Negamax_Search.hpp \
- include/Negamax/EvaluatedGameState.hpp include/Negamax/EvaluatedMove.hpp \
+ include/Search/MCTS/MCTS_Search.hpp include/Search/MCTS/MCTS_Node.hpp \
+ include/Search/MCTS/MCTS_Tree.hpp \
+ include/Logic/Piranhas_Negamax_Logic.hpp include/Search/MoveSearch.hpp \
+ include/Search/Helpers/EvaluatedGameState.hpp \
+ include/Search/SearchInformation.hpp \
+ include/Search/Negamax/FullNegamaxSearch.hpp \
+ include/Search/Heuristics/NullMoveHeuristic.hpp \
+ include/Search/Negamax/NegamaxSearch.hpp \
+ include/Search/Helpers/EvaluatedMove.hpp \
  include/Evaluation/Evaluator.hpp \
+ include/Evaluation/ConcentrationEvaluation.hpp \
+ include/Piranhas/PositionF.hpp \
  include/Evaluation/CentralisationEvaluation.hpp \
  include/Evaluation/CenterOfMassEvaluation.hpp \
- include/Piranhas/PositionF.hpp \
  include/Evaluation/ConnectednessEvaluation.hpp \
  include/Evaluation/UniformityEvaluation.hpp \
- include/Negamax/MoveSearch.hpp
+ include/Search/MoveOrdering/MoveOrdering.hpp \
+ include/Search/Heuristics/KillerHeuristic.hpp \
+ include/Search/QuiescenceSearch.hpp \
+ include/Search/Minimax/MinimaxSearch.hpp \
+ include/Evaluation/EvaluatorForMinimax.hpp
 
 include/Piranhas/GameState.hpp:
 
@@ -61,30 +71,48 @@ include/Logic/PiranhasLogic.hpp:
 
 include/Logic/Piranhas_MCTS_Logic.hpp:
 
-include/MCTS/MCTS_Search.hpp:
+include/Search/MCTS/MCTS_Search.hpp:
 
-include/MCTS/MCTS_Node.hpp:
+include/Search/MCTS/MCTS_Node.hpp:
 
-include/MCTS/MCTS_Tree.hpp:
+include/Search/MCTS/MCTS_Tree.hpp:
 
 include/Logic/Piranhas_Negamax_Logic.hpp:
 
-include/Negamax/Negamax_Search.hpp:
+include/Search/MoveSearch.hpp:
 
-include/Negamax/EvaluatedGameState.hpp:
+include/Search/Helpers/EvaluatedGameState.hpp:
 
-include/Negamax/EvaluatedMove.hpp:
+include/Search/SearchInformation.hpp:
+
+include/Search/Negamax/FullNegamaxSearch.hpp:
+
+include/Search/Heuristics/NullMoveHeuristic.hpp:
+
+include/Search/Negamax/NegamaxSearch.hpp:
+
+include/Search/Helpers/EvaluatedMove.hpp:
 
 include/Evaluation/Evaluator.hpp:
+
+include/Evaluation/ConcentrationEvaluation.hpp:
+
+include/Piranhas/PositionF.hpp:
 
 include/Evaluation/CentralisationEvaluation.hpp:
 
 include/Evaluation/CenterOfMassEvaluation.hpp:
 
-include/Piranhas/PositionF.hpp:
-
 include/Evaluation/ConnectednessEvaluation.hpp:
 
 include/Evaluation/UniformityEvaluation.hpp:
 
-include/Negamax/MoveSearch.hpp:
+include/Search/MoveOrdering/MoveOrdering.hpp:
+
+include/Search/Heuristics/KillerHeuristic.hpp:
+
+include/Search/QuiescenceSearch.hpp:
+
+include/Search/Minimax/MinimaxSearch.hpp:
+
+include/Evaluation/EvaluatorForMinimax.hpp:

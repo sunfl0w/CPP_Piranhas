@@ -24,7 +24,13 @@ float CentralisationEvaluation::GetSumOfCheckerValues(const std::vector<Field> &
                                  -2, -1, -1, -1, -1, -1, -1, -1, -1, -2};
     float sumOfValues = 0.0f;
     for (Field field : checkers) {
-        sumOfValues += centralisationTable[(int)(field.position.y * 10 + field.position.x)];
+        int index = (int)(field.position.y * 10 + field.position.x);
+        if(index > 99) {
+            index = 99;
+        } else if(index < 0) {
+            index = 0;
+        }
+        sumOfValues += centralisationTable[index];
     }
     return sumOfValues;
 }

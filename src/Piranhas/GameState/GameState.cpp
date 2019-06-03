@@ -26,6 +26,7 @@ GameState::GameState(GameState &gameState) {
     currentPlayer = Player(gameState.currentPlayer);
     //if (&gameState.lastPerformedMove != NULL) {
         lastPerformedMove = Move(gameState.lastPerformedMove);
+        lastPerformedMoveDestinationPos = Position(gameState.lastPerformedMoveDestinationPos);
     //}
 }
 
@@ -35,6 +36,7 @@ GameState::GameState(const GameState &gameState) {
     currentPlayer = Player(gameState.currentPlayer);
     //if (&gameState.lastPerformedMove != NULL) {
         lastPerformedMove = Move(gameState.lastPerformedMove);
+        lastPerformedMoveDestinationPos = Position(gameState.lastPerformedMoveDestinationPos);
     //}
 }
 
@@ -126,6 +128,7 @@ void GameState::PerformMove(Move &move) {
         Position startPos = move.GetStartPosition();
         board.SetFieldType(startPos, FieldType::Empty);
         board.SetFieldType(destinationPos, currentPlayer.fieldType);
+        lastPerformedMoveDestinationPos = Position(destinationPos);
 
         turnCount++;
         SwapPlayers();

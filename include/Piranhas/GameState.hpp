@@ -16,6 +16,7 @@ namespace Piranhas {
         Player currentPlayer;
         Player startingPlayer;
         Move lastPerformedMove;
+        Position lastPerformedMoveDestinationPos;
 
     public:
         GameState();

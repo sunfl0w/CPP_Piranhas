@@ -74,7 +74,7 @@ std::vector<SC_Message> PiranhasClient::HandleIncomingMessagesAndGenerateRespone
             }
             responseMessages.push_back(scMessageHandler.CreateMoveMessage(nextMove, roomID));
         } else if (message.messageType == SC_MessageType::Left) {
-            gameOver = true;
+            //gameOver = true;
         } else if (message.messageType == SC_MessageType::Result) {
             gameOver = true;
         } else if (message.messageType == SC_MessageType::Error) {

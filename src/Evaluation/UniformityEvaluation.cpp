@@ -21,8 +21,8 @@ float UniformityEvaluation::GetAreaCheckersCover(const std::vector<Field> &check
         }
     }
 
-    int width = upX - lowX;
-    int height = upY - lowY;
+    int width = upX - lowX + 1;
+    int height = upY - lowY + 1;
     float area = width * height;
     return area;
 }
