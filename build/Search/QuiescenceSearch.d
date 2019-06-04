@@ -12,7 +12,8 @@ build/Search/QuiescenceSearch.o: src/Search/QuiescenceSearch.cpp \
  include/Evaluation/CentralisationEvaluation.hpp \
  include/Evaluation/CenterOfMassEvaluation.hpp \
  include/Evaluation/ConnectednessEvaluation.hpp \
- include/Evaluation/UniformityEvaluation.hpp
+ include/Evaluation/UniformityEvaluation.hpp \
+ include/Search/SearchInformation.hpp
 
 include/Search/QuiescenceSearch.hpp:
 
@@ -53,3 +54,5 @@ include/Evaluation/CenterOfMassEvaluation.hpp:
 include/Evaluation/ConnectednessEvaluation.hpp:
 
 include/Evaluation/UniformityEvaluation.hpp:
+
+include/Search/SearchInformation.hpp:

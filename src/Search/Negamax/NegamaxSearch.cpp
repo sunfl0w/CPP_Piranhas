@@ -10,7 +10,7 @@ EvaluatedGameState NegamaxSearch::Search(const GameState &gameState, int depth, 
         return EvaluatedGameState(gameState, 0.0f);
     }
     if (depth == 0 || gameState.IsGameOver()) {
-        float eval = Evaluator::EvaluateGameState(gameState, searchInformation.ownPlayerColor, maximizing);
+        float eval = Evaluator::EvaluateGameState(gameState);
         return EvaluatedGameState(gameState, eval);
     }
 

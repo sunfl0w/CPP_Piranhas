@@ -46,7 +46,9 @@ int main(int argc, char *argv[]) {
     std::cout << "HostPort: " + std::to_string(hostPort) + "\n";
     std::cout << "ReservationCode: " + reservationCode + "\n";
 
-    PiranhasClient piranhasClient;
+    io_service ioService;
+    PiranhasClient piranhasClient(ioService);
+
     if (reservationCode.size() == 0) {
         std::cout << "Start.\n";
         piranhasClient.Start(ip::address::from_string("127.0.0.1"), hostPort);
@@ -61,6 +63,7 @@ int main(int argc, char *argv[]) {
         Bench3();
     }*/
     //Test();
+    //std::getchar();
 
     return 0;
 }
@@ -106,8 +109,9 @@ void Test() {
 
     GameState clonedGameState = GameState(gameState);
     clonedGameState.PerformMove(move);
+    clonedGameState.board.Print();
 
-    float eval = Search::Evaluation::Evaluator::EvaluateGameState(clonedGameState, PlayerColor::Red, true);
+    float eval = Search::Evaluation::Evaluator::EvaluateGameState(clonedGameState);
 
     float x = 0.0f;
     std::cout << "Score: " << std::to_string(eval) << "\n";

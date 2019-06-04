@@ -43,7 +43,7 @@ namespace Piranhas::Client {
         Move GetNextMove();
 
     public:
-        PiranhasClient();
+        PiranhasClient(io_service &ioService);
         void Start(ip::address, unsigned short port);
         void StartReserved(std::string hostanme, unsigned short port, std::string reservationCode);
     };

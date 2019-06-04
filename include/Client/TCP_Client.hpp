@@ -9,11 +9,11 @@ using boost::asio::ip::tcp;
 
 namespace Networking_Client {
     class TCP_Client {
-        io_service ioService;
+        io_service &ioService;
         tcp::socket socket;
 
         public:
-        TCP_Client();
+        TCP_Client(io_service &ioService);
 
         void ConnectWithIP(ip::address address, unsigned short port);
 

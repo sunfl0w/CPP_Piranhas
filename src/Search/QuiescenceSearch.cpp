@@ -21,10 +21,10 @@ std::vector<GameState> QuiescenceSearch::GetChildGameStatesWithCaptures(const Ga
     return childGameStatesPreviousCaptureMove;
 }
 
-EvaluatedGameState QuiescenceSearch::Search(const GameState &gameState, unsigned int depth, float alpha, float beta, PlayerColor maximizingPlayerColor, bool maximizing) {
-    float eval = Evaluator::EvaluateGameState(gameState, maximizingPlayerColor, maximizing);
+EvaluatedGameState QuiescenceSearch::Search(const GameState &gameState, unsigned int depth, float alpha, float beta, const SearchInformation &searchInformation) {
+    float eval = Evaluator::EvaluateGameState(gameState);
 
-    if(depth == 0 || gameState.IsGameOver()) {
+    if(depth == 0, gameState.IsGameOver() || std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchInformation.searchStartTimePoint).count() > searchInformation.maxSearchTimeInMs) {
         return EvaluatedGameState(gameState, eval);
     }
 
@@ -36,7 +36,7 @@ EvaluatedGameState QuiescenceSearch::Search(const GameState &gameState, unsigned
     }
 
     for(GameState childGameState : GetChildGameStatesWithCaptures(gameState)) {
-        float captureEval = -Search(childGameState, depth - 1, -beta, -alpha, maximizingPlayerColor, !maximizing).eval;
+        float captureEval = -Search(childGameState, depth - 1, -beta, -alpha, searchInformation).eval;
 
         if(captureEval >= beta) {
             return EvaluatedGameState(gameState, beta);

@@ -2,7 +2,7 @@
 
 using namespace Networking_Client;
 
-TCP_Client::TCP_Client() : socket(ioService) {}
+TCP_Client::TCP_Client(io_service &ioService) : ioService(ioService), socket(ioService) {}
 
 void TCP_Client::ConnectWithIP(ip::address address, unsigned short port) {
     socket.connect(tcp::endpoint(address, port));

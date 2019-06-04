@@ -179,9 +179,11 @@ GameState SC_MessageHandler::GetGameStateFromGameStateMessage(SC_Message message
             for(pugi::xml_attribute fieldAttribute : fieldNode.attributes()) {
                 std::string fieldAttributeName(fieldAttribute.name());
                 if(fieldAttributeName == "x") {
-                    fieldPos.x = std::stoi(std::string(fieldAttribute.value()));
+                    std::string x = std::string(fieldAttribute.value());
+                    fieldPos.x = std::stoi(x);
                 } else if(fieldAttributeName == "y") {
-                    fieldPos.y = std::stoi(std::string(fieldAttribute.value()));
+                    std::string y = std::string(fieldAttribute.value());
+                    fieldPos.y = std::stoi(y);
                 } else if(fieldAttributeName == "state") {
                     std::string fieldAttributeValue(fieldAttribute.value());
                     if(fieldAttributeValue == "RED") {

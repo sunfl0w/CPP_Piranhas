@@ -22,7 +22,7 @@ Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor)
     std::cout << "Starting to search. Turn: " << std::to_string(gameState.turnCount) << "\n";
 
     for(int i = 1; i < searchDepth; i++) {
-        EvaluatedGameState eval = fullNegamaxSearch.Search(gameState, i, -10000.0f, 10000.0f, true, SearchInformation(ownPlayerColor, maxSearchTimeInMs, searchStartTimePoint));
+        EvaluatedGameState eval = fullNegamaxSearch.Search(gameState, i, -10000.0f, 10000.0f, SearchInformation(ownPlayerColor, maxSearchTimeInMs, searchStartTimePoint), true);
         //EvaluatedGameState eval = minimaxSearch.Search(gameState, i, true, SearchInformation(ownPlayerColor, maxSearchTimeInMs, searchStartTimePoint));
         if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchStartTimePoint).count() < maxSearchTimeInMs - 10) {
             nextBestGameState = eval;

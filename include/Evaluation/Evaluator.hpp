@@ -13,11 +13,11 @@ namespace Search::Evaluation {
     class Evaluator {
     private:
         Evaluator();
-        static float EvaluateEarlyGame(GameState gameState, PlayerColor maximizingPlayerColor, bool maximizing);
-        static float EvaluateMidGame(GameState gameState, PlayerColor maximizingPlayerColor, bool maximizing);
-        static float EvaluateEndGame(GameState gameState, PlayerColor maximizingPlayerColor, bool maximizing);
+        static float EvaluateEarlyGame(const GameState &gameState);
+        static float EvaluateMidGame(const GameState &gameState);
+        static float EvaluateEndGame(const GameState &gameState);
 
     public:
-        static float EvaluateGameState(GameState gameState, PlayerColor maximizingPlayerColor, bool maximizing);
+        static float EvaluateGameState(const GameState &gameState);
     };
 } // namespace Search::Evaluation

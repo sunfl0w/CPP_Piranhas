@@ -29,6 +29,6 @@ namespace Search {
 
     public:
         FullNegamaxSearch(KillerHeuristic *killerHeuristic);
-        EvaluatedGameState Search(const GameState &gameState, int depth, float alpha, float beta, bool maximizing, const SearchInformation &searchInformation);
+        EvaluatedGameState Search(const GameState &gameState, int depth, float alpha, float beta, const SearchInformation &searchInformation, bool allownNullMove);
     };
 } // namespace Search::Negamax
