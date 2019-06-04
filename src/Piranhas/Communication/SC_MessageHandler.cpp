@@ -174,25 +174,25 @@ GameState SC_MessageHandler::GetGameStateFromGameStateMessage(SC_Message message
 
     for (pugi::xml_node fieldsNode : roomNode.child("data").child("state").child("board").children()) {
         for (pugi::xml_node fieldNode : fieldsNode.children()) {
-            Position fieldPos; 
+            Position fieldPos;
             FieldType fieldType;
-            for(pugi::xml_attribute fieldAttribute : fieldNode.attributes()) {
+            for (pugi::xml_attribute fieldAttribute : fieldNode.attributes()) {
                 std::string fieldAttributeName(fieldAttribute.name());
-                if(fieldAttributeName == "x") {
+                if (fieldAttributeName == "x") {
                     std::string x = std::string(fieldAttribute.value());
                     fieldPos.x = std::stoi(x);
-                } else if(fieldAttributeName == "y") {
+                } else if (fieldAttributeName == "y") {
                     std::string y = std::string(fieldAttribute.value());
                     fieldPos.y = std::stoi(y);
-                } else if(fieldAttributeName == "state") {
+                } else if (fieldAttributeName == "state") {
                     std::string fieldAttributeValue(fieldAttribute.value());
-                    if(fieldAttributeValue == "RED") {
+                    if (fieldAttributeValue == "RED") {
                         fieldType = FieldType::Red;
-                    } else if(fieldAttributeValue == "BLUE") {
+                    } else if (fieldAttributeValue == "BLUE") {
                         fieldType = FieldType::Blue;
-                    } else if(fieldAttributeValue == "OBSTRUCTED") {
+                    } else if (fieldAttributeValue == "OBSTRUCTED") {
                         fieldType = FieldType::Obstacle;
-                    } else if(fieldAttributeValue == "EMPTY") {
+                    } else if (fieldAttributeValue == "EMPTY") {
                         fieldType = FieldType::Empty;
                     }
                 }

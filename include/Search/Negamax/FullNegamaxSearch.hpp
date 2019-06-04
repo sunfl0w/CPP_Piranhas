@@ -17,18 +17,21 @@
 #include "KillerHeuristic.hpp"
 #include "MoveOrdering.hpp"
 #include "QuiescenceSearch.hpp"
+#include "TranspositionTable.hpp"
 
 using namespace Piranhas;
 using namespace Search::Helpers;
 using namespace Search;
 using namespace Search::Heuristics;
+using namespace Client::Storage;
 
 namespace Search {
     class FullNegamaxSearch {
         KillerHeuristic* killerHeuristic;
+        TranspositionTable* transpositionTable;
 
     public:
-        FullNegamaxSearch(KillerHeuristic *killerHeuristic);
+        FullNegamaxSearch(KillerHeuristic *killerHeuristic, TranspositionTable* transpositionTable);
         EvaluatedGameState Search(const GameState &gameState, int depth, float alpha, float beta, const SearchInformation &searchInformation, bool allownNullMove);
     };
 } // namespace Search::Negamax

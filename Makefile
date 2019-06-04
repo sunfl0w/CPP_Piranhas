@@ -27,7 +27,7 @@ DEPS = $(OBJECTS:.o=.d)
 # flags #
 COMPILE_FLAGS = -std=c++14 -Wall -Wextra -Ofast
 COMPILE_FLAGS_DEBUG = -std=c++14 -Wall -Wextra -g -Og
-INCLUDES = -I include/ -I include/Logic/ -I include/Search/ -I include/Search/MoveOrdering -I include/Search/Heuristics -I include/Search/Helpers/ -I include/Search/MCTS/ -I include/Search/Minimax -I include/Search/Negamax/ -I include/Search/NullMoveSearch/ -I include/Evaluation/ -I include/Client/ -I include/Piranhas/ -I include/Piranhas/Communication/ -I include/PugiXmlAdditions/ -I /usr/local/include -I /usr/lib/
+INCLUDES = -I include/ -I include/Logic/ -I include/Search/ -I include/Transposition -I include/Search/MoveOrdering -I include/Search/Heuristics -I include/Search/Helpers/ -I include/Search/MCTS/ -I include/Search/Minimax -I include/Search/Negamax/ -I include/Search/NullMoveSearch/ -I include/Evaluation/ -I include/Client/ -I include/Piranhas/ -I include/Piranhas/Communication/ -I include/PugiXmlAdditions/ -I /usr/local/include -I /usr/lib/
 # Space-separated pkg-config libraries used by this project
 LIBS = -static -L /usr/lib/ -lboost_system -lboost_thread -lpthread -lboost_program_options
 LIBS_DEBUG = -static -L /usr/lib/ -lboost_system -lboost_thread -lpthread -lboost_program_options

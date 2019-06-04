@@ -3,21 +3,44 @@
 using namespace Search::Evaluation;
 using namespace Search;
 using namespace Search::Heuristics;
+using namespace Client::Storage;
 
-FullNegamaxSearch::FullNegamaxSearch(KillerHeuristic *killerHeuristic) {
+FullNegamaxSearch::FullNegamaxSearch(KillerHeuristic *killerHeuristic, TranspositionTable *transpositionTable) {
     this->killerHeuristic = killerHeuristic;
+    this->transpositionTable = transpositionTable;
 }
 
 EvaluatedGameState FullNegamaxSearch::Search(const GameState &gameState, int depth, float alpha, float beta, const SearchInformation &searchInformation, bool allowNullMove) {
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchInformation.searchStartTimePoint).count() > searchInformation.maxSearchTimeInMs) {
         return EvaluatedGameState(gameState, 0.0f);
     }
+
+    float originalAlpha = alpha;
+    //TranspositionTableLookup
+    if(transpositionTable->HasTransposition(gameState)) {
+        Transposition transposition = transpositionTable->GetTransposition(gameState);
+        if(transposition.depth >= depth) {
+            if(transposition.flag == TranspositionFlag::Exact) {
+                return EvaluatedGameState(gameState, transposition.eval);
+            } else if(transposition.flag == TranspositionFlag::LowerBound) {
+                alpha = std::max(alpha, transposition.eval);
+            } else if(transposition.flag == TranspositionFlag::UpperBound) {
+                beta = std::min(beta, transposition.eval);
+            }
+        }
+        if(alpha >= beta) {
+            return EvaluatedGameState(gameState, transposition.eval);
+        }
+    }
+
+
     if (depth == 0 || gameState.IsGameOver()) {
         float eval = Evaluator::EvaluateGameState(gameState);
         //float eval = QuiescenceSearch::Search(gameState, 10, alpha, beta, searchInformation).eval;
         return EvaluatedGameState(gameState, eval);
     }
 
+    //NullMoveHeuristic
     if(allowNullMove && depth > 2) {
         int r = 1;
         if(depth > 4) {
@@ -32,6 +55,7 @@ EvaluatedGameState FullNegamaxSearch::Search(const GameState &gameState, int dep
             return nullEval;
         }
     }
+    //NullMoveHeuristic
 
     std::vector<GameState> childGameStates = MoveOrdering::GetOrderedChildGameStates(gameState, searchInformation.ownPlayerColor, killerHeuristic);
     EvaluatedGameState maxEval = EvaluatedGameState(childGameStates[0], -10000.0f);
@@ -47,5 +71,20 @@ EvaluatedGameState FullNegamaxSearch::Search(const GameState &gameState, int dep
             break;
         }
     }
+
+    //TranspositionTableLookup
+    if(transpositionTable->HasTransposition(gameState)) {
+        Transposition transposition = transpositionTable->GetTransposition(gameState);
+        transposition.eval = maxEval.eval;
+        if(maxEval.eval <= originalAlpha) {
+            transposition.flag = TranspositionFlag::UpperBound;
+        } else if(maxEval.eval >= beta) {
+            transposition.flag == TranspositionFlag::LowerBound;
+        } else {
+            transposition.flag == TranspositionFlag::Exact;
+        }
+        transposition.depth = depth;
+    }
+
     return maxEval;
 }

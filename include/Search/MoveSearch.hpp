@@ -10,6 +10,7 @@
 #include "FullNegamaxSearch.hpp"
 #include "MinimaxSearch.hpp"
 #include "KillerHeuristic.hpp"
+#include "TranspositionTable.hpp"
 
 using namespace Piranhas;
 
@@ -21,6 +22,7 @@ namespace Search {
         int maxSearchDepth;
         std::chrono::high_resolution_clock::time_point searchStartTimePoint;
         KillerHeuristic killerHeursitic;
+        TranspositionTable transpositionTable;
 
     public:
         MoveSearch(int maxSearchTimeInMs, int maxSearchDepth);

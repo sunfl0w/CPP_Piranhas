@@ -12,12 +12,12 @@ void PiranhasClient::ClientLoop() {
         std::vector<SC_Message> messages = scMessageHandler.SplitInputMessagesIntoValidSC_Messages(inputStream);
         for (SC_Message message : messages) {
             //std::cout << message.content << "\n";
-            std::cerr << message.content << "\n";
+            //std::cerr << message.content << "\n";
         }
         std::vector<SC_Message> responses = HandleIncomingMessagesAndGenerateRespones(messages);
         for (SC_Message response : responses) {
             //std::cout << response.content << "\n";
-            std::cerr << response.content << "\n";
+            //std::cerr << response.content << "\n";
             tcpClient.SendMessage(response.content);
         }
         //std::cout << "Message: " << tcpClient.ReadMessage() << "\n";

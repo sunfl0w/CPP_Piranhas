@@ -6,13 +6,14 @@ MoveSearch::MoveSearch(int maxSearchTimeInMs, int maxSearchDepth) {
     this->maxSearchTimeInMs = maxSearchTimeInMs;
     this->maxSearchDepth = maxSearchDepth;
     this->killerHeursitic = KillerHeuristic();
+    this->transpositionTable = TranspositionTable();
 }
 
 Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor) {
     this->ownPlayerColor = ownPlayerColor;
     this->searchStartTimePoint = std::chrono::high_resolution_clock::now();
 
-    FullNegamaxSearch fullNegamaxSearch = FullNegamaxSearch(&killerHeursitic);
+    FullNegamaxSearch fullNegamaxSearch = FullNegamaxSearch(&killerHeursitic, &transpositionTable);
     MinimaxSearch minimaxSearch;
 
     EvaluatedGameState nextBestGameState;
@@ -28,6 +29,7 @@ Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor)
             nextBestGameState = eval;
             std::cout << "Reached layer: " << i << " || Time used: " << std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchStartTimePoint).count()) << "\n";
             std::cout << "Confidence: " << std::to_string(eval.eval) << "\n";
+            std::cout << "Stored transpositions: " << std::to_string(transpositionTable.GetSize()) << "\n";
         }
     }
     return nextBestGameState.gameState.lastPerformedMove;

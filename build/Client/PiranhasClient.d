@@ -30,6 +30,9 @@ build/Client/PiranhasClient.o: src/Client/PiranhasClient.cpp \
  include/Search/MoveOrdering/MoveOrdering.hpp \
  include/Search/Heuristics/KillerHeuristic.hpp \
  include/Search/QuiescenceSearch.hpp \
+ include/Transposition/TranspositionTable.hpp \
+ include/Transposition/Transposition.hpp \
+ include/Transposition/TranspositionFlag.hpp \
  include/Search/Minimax/MinimaxSearch.hpp \
  include/Evaluation/EvaluatorForMinimax.hpp
 
@@ -112,6 +115,12 @@ include/Search/MoveOrdering/MoveOrdering.hpp:
 include/Search/Heuristics/KillerHeuristic.hpp:
 
 include/Search/QuiescenceSearch.hpp:
+
+include/Transposition/TranspositionTable.hpp:
+
+include/Transposition/Transposition.hpp:
+
+include/Transposition/TranspositionFlag.hpp:
 
 include/Search/Minimax/MinimaxSearch.hpp:
 
