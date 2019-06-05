@@ -18,7 +18,10 @@ build/Search/Heuristics/NullMoveHeursitic.o: \
  include/Evaluation/UniformityEvaluation.hpp \
  include/Search/SearchInformation.hpp \
  include/Search/MoveOrdering/MoveOrdering.hpp \
- include/Search/Heuristics/KillerHeuristic.hpp
+ include/Search/Heuristics/KillerHeuristic.hpp \
+ include/Transposition/TranspositionTable.hpp \
+ include/Transposition/Transposition.hpp \
+ include/Transposition/TranspositionFlag.hpp
 
 include/Search/Heuristics/NullMoveHeuristic.hpp:
 
@@ -69,3 +72,9 @@ include/Search/SearchInformation.hpp:
 include/Search/MoveOrdering/MoveOrdering.hpp:
 
 include/Search/Heuristics/KillerHeuristic.hpp:
+
+include/Transposition/TranspositionTable.hpp:
+
+include/Transposition/Transposition.hpp:
+
+include/Transposition/TranspositionFlag.hpp:

@@ -20,10 +20,10 @@ build/Search/Negamax/FullNegamaxSearch.o: \
  include/Search/SearchInformation.hpp \
  include/Search/MoveOrdering/MoveOrdering.hpp \
  include/Search/Heuristics/KillerHeuristic.hpp \
- include/Search/QuiescenceSearch.hpp \
  include/Transposition/TranspositionTable.hpp \
  include/Transposition/Transposition.hpp \
- include/Transposition/TranspositionFlag.hpp
+ include/Transposition/TranspositionFlag.hpp \
+ include/Search/QuiescenceSearch.hpp
 
 include/Search/Negamax/FullNegamaxSearch.hpp:
 
@@ -77,10 +77,10 @@ include/Search/MoveOrdering/MoveOrdering.hpp:
 
 include/Search/Heuristics/KillerHeuristic.hpp:
 
-include/Search/QuiescenceSearch.hpp:
-
 include/Transposition/TranspositionTable.hpp:
 
 include/Transposition/Transposition.hpp:
 
 include/Transposition/TranspositionFlag.hpp:
+
+include/Search/QuiescenceSearch.hpp:

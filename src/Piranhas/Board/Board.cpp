@@ -252,7 +252,7 @@ int Board::GetCheckerCountInDirection(const std::vector<Field> &fieldsInDirectio
 
 void Board::Print() const {
     for(int y = 9; y >= 0; y--) {
-        for(int x = 9; x >= 0; x--) {
+        for(int x = 0; x < 10; x++) {
             if(GetField(x, y).fieldType == FieldType::Red) {
                 std::cout << "R";
             } else if(GetField(x, y).fieldType == FieldType::Blue) {

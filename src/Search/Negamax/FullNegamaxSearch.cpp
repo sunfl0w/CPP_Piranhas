@@ -57,10 +57,10 @@ EvaluatedGameState FullNegamaxSearch::Search(const GameState &gameState, int dep
     }
     //NullMoveHeuristic
 
-    std::vector<GameState> childGameStates = MoveOrdering::GetOrderedChildGameStates(gameState, searchInformation.ownPlayerColor, killerHeuristic);
+    std::vector<GameState> childGameStates = MoveOrdering::GetOrderedChildGameStates(gameState, searchInformation.ownPlayerColor, killerHeuristic, transpositionTable);
     EvaluatedGameState maxEval = EvaluatedGameState(childGameStates[0], -10000.0f);
-
     for (GameState childGameState : childGameStates) {
+        nodesSearched++;
         EvaluatedGameState eval = EvaluatedGameState(childGameState, -(FullNegamaxSearch::Search(childGameState, depth - 1, -beta, -alpha, searchInformation, true).eval));
         if (eval.eval > maxEval.eval) {
             maxEval = eval;
@@ -84,6 +84,19 @@ EvaluatedGameState FullNegamaxSearch::Search(const GameState &gameState, int dep
             transposition.flag == TranspositionFlag::Exact;
         }
         transposition.depth = depth;
+        transposition.hashMove = maxEval.gameState.lastPerformedMove;
+    } else {
+        Transposition transposition = Transposition(0.0f, 0, TranspositionFlag::Exact, Move(maxEval.gameState.lastPerformedMove));
+        transposition.eval = maxEval.eval;
+        if(maxEval.eval <= originalAlpha) {
+            transposition.flag = TranspositionFlag::UpperBound;
+        } else if(maxEval.eval >= beta) {
+            transposition.flag == TranspositionFlag::LowerBound;
+        } else {
+            transposition.flag == TranspositionFlag::Exact;
+        }
+        transposition.depth = depth;
+        transpositionTable->AddTransposition(transpositionTable->ComputeKey(gameState), transposition);
     }
 
     return maxEval;

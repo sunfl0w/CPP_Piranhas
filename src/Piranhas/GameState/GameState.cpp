@@ -58,23 +58,28 @@ Player GameState::GetOtherPlayer() const {
 
 bool GameState::IsMoveValid(Move &move) const {
     if (!board.IsPositionOnBoard(move.GetStartPosition())) {
+        //std::cout << "StartNotOnBoard" << "\n";
         return false;
     }
     if (board.GetField(move.GetStartPosition()).fieldType != currentPlayer.fieldType) {
+        //std::cout << "NotOfOwnPlayer" << "\n";
         return false;
     }
     int moveDistance = board.GetMoveDistance(move);
     Position destinationPos = board.GetDestinationPositionOfMove(move, moveDistance);
     if (!board.IsPositionOnBoard(destinationPos)) {
+        //std::cout << "DestNotOnBoard" << "\n";
         return false;
     }
     FieldType otherPlayerFieldType = GetOtherPlayer().fieldType;
     if (board.IsMovePathBlocked(move, otherPlayerFieldType)) {
+        //std::cout << "Blocked" << "\n";
         return false;
     }
     if (board.GetField(destinationPos).fieldType == otherPlayerFieldType || board.GetField(destinationPos).fieldType == FieldType::Empty) {
         return true;
     } else {
+        //std::cout << "DestBlocked" << "\n";
         return false;
     }
 }
@@ -138,6 +143,10 @@ void GameState::PerformMove(Move &move) {
     } else {
         std::cout << "Move is invalid. Move will not be performed." << "\n";
     }
+}
+
+void GameState::RevertLastPerformedMove() {
+    
 }
 
 bool GameState::IsGameOver() const {

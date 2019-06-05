@@ -23,9 +23,9 @@ bool Field::IsChecker() {
 }
 
 bool Field::operator==(const Field &field) const {
-    if(fieldType == field.fieldType && position == field.position) {
-        return true;
-    } else {
+    if(fieldType != field.fieldType || position.x != field.position.x || position.y != field.position.y) {
         return false;
+    } else {
+        return true;
     }
 }

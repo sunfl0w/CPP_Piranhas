@@ -20,6 +20,9 @@ build/Search/Negamax/MinimaxSearch.o: \
  include/Search/SearchInformation.hpp \
  include/Search/MoveOrdering/MoveOrdering.hpp \
  include/Search/Heuristics/KillerHeuristic.hpp \
+ include/Transposition/TranspositionTable.hpp \
+ include/Transposition/Transposition.hpp \
+ include/Transposition/TranspositionFlag.hpp \
  include/Evaluation/EvaluatorForMinimax.hpp
 
 include/Search/Minimax/MinimaxSearch.hpp:
@@ -73,5 +76,11 @@ include/Search/SearchInformation.hpp:
 include/Search/MoveOrdering/MoveOrdering.hpp:
 
 include/Search/Heuristics/KillerHeuristic.hpp:
+
+include/Transposition/TranspositionTable.hpp:
+
+include/Transposition/Transposition.hpp:
+
+include/Transposition/TranspositionFlag.hpp:
 
 include/Evaluation/EvaluatorForMinimax.hpp:

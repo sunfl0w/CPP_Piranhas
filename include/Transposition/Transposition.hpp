@@ -10,6 +10,6 @@ namespace Client::Storage {
         TranspositionFlag flag;
         Piranhas::Move hashMove;
 
-        Transposition(float eval, unsigned int depth, TranspositionFlag transpositionFlag);
+        Transposition(float eval, unsigned int depth, TranspositionFlag transpositionFlag, Piranhas::Move hashMove);
     };
 }

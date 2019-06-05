@@ -7,11 +7,14 @@
 #include "GameState.hpp"
 #include "Transposition.hpp"
 #include "FieldType.hpp"
+#include "Direction.hpp"
+#include "Position.hpp"
+#include "PlayerColor.hpp"
 
 namespace Client::Storage {
     class TranspositionTable {
     private:
-        unsigned long long zobristTable[10][10][3];
+        unsigned long long zobristTable[2][10][10][4];
         std::unordered_map<unsigned long long, Transposition> table;
 
         void Init();
@@ -19,7 +22,7 @@ namespace Client::Storage {
     public:
         TranspositionTable();
 
-        unsigned long long ComputeKey(const Piranhas::Board &board) const;
+        unsigned long long ComputeKey(const Piranhas::GameState &gameState) const;
         const Transposition &GetTransposition(const Piranhas::GameState &gameState) const;
         bool HasTransposition(const Piranhas::GameState &gameState) const;
         void AddTransposition(unsigned long long zobristKey, const Transposition &transposition);

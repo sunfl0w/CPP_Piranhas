@@ -7,9 +7,11 @@
 #include "GameState.hpp"
 #include "EvaluatedMove.hpp"
 #include "KillerHeuristic.hpp"
+#include "TranspositionTable.hpp"
 
 using namespace Piranhas;
 using namespace Search::Heuristics;
+using namespace Client::Storage;
 
 namespace Search {
     class MoveOrdering {
@@ -18,8 +20,8 @@ namespace Search {
         static float EvaluateMove(const Move &move, const GameState &gameState);
     public:
         static std::vector<Move> GetOrderedPossibleMoves(const GameState &gameState, const PlayerColor maximizingPlayerColor);
-        static std::vector<Move> GetOrderedPossibleMoves(const GameState &gameState, const PlayerColor maximizingPlayerColor, const KillerHeuristic *killerHeuristic);
+        static std::vector<Move> GetOrderedPossibleMoves(const GameState &gameState, const PlayerColor maximizingPlayerColor, const KillerHeuristic *killerHeuristic, const TranspositionTable *transpositionTable);
         static std::vector<GameState> GetOrderedChildGameStates(const GameState &gameState, const PlayerColor maximizingPlayerColor);
-        static std::vector<GameState> GetOrderedChildGameStates(const GameState &gameState, const PlayerColor maximizingPlayerColor, const KillerHeuristic *killerHeuristic);
+        static std::vector<GameState> GetOrderedChildGameStates(const GameState &gameState, const PlayerColor maximizingPlayerColor, const KillerHeuristic *killerHeuristic, const TranspositionTable *transpositionTable);
     };
 } // namespace Search

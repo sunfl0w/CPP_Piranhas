@@ -29,6 +29,8 @@ namespace Search {
     class FullNegamaxSearch {
         KillerHeuristic* killerHeuristic;
         TranspositionTable* transpositionTable;
+    public:
+        unsigned int nodesSearched = 0;
 
     public:
         FullNegamaxSearch(KillerHeuristic *killerHeuristic, TranspositionTable* transpositionTable);

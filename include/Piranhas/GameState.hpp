@@ -34,6 +34,7 @@ namespace Piranhas {
 
         std::vector<Move> GetPossibleMoves() const;
         void PerformMove(Move &move);
+        void RevertLastPerformedMove();
 
         bool IsGameOver() const;
         GameResult GetGameResult() const;

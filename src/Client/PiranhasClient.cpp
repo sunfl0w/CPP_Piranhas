@@ -74,6 +74,7 @@ std::vector<SC_Message> PiranhasClient::HandleIncomingMessagesAndGenerateRespone
                     }
 
                     std::cout << "Move: " << nextMove.GetStartPosition().x << "|" << nextMove.GetStartPosition().y << "|" << direction << "\n";
+                    responseMessages.push_back(scMessageHandler.CreateMoveMessage(nextMove, roomID));
                 }
                 responseMessages.push_back(scMessageHandler.CreateMoveMessage(nextMove, roomID));
             }
