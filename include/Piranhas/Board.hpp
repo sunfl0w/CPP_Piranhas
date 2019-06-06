@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include <vector>
 #include <iostream>
+#include <memory>
 
 #include "Bitboard.hpp"
 #include "Direction.hpp"

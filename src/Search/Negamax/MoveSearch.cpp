@@ -14,7 +14,6 @@ Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor)
     this->searchStartTimePoint = std::chrono::high_resolution_clock::now();
 
     FullNegamaxSearch fullNegamaxSearch = FullNegamaxSearch(&killerHeursitic, &transpositionTable);
-    MinimaxSearch minimaxSearch;
 
     EvaluatedGameState nextBestGameState;
 
@@ -26,7 +25,6 @@ Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor)
 
     for(int i = 1; i < searchDepth; i++) {
         EvaluatedGameState eval = fullNegamaxSearch.Search(gameState, i, -10000.0f, 10000.0f, SearchInformation(ownPlayerColor, maxSearchTimeInMs, searchStartTimePoint), true);
-        //EvaluatedGameState eval = minimaxSearch.Search(gameState, i, true, SearchInformation(ownPlayerColor, maxSearchTimeInMs, searchStartTimePoint));
         if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchStartTimePoint).count() < maxSearchTimeInMs - 10) {
             nextBestGameState = eval;
             std::cout << "Reached layer: " << i << " || Time used: " << std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchStartTimePoint).count()) << "\n";

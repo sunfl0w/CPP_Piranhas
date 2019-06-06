@@ -8,7 +8,6 @@
 #include "EvaluatedGameState.hpp"
 #include "SearchInformation.hpp"
 #include "FullNegamaxSearch.hpp"
-#include "MinimaxSearch.hpp"
 #include "KillerHeuristic.hpp"
 #include "TranspositionTable.hpp"
 

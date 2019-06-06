@@ -23,9 +23,7 @@ build/Search/Negamax/MoveSearch.o: src/Search/Negamax/MoveSearch.cpp \
  include/Transposition/TranspositionTable.hpp \
  include/Transposition/Transposition.hpp \
  include/Transposition/TranspositionFlag.hpp \
- include/Search/QuiescenceSearch.hpp \
- include/Search/Minimax/MinimaxSearch.hpp \
- include/Evaluation/EvaluatorForMinimax.hpp
+ include/Search/QuiescenceSearch.hpp
 
 include/Search/MoveSearch.hpp:
 
@@ -88,7 +86,3 @@ include/Transposition/Transposition.hpp:
 include/Transposition/TranspositionFlag.hpp:
 
 include/Search/QuiescenceSearch.hpp:
-
-include/Search/Minimax/MinimaxSearch.hpp:
-
-include/Evaluation/EvaluatorForMinimax.hpp:

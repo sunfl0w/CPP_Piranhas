@@ -32,9 +32,7 @@ build/Client/PiranhasClient.o: src/Client/PiranhasClient.cpp \
  include/Transposition/TranspositionTable.hpp \
  include/Transposition/Transposition.hpp \
  include/Transposition/TranspositionFlag.hpp \
- include/Search/QuiescenceSearch.hpp \
- include/Search/Minimax/MinimaxSearch.hpp \
- include/Evaluation/EvaluatorForMinimax.hpp
+ include/Search/QuiescenceSearch.hpp
 
 include/Client/PiranhasClient.hpp:
 
@@ -121,7 +119,3 @@ include/Transposition/Transposition.hpp:
 include/Transposition/TranspositionFlag.hpp:
 
 include/Search/QuiescenceSearch.hpp:
-
-include/Search/Minimax/MinimaxSearch.hpp:
-
-include/Evaluation/EvaluatorForMinimax.hpp:

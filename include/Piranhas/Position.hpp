@@ -3,10 +3,10 @@
 namespace Piranhas {
     struct Position {
     public:
-        int x, y;
+        unsigned char x, y;
 
         Position();
-        Position(int x, int y);
+        Position(unsigned char x, unsigned char y);
 
         bool operator==(const Position &position) const;
         //bool operator!=(const Position &position) const;

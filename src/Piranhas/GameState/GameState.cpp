@@ -146,7 +146,7 @@ void GameState::PerformMove(Move &move) {
 }
 
 void GameState::RevertLastPerformedMove() {
-    
+
 }
 
 bool GameState::IsGameOver() const {
