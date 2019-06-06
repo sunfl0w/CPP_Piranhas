@@ -7,7 +7,7 @@ Position::Position() {
     this->y = 0;
 }
 
-Position::Position(unsigned char x, unsigned char y) {
+Position::Position(char x, char y) {
     this->x = x;
     this->y = y;
 }

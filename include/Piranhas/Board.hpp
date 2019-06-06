@@ -27,7 +27,7 @@ namespace std {
 
 namespace Piranhas {
     class Board {
-        Bitboard bitboard;
+        std::array<Field, 100> fields;
 
     private:
         void SetEmpty();
@@ -51,13 +51,11 @@ namespace Piranhas {
 
         void Populate();
 
-        Bitboard GetBitboard() const;
-        void SetBitboard(const Bitboard &bitboard);
-
         Field GetField(const Position &pos) const;
         Field GetField(int x, int y) const;
-        void SetField(Field field);
-        void SetFieldType(const Position &position, FieldType fieldType);
+        
+        void SetFieldTypeAtPosition(const Position &position, FieldType fieldType);
+        void SetFieldTypeAtPosition(int x, int y, FieldType fieldType);
 
         bool IsPositionOnBoard(const Position &pos) const;
 

@@ -8,7 +8,12 @@ PiranhasClient::PiranhasClient(io_service &ioService) : tcpClient(ioService) {}
 void PiranhasClient::ClientLoop() {
     while (!gameOver) {
         //std::cout << "Listening" << "\n";
-        std::string inputStream = tcpClient.ReadMessage();
+        boost::system::error_code receiveErrorCode;
+        std::string inputStream = tcpClient.ReadMessage(receiveErrorCode);
+        if(receiveErrorCode) {
+            std::cout << "Receive failed. Shutting down." << "\n";
+            gameOver = true;
+        }
         std::vector<SC_Message> messages = scMessageHandler.SplitInputMessagesIntoValidSC_Messages(inputStream);
         for (SC_Message message : messages) {
             //std::cout << message.content << "\n";

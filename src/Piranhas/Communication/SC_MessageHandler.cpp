@@ -197,7 +197,7 @@ GameState SC_MessageHandler::GetGameStateFromGameStateMessage(SC_Message message
                     }
                 }
             }
-            gameState.board.SetFieldType(fieldPos, fieldType);
+            gameState.board.SetFieldTypeAtPosition(fieldPos, fieldType);
         }
     }
 

@@ -14,20 +14,24 @@
 using namespace Piranhas;
 
 Board::Board() {
-    bitboard = Bitboard();
+    for (int x = 0; x < 10; x++) {
+        for (int y = 0; y < 10; y++) {
+            fields[y * 10 + x].fieldType = FieldType::Empty;
+            fields[y * 10 + x].position = Position(x, y);
+        }
+    }
 }
 
 Board::Board(Board &board) {
-    Bitboard bitboard (board.bitboard);
-    this->SetBitboard(bitboard);
+    this->fields = board.fields;
 }
 
 Board::Board(const Board &board) {
-    this->bitboard = Bitboard(board.bitboard);
+    this->fields = board.fields;
 }
 
 void Board::Populate() {
-    SetEmpty();
+    //SetEmpty();
     SetCheckers();
     SetObstacles();
 }
@@ -35,20 +39,17 @@ void Board::Populate() {
 void Board::SetEmpty() {
     for (int x = 0; x < 10; x++) {
         for (int y = 0; y < 10; y++) {
-            SetFieldType(Position(x, y), FieldType::Empty);
+            SetFieldTypeAtPosition(x, y, FieldType::Empty);
         }
     }
 }
 
 void Board::SetCheckers() {
     for (int fieldIndex = 1; fieldIndex < 9; fieldIndex++) {
-        SetField(Field(FieldType::Red, Position(0, fieldIndex)));
-
-        SetField(Field(FieldType::Red, Position(9, fieldIndex)));
-
-        SetField(Field(FieldType::Blue, Position(fieldIndex, 0)));
-
-        SetField(Field(FieldType::Blue, Position(fieldIndex, 9)));
+        SetFieldTypeAtPosition(0, fieldIndex, FieldType::Red);
+        SetFieldTypeAtPosition(9, fieldIndex, FieldType::Red);
+        SetFieldTypeAtPosition(fieldIndex, 0, FieldType::Blue);
+        SetFieldTypeAtPosition(fieldIndex, 9, FieldType::Blue);
     }
 }
 
@@ -68,7 +69,7 @@ void Board::SetObstacles() {
         obstaclesInLine += GetFieldCountOfTypeInDirection(randomPosition, std::vector<FieldType>{FieldType::Obstacle}, Direction::Down_Right);
 
         if (obstaclesInLine == 0) {
-            SetField(Field(FieldType::Obstacle, randomPosition));
+            SetFieldTypeAtPosition(randomPosition, FieldType::Obstacle);
             numberOfObstacles++;
         }
     }
@@ -251,13 +252,13 @@ int Board::GetCheckerCountInDirection(const std::vector<Field> &fieldsInDirectio
 }
 
 void Board::Print() const {
-    for(int y = 9; y >= 0; y--) {
-        for(int x = 0; x < 10; x++) {
-            if(GetField(x, y).fieldType == FieldType::Red) {
+    for (int y = 9; y >= 0; y--) {
+        for (int x = 0; x < 10; x++) {
+            if (GetField(x, y).fieldType == FieldType::Red) {
                 std::cout << "R";
-            } else if(GetField(x, y).fieldType == FieldType::Blue) {
+            } else if (GetField(x, y).fieldType == FieldType::Blue) {
                 std::cout << "B";
-            } else if(GetField(x, y).fieldType == FieldType::Obstacle) {
+            } else if (GetField(x, y).fieldType == FieldType::Obstacle) {
                 std::cout << "O";
             } else {
                 std::cout << " ";
@@ -267,26 +268,17 @@ void Board::Print() const {
     }
 }
 
-Bitboard Board::GetBitboard() const {
-    return bitboard;
-}
-void Board::SetBitboard(const Bitboard &bitboard) {
-    this->bitboard = bitboard;
-}
-
 Field Board::GetField(const Position &position) const {
-    return bitboard.GetField(position);
+    return fields[position.y * 10 + position.x];
 }
 Field Board::GetField(int x, int y) const {
-    //Position pos = Position(x,y);
-    //Field field = bitboard.GetField(pos);
-    return bitboard.GetField(Position(x, y));
+    return fields[y * 10 + x];
 }
-void Board::SetField(Field field) {
-    bitboard.SetField(field.position, field.fieldType);
+void Board::SetFieldTypeAtPosition(const Position &position, FieldType fieldType) {
+    fields[position.y * 10 + position.x].fieldType = fieldType;
 }
-void Board::SetFieldType(const Position &position, FieldType fieldType) {
-    bitboard.SetField(position, fieldType);
+void Board::SetFieldTypeAtPosition(int x, int y, FieldType fieldType) {
+    fields[y * 10 + x].fieldType = fieldType;
 }
 
 bool Board::IsPositionOnBoard(const Position &position) const {
@@ -316,8 +308,8 @@ std::vector<Field> Board::GetNeighbouringFieldsOfType(const Position &position, 
             int searchX = x + position.x;
             int searchY = y + position.y;
             if ((!(searchX == position.x && searchY == position.y)) && searchX >= 0 && searchY >= 0 && searchX < 10 && searchY < 10) {
-                for(FieldType fieldMask : fieldTypeMask) {
-                    if(GetField(searchX, searchY).fieldType == fieldMask) {
+                for (FieldType fieldMask : fieldTypeMask) {
+                    if (GetField(searchX, searchY).fieldType == fieldMask) {
                         neighbouringFields.push_back(GetField(searchX, searchY));
                     }
                 }
@@ -353,7 +345,7 @@ std::vector<Field> Board::GetFieldsMovePasses(const Move &move, const std::vecto
         int x = move.GetStartPosition().x + moveShiftPosition.x * i;
         int y = move.GetStartPosition().y + moveShiftPosition.y * i;
         if (IsPositionOnBoard(Position(x, y))) {
-            passedFields.push_back(GetField(move.GetStartPosition().x + moveShiftPosition.x * i, move.GetStartPosition().y + moveShiftPosition.y * i));
+            passedFields.push_back(GetField(x, y));
         }
     }
     return passedFields;
@@ -418,7 +410,7 @@ Position Board::GetDestinationPositionOfMove(const Move &move, int moveDistance)
     return destinationPos;
 }
 
-Position Board::GetDestinationPositionOfMove(const Move &move) const{
+Position Board::GetDestinationPositionOfMove(const Move &move) const {
     int moveDistance = GetMoveDistance(move);
     return GetDestinationPositionOfMove(move, moveDistance);
 }

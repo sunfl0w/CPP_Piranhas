@@ -23,6 +23,6 @@ namespace Networking_Client {
 
         void SendMessage(std::string message);
 
-        std::string ReadMessage();
+        std::string ReadMessage(boost::system::error_code &errorCode);
     };
 } // namespace TCP_Client

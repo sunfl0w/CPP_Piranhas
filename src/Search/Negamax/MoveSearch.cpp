@@ -17,7 +17,7 @@ Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor)
 
     EvaluatedGameState nextBestGameState;
 
-    int searchDepth = std::min(maxSearchDepth + 1, 61 - gameState.turnCount);
+    int searchDepth = maxSearchDepth;
 
     std::cout << "Starting to search. Turn: " << std::to_string(gameState.turnCount) << "\n";
 
@@ -35,5 +35,9 @@ Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor)
     std::cout << "Stored transpositions: " << std::to_string(transpositionTable.GetSize()) << "\n";
     std::cout << "Nodes searched: " << std::to_string(fullNegamaxSearch.nodesSearched) << "\n";
     std::cout << "Average branching: " << std::to_string(std::pow(fullNegamaxSearch.nodesSearched, 1.0f / maxSearchDepthReached)) << "\n";
+    if(gameState.turnCount == 59) {
+        searchDepth = std::min(maxSearchDepth + 1, 61 - gameState.turnCount);
+        return nextBestGameState.gameState.lastPerformedMove;
+    }    
     return nextBestGameState.gameState.lastPerformedMove;
 }

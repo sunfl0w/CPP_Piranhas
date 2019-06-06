@@ -131,8 +131,8 @@ void GameState::PerformMove(Move &move) {
     if (IsMoveValid(move)) {
         Position destinationPos = board.GetDestinationPositionOfMove(move);
         Position startPos = move.GetStartPosition();
-        board.SetFieldType(startPos, FieldType::Empty);
-        board.SetFieldType(destinationPos, currentPlayer.fieldType);
+        board.SetFieldTypeAtPosition(startPos, FieldType::Empty);
+        board.SetFieldTypeAtPosition(destinationPos, currentPlayer.fieldType);
         lastPerformedMoveDestinationPos = Position(destinationPos);
 
         turnCount++;
@@ -151,10 +151,13 @@ void GameState::RevertLastPerformedMove() {
 
 bool GameState::IsGameOver() const {
     if (turnCount >= 60) {
+        //std::cout << "Turn limit." << "”\n";
         return true;
     } else if (currentPlayer.color == PlayerColor::Red && board.IsSwarmComplete(PlayerColor::Red)) {
+        //std::cout << "RED." << "”\n";
         return true;
     } else if (board.IsSwarmComplete(PlayerColor::Blue)) {
+        //std::cout << "BLUE." << "”\n";
         return true;
     } else {
         return false;

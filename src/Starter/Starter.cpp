@@ -18,7 +18,7 @@ void Bench3();
 void Test();
 
 int main(int argc, char *argv[]) {
-    /*cout << "Hello, World! I am a c++ client!\n";
+    cout << "Hello, World! I am a c++ client!\n";
     cout << "Parsing arguments.\n";
 
     options_description optionsDesribtion("C++ client");
@@ -55,13 +55,13 @@ int main(int argc, char *argv[]) {
     } else {
         std::cout << "Start reserved.\n";
         piranhasClient.StartReserved(hostname, hostPort, reservationCode);
-    }*/
+    }
 
-    while (true) {
+    /*while (true) {
         Bench1();
         Bench2();
         Bench3();
-    }
+    }*/
     //Test();
     //std::getchar();
 

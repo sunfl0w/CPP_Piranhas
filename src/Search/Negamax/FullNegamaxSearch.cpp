@@ -41,7 +41,7 @@ EvaluatedGameState FullNegamaxSearch::Search(const GameState &gameState, int dep
     }
 
     //NullMoveHeuristic
-    if(allowNullMove && depth > 2) {
+    if(allowNullMove && depth > 2 && gameState.turnCount < 46) {
         int r = 1;
         if(depth > 4) {
             r = 2;
