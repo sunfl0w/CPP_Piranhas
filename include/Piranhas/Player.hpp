@@ -1,7 +1,7 @@
 #pragma once
 
-#include "PlayerColor.hpp"
-#include "FieldType.hpp"
+#include "Piranhas/PlayerColor.hpp"
+#include "Piranhas/FieldType.hpp"
 
 
 namespace Piranhas {

@@ -5,34 +5,36 @@ build/Client/PiranhasClient.o: src/Client/PiranhasClient.cpp \
  include/Piranhas/Player.hpp include/Piranhas/FieldType.hpp \
  include/Piranhas/Move.hpp include/Piranhas/Position.hpp \
  include/Piranhas/Direction.hpp include/Piranhas/Board.hpp \
- include/Piranhas/Bitboard.hpp include/Piranhas/Field.hpp \
- include/Piranhas/GameResult.hpp include/Piranhas/Constants.hpp \
+ include/Piranhas/Field.hpp include/Piranhas/GameResult.hpp \
+ include/Piranhas/Constants/Constants.hpp \
  include/Piranhas/Communication/SC_Message.hpp \
  include/Piranhas/Communication/SC_MessageType.hpp \
  include/PugiXmlAdditions/XmlStringWriter.hpp \
- include/Logic/PiranhasLogic.hpp include/Logic/Piranhas_MCTS_Logic.hpp \
- include/Search/MCTS/MCTS_Search.hpp include/Search/MCTS/MCTS_Node.hpp \
- include/Search/MCTS/MCTS_Tree.hpp \
- include/Logic/Piranhas_Negamax_Logic.hpp include/Search/MoveSearch.hpp \
- include/Search/Helpers/EvaluatedGameState.hpp \
- include/Search/SearchInformation.hpp \
- include/Search/Negamax/FullNegamaxSearch.hpp \
- include/Search/Heuristics/NullMoveHeuristic.hpp \
- include/Search/Negamax/NegamaxSearch.hpp \
- include/Search/Helpers/EvaluatedMove.hpp \
- include/Evaluation/Evaluator.hpp \
- include/Evaluation/ConcentrationEvaluation.hpp \
+ include/AI/Logic/PiranhasLogic.hpp \
+ include/AI/Logic/Piranhas_MCTS_Logic.hpp \
+ include/AI/Search/SearchAlgorithms/MCTS/MCTS_Search.hpp \
+ include/AI/Search/SearchAlgorithms/MCTS/MCTS_Node.hpp \
+ include/AI/Logic/Piranhas_Negamax_Logic.hpp \
+ include/AI/Search/MoveSearch.hpp \
+ include/AI/Search/Helpers/EvaluatedGameState.hpp \
+ include/AI/Search/Helpers/SearchInformation.hpp \
+ include/AI/Search/SearchAlgorithms/FullNegamaxSearch.hpp \
+ include/AI/Heuristics/NullMoveHeuristic.hpp \
+ include/AI/Search/SearchAlgorithms/NegamaxSearch.hpp \
+ include/AI/Search/Helpers/EvaluatedMove.hpp \
+ include/AI/Evaluation/Evaluator.hpp \
+ include/AI/Evaluation/CenterOfMassEvaluation.hpp \
  include/Piranhas/PositionF.hpp \
- include/Evaluation/CentralisationEvaluation.hpp \
- include/Evaluation/CenterOfMassEvaluation.hpp \
- include/Evaluation/ConnectednessEvaluation.hpp \
- include/Evaluation/UniformityEvaluation.hpp \
- include/Search/MoveOrdering/MoveOrdering.hpp \
- include/Search/Heuristics/KillerHeuristic.hpp \
- include/Transposition/TranspositionTable.hpp \
- include/Transposition/Transposition.hpp \
- include/Transposition/TranspositionFlag.hpp \
- include/Search/QuiescenceSearch.hpp
+ include/AI/Evaluation/CentralisationEvaluation.hpp \
+ include/AI/Evaluation/ConcentrationEvaluation.hpp \
+ include/AI/Evaluation/ConnectednessEvaluation.hpp \
+ include/AI/Evaluation/UniformityEvaluation.hpp \
+ include/AI/MoveOrdering/MoveOrderer.hpp \
+ include/AI/Heuristics/KillerHeuristic.hpp \
+ include/AI/Transposition/TranspositionTable.hpp \
+ include/AI/Transposition/TranspositionEntry.hpp \
+ include/AI/Transposition/TranspositionFlag.hpp \
+ include/AI/Search/SearchAlgorithms/QuiescenceSearch.hpp
 
 include/Client/PiranhasClient.hpp:
 
@@ -56,13 +58,11 @@ include/Piranhas/Direction.hpp:
 
 include/Piranhas/Board.hpp:
 
-include/Piranhas/Bitboard.hpp:
-
 include/Piranhas/Field.hpp:
 
 include/Piranhas/GameResult.hpp:
 
-include/Piranhas/Constants.hpp:
+include/Piranhas/Constants/Constants.hpp:
 
 include/Piranhas/Communication/SC_Message.hpp:
 
@@ -70,54 +70,52 @@ include/Piranhas/Communication/SC_MessageType.hpp:
 
 include/PugiXmlAdditions/XmlStringWriter.hpp:
 
-include/Logic/PiranhasLogic.hpp:
+include/AI/Logic/PiranhasLogic.hpp:
 
-include/Logic/Piranhas_MCTS_Logic.hpp:
+include/AI/Logic/Piranhas_MCTS_Logic.hpp:
 
-include/Search/MCTS/MCTS_Search.hpp:
+include/AI/Search/SearchAlgorithms/MCTS/MCTS_Search.hpp:
 
-include/Search/MCTS/MCTS_Node.hpp:
+include/AI/Search/SearchAlgorithms/MCTS/MCTS_Node.hpp:
 
-include/Search/MCTS/MCTS_Tree.hpp:
+include/AI/Logic/Piranhas_Negamax_Logic.hpp:
 
-include/Logic/Piranhas_Negamax_Logic.hpp:
+include/AI/Search/MoveSearch.hpp:
 
-include/Search/MoveSearch.hpp:
+include/AI/Search/Helpers/EvaluatedGameState.hpp:
 
-include/Search/Helpers/EvaluatedGameState.hpp:
+include/AI/Search/Helpers/SearchInformation.hpp:
 
-include/Search/SearchInformation.hpp:
+include/AI/Search/SearchAlgorithms/FullNegamaxSearch.hpp:
 
-include/Search/Negamax/FullNegamaxSearch.hpp:
+include/AI/Heuristics/NullMoveHeuristic.hpp:
 
-include/Search/Heuristics/NullMoveHeuristic.hpp:
+include/AI/Search/SearchAlgorithms/NegamaxSearch.hpp:
 
-include/Search/Negamax/NegamaxSearch.hpp:
+include/AI/Search/Helpers/EvaluatedMove.hpp:
 
-include/Search/Helpers/EvaluatedMove.hpp:
+include/AI/Evaluation/Evaluator.hpp:
 
-include/Evaluation/Evaluator.hpp:
-
-include/Evaluation/ConcentrationEvaluation.hpp:
+include/AI/Evaluation/CenterOfMassEvaluation.hpp:
 
 include/Piranhas/PositionF.hpp:
 
-include/Evaluation/CentralisationEvaluation.hpp:
+include/AI/Evaluation/CentralisationEvaluation.hpp:
 
-include/Evaluation/CenterOfMassEvaluation.hpp:
+include/AI/Evaluation/ConcentrationEvaluation.hpp:
 
-include/Evaluation/ConnectednessEvaluation.hpp:
+include/AI/Evaluation/ConnectednessEvaluation.hpp:
 
-include/Evaluation/UniformityEvaluation.hpp:
+include/AI/Evaluation/UniformityEvaluation.hpp:
 
-include/Search/MoveOrdering/MoveOrdering.hpp:
+include/AI/MoveOrdering/MoveOrderer.hpp:
 
-include/Search/Heuristics/KillerHeuristic.hpp:
+include/AI/Heuristics/KillerHeuristic.hpp:
 
-include/Transposition/TranspositionTable.hpp:
+include/AI/Transposition/TranspositionTable.hpp:
 
-include/Transposition/Transposition.hpp:
+include/AI/Transposition/TranspositionEntry.hpp:
 
-include/Transposition/TranspositionFlag.hpp:
+include/AI/Transposition/TranspositionFlag.hpp:
 
-include/Search/QuiescenceSearch.hpp:
+include/AI/Search/SearchAlgorithms/QuiescenceSearch.hpp:

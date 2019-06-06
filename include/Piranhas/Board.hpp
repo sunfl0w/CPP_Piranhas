@@ -6,14 +6,13 @@
 #include <iostream>
 #include <memory>
 
-#include "Bitboard.hpp"
-#include "Direction.hpp"
-#include "Field.hpp"
-#include "FieldType.hpp"
-#include "Move.hpp"
-#include "Player.hpp"
-#include "PlayerColor.hpp"
-#include "Position.hpp"
+#include "Piranhas/Direction.hpp"
+#include "Piranhas/Field.hpp"
+#include "Piranhas/FieldType.hpp"
+#include "Piranhas/Move.hpp"
+#include "Piranhas/Player.hpp"
+#include "Piranhas/PlayerColor.hpp"
+#include "Piranhas/Position.hpp"
 
 namespace std {
     template <>

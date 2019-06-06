@@ -7,7 +7,7 @@
 using namespace boost::asio;
 using boost::asio::ip::tcp;
 
-namespace Networking_Client {
+namespace Client {
     class TCP_Client {
         io_service &ioService;
         tcp::socket socket;

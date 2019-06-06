@@ -7,40 +7,36 @@
 #include <vector>
 #include <boost/asio.hpp>
 
-#include "TCP_Client.hpp"
-#include "SC_MessageHandler.hpp"
-#include "SC_Message.hpp"
-#include "SC_MessageType.hpp"
-#include "PlayerColor.hpp"
-#include "Move.hpp"
-#include "GameState.hpp"
-#include "PiranhasLogic.hpp"
-#include "Piranhas_MCTS_Logic.hpp"
-#include "Piranhas_Negamax_Logic.hpp"
+#include "Client/TCP_Client.hpp"
+#include "Piranhas/Communication/SC_MessageHandler.hpp"
+#include "Piranhas/Communication/SC_Message.hpp"
+#include "Piranhas/Communication/SC_MessageType.hpp"
+#include "Piranhas/PlayerColor.hpp"
+#include "Piranhas/Move.hpp"
+#include "Piranhas/GameState.hpp"
+#include "AI/Logic/PiranhasLogic.hpp"
+#include "AI/Logic/Piranhas_MCTS_Logic.hpp"
+#include "AI/Logic/Piranhas_Negamax_Logic.hpp"
 
-using namespace Networking_Client;
-using namespace Piranhas::Communication;
-using namespace Piranhas::Logic;
-
-namespace Piranhas::Client {
+namespace Client {
     class PiranhasClient {
-        TCP_Client tcpClient;
-        SC_MessageHandler scMessageHandler;
+        Client::TCP_Client tcpClient;
+        Piranhas::Communication::SC_MessageHandler scMessageHandler;
 
         std::string roomID;
-        PlayerColor ownPlayerColor;
-        GameState currentGameState;
+        Piranhas::PlayerColor ownPlayerColor;
+        Piranhas::GameState currentGameState;
         bool gameOver = false;
 
-        PiranhasLogic *logic = new Piranhas_Negamax_Logic(1700);
+        AI::Logic::PiranhasLogic *logic = new AI::Logic::Piranhas_Negamax_Logic(1700);
 
 
         void ClientLoop();
         void Shutdown();
 
-        std::vector<SC_Message> HandleIncomingMessagesAndGenerateRespones(std::vector<SC_Message> incomingMessages);
+        std::vector<Piranhas::Communication::SC_Message> HandleIncomingMessagesAndGenerateRespones(std::vector<Piranhas::Communication::SC_Message> incomingMessages);
 
-        Move GetNextMove();
+        Piranhas::Move GetNextMove();
 
     public:
         PiranhasClient(io_service &ioService);

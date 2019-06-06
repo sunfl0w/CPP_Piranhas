@@ -6,11 +6,11 @@
 #include <vector>
 #include <algorithm>
 
-#include "GameState.hpp"
-#include "Move.hpp"
-#include "PlayerColor.hpp"
-#include "SC_Message.hpp"
-#include "XmlStringWriter.hpp"
+#include "Piranhas/GameState.hpp"
+#include "Piranhas/Move.hpp"
+#include "Piranhas/PlayerColor.hpp"
+#include "Piranhas/Communication/SC_Message.hpp"
+#include "PugiXmlAdditions/XmlStringWriter.hpp"
 
 namespace Piranhas::Communication {
     class SC_MessageHandler {

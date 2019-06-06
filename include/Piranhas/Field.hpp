@@ -2,8 +2,8 @@
 
 #include <functional>
 
-#include "FieldType.hpp"
-#include "Position.hpp"
+#include "Piranhas/FieldType.hpp"
+#include "Piranhas/Position.hpp"
 
 namespace Piranhas {
     struct Field {

@@ -3,13 +3,14 @@
 #include <chrono>
 #include <iostream>
 
-#include "GameState.hpp"
-#include "PiranhasClient.hpp"
-#include "PlayerColor.hpp"
+#include "Piranhas/GameState.hpp"
+#include "Client/PiranhasClient.hpp"
+#include "Piranhas/PlayerColor.hpp"
 
 using namespace std;
 using namespace Piranhas;
-using namespace Piranhas::Client;
+using namespace Client;
+using namespace AI::Evaluation;
 using namespace boost::program_options;
 
 void Bench1();
@@ -18,7 +19,7 @@ void Bench3();
 void Test();
 
 int main(int argc, char *argv[]) {
-    /*cout << "Hello, World! I am a c++ client!\n";
+    cout << "Hello, World! I am a c++ client!\n";
     cout << "Parsing arguments.\n";
 
     options_description optionsDesribtion("C++ client");
@@ -55,13 +56,13 @@ int main(int argc, char *argv[]) {
     } else {
         std::cout << "Start reserved.\n";
         piranhasClient.StartReserved(hostname, hostPort, reservationCode);
-    }*/
+    }
 
-    while (true) {
+    /*while (true) {
         Bench1();
         Bench2();
         Bench3();
-    }
+    }*/
     //Test();
     //std::getchar();
 
@@ -111,7 +112,7 @@ void Test() {
     clonedGameState.PerformMove(move);
     clonedGameState.board.Print();
 
-    float eval = Search::Evaluation::Evaluator::EvaluateGameState(clonedGameState);
+    float eval = Evaluator::EvaluateGameState(clonedGameState);
 
     float x = 0.0f;
     std::cout << "Score: " << std::to_string(eval) << "\n";

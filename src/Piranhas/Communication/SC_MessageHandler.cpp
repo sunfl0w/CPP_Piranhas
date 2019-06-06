@@ -1,7 +1,8 @@
-#include "SC_MessageHandler.hpp"
+#include "Piranhas/Communication/SC_MessageHandler.hpp"
 
 using namespace Piranhas::Communication;
 using namespace Piranhas;
+using namespace PugiXmlAdditions;
 
 SC_MessageHandler::SC_MessageHandler() {}
 

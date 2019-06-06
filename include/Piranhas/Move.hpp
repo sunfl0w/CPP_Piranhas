@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Position.hpp"
-#include "Direction.hpp"
-#include "FieldType.hpp"
+#include "Piranhas/Position.hpp"
+#include "Piranhas/Direction.hpp"
+#include "Piranhas/FieldType.hpp"
 
 namespace Piranhas {
     class Move {

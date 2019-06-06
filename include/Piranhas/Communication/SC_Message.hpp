@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "SC_MessageType.hpp"
+#include "Piranhas/Communication/SC_MessageType.hpp"
 
 namespace Piranhas::Communication {
     struct SC_Message {

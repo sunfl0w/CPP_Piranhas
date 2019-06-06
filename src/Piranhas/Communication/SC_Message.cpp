@@ -1,4 +1,4 @@
-#include "SC_Message.hpp"
+#include "Piranhas/Communication/SC_Message.hpp"
 
 using namespace Piranhas::Communication;
 

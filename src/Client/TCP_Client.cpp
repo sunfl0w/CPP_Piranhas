@@ -1,6 +1,6 @@
-#include "TCP_Client.hpp"
+#include "Client/TCP_Client.hpp"
 
-using namespace Networking_Client;
+using namespace Client;
 
 TCP_Client::TCP_Client(io_service &ioService) : ioService(ioService), socket(ioService) {}
 

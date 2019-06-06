@@ -1,7 +1,8 @@
-#include "PiranhasClient.hpp"
+#include "Client/PiranhasClient.hpp"
 
-using namespace Piranhas::Client;
+using namespace Client;
 using namespace Piranhas;
+using namespace Piranhas::Communication;
 
 PiranhasClient::PiranhasClient(io_service &ioService) : tcpClient(ioService) {}
 

@@ -2,12 +2,12 @@
 
 #include <vector>
 
-#include "PlayerColor.hpp"
-#include "Player.hpp"
-#include "Move.hpp"
-#include "Board.hpp"
-#include "GameResult.hpp"
-#include "Constants.hpp"
+#include "Piranhas/PlayerColor.hpp"
+#include "Piranhas/Player.hpp"
+#include "Piranhas/Move.hpp"
+#include "Piranhas/Board.hpp"
+#include "Piranhas/GameResult.hpp"
+#include "Piranhas/Constants/Constants.hpp"
 
 namespace Piranhas {
     class GameState {
