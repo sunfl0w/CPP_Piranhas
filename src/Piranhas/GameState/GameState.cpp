@@ -7,6 +7,7 @@
 #include "PlayerColor.hpp"
 
 using namespace Piranhas;
+using namespace Piranhas::Constants;
 
 GameState::GameState() {
     board = Board();
@@ -25,8 +26,8 @@ GameState::GameState(GameState &gameState) {
     turnCount = gameState.turnCount;
     currentPlayer = Player(gameState.currentPlayer);
     //if (&gameState.lastPerformedMove != NULL) {
-        lastPerformedMove = Move(gameState.lastPerformedMove);
-        lastPerformedMoveDestinationPos = Position(gameState.lastPerformedMoveDestinationPos);
+    lastPerformedMove = Move(gameState.lastPerformedMove);
+    lastPerformedMoveDestinationPos = Position(gameState.lastPerformedMoveDestinationPos);
     //}
 }
 
@@ -35,8 +36,8 @@ GameState::GameState(const GameState &gameState) {
     turnCount = gameState.turnCount;
     currentPlayer = Player(gameState.currentPlayer);
     //if (&gameState.lastPerformedMove != NULL) {
-        lastPerformedMove = Move(gameState.lastPerformedMove);
-        lastPerformedMoveDestinationPos = Position(gameState.lastPerformedMoveDestinationPos);
+    lastPerformedMove = Move(gameState.lastPerformedMove);
+    lastPerformedMoveDestinationPos = Position(gameState.lastPerformedMoveDestinationPos);
     //}
 }
 
@@ -108,16 +109,21 @@ bool GameState::IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirectio
 }
 
 std::vector<Move> GameState::GetPossibleMoves() const {
-    const std::vector<Direction> directions{Direction::Up, Direction::Up_Right, Direction::Right, Direction::Down_Right, Direction::Down, Direction::Down_Left, Direction::Left, Direction::Up_Left};
     std::vector<Move> possibleMoves;
-    std::vector<Field> occupiedFields = board.GetAllFieldsOfSameType(currentPlayer.fieldType);
-    for (Field field : occupiedFields) {
-        for (Direction dir : directions) {
-            std::vector<Field> fieldsInMoveDirection = board.GetFieldsInDirection(field.position, dir);
-            int moveDistance = board.GetCheckerCountInDirection(fieldsInMoveDirection);
-            Move possibleMove = Move(field.position, dir);
-            if (IsMoveValid(possibleMove, fieldsInMoveDirection)) {
-                possibleMoves.push_back(possibleMove);
+    //std::vector<Field> occupiedFields = board.GetAllFieldsOfSameType(currentPlayer.fieldType);
+    //for (Field field : occupiedFields) {
+    for (int x = 0; x < 10; x++) {
+        for (int y = 0; y < 10; y++) {
+            Field field = board.GetField(x, y);
+            if (field.fieldType == currentPlayer.fieldType) {
+                for (Direction dir : directions) {
+                    std::vector<Field> fieldsInMoveDirection = board.GetFieldsInDirection(field.position, dir);
+                    int moveDistance = board.GetCheckerCountInDirection(fieldsInMoveDirection);
+                    Move possibleMove = Move(field.position, dir);
+                    if (IsMoveValid(possibleMove, fieldsInMoveDirection)) {
+                        possibleMoves.push_back(possibleMove);
+                    }
+                }
             }
         }
     }
@@ -126,7 +132,8 @@ std::vector<Move> GameState::GetPossibleMoves() const {
 
 void GameState::PerformMove(Move &move) {
     if (IsGameOver()) {
-        std::cout << "Game is over. Move will not be performed." << "\n";
+        std::cout << "Game is over. Move will not be performed."
+                  << "\n";
     }
     if (IsMoveValid(move)) {
         Position destinationPos = board.GetDestinationPositionOfMove(move);
@@ -141,12 +148,12 @@ void GameState::PerformMove(Move &move) {
         //std::cout << "";
 
     } else {
-        std::cout << "Move is invalid. Move will not be performed." << "\n";
+        std::cout << "Move is invalid. Move will not be performed."
+                  << "\n";
     }
 }
 
 void GameState::RevertLastPerformedMove() {
-
 }
 
 bool GameState::IsGameOver() const {

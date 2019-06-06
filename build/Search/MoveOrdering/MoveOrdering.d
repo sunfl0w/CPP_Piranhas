@@ -6,7 +6,7 @@ build/Search/MoveOrdering/MoveOrdering.o: \
  include/Piranhas/PlayerColor.hpp include/Piranhas/Player.hpp \
  include/Piranhas/Board.hpp include/Piranhas/Bitboard.hpp \
  include/Piranhas/Field.hpp include/Piranhas/GameResult.hpp \
- include/Search/Helpers/EvaluatedMove.hpp \
+ include/Piranhas/Constants.hpp include/Search/Helpers/EvaluatedMove.hpp \
  include/Search/Heuristics/KillerHeuristic.hpp \
  include/Transposition/TranspositionTable.hpp \
  include/Transposition/Transposition.hpp \
@@ -35,6 +35,8 @@ include/Piranhas/Bitboard.hpp:
 include/Piranhas/Field.hpp:
 
 include/Piranhas/GameResult.hpp:
+
+include/Piranhas/Constants.hpp:
 
 include/Search/Helpers/EvaluatedMove.hpp:
 

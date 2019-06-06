@@ -30,7 +30,6 @@ namespace Piranhas {
         std::array<Field, 100> fields;
 
     private:
-        void SetEmpty();
         void SetCheckers();
         void SetObstacles();
 

@@ -6,7 +6,7 @@ build/Transposition/TranspositionTable.o: \
  include/Piranhas/Direction.hpp include/Piranhas/Move.hpp \
  include/Piranhas/Player.hpp include/Piranhas/PlayerColor.hpp \
  include/Piranhas/GameState.hpp include/Piranhas/GameResult.hpp \
- include/Transposition/Transposition.hpp \
+ include/Piranhas/Constants.hpp include/Transposition/Transposition.hpp \
  include/Transposition/TranspositionFlag.hpp
 
 include/Transposition/TranspositionTable.hpp:
@@ -32,6 +32,8 @@ include/Piranhas/PlayerColor.hpp:
 include/Piranhas/GameState.hpp:
 
 include/Piranhas/GameResult.hpp:
+
+include/Piranhas/Constants.hpp:
 
 include/Transposition/Transposition.hpp:
 

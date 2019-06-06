@@ -7,7 +7,8 @@ build/Search/Negamax/FullNegamaxSearch.o: \
  include/Piranhas/Move.hpp include/Piranhas/Position.hpp \
  include/Piranhas/Direction.hpp include/Piranhas/Board.hpp \
  include/Piranhas/Bitboard.hpp include/Piranhas/Field.hpp \
- include/Piranhas/GameResult.hpp include/Search/Negamax/NegamaxSearch.hpp \
+ include/Piranhas/GameResult.hpp include/Piranhas/Constants.hpp \
+ include/Search/Negamax/NegamaxSearch.hpp \
  include/Search/Helpers/EvaluatedGameState.hpp \
  include/Search/Helpers/EvaluatedMove.hpp \
  include/Evaluation/Evaluator.hpp \
@@ -50,6 +51,8 @@ include/Piranhas/Bitboard.hpp:
 include/Piranhas/Field.hpp:
 
 include/Piranhas/GameResult.hpp:
+
+include/Piranhas/Constants.hpp:
 
 include/Search/Negamax/NegamaxSearch.hpp:
 

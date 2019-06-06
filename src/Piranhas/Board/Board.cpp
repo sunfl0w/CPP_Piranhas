@@ -31,17 +31,8 @@ Board::Board(const Board &board) {
 }
 
 void Board::Populate() {
-    //SetEmpty();
     SetCheckers();
     SetObstacles();
-}
-
-void Board::SetEmpty() {
-    for (int x = 0; x < 10; x++) {
-        for (int y = 0; y < 10; y++) {
-            SetFieldTypeAtPosition(x, y, FieldType::Empty);
-        }
-    }
 }
 
 void Board::SetCheckers() {
@@ -165,10 +156,6 @@ std::unordered_set<Field> Board::GetSwarm(std::vector<Field> &found, std::unorde
     if (swarm.size() == 0 && found.size() > 0) {
         Field field = found[index];
         swarm.insert(field);
-        /*std::vector<Field>::iterator iterator = std::find(found.begin(), found.end(), field);
-        if(iterator != found.end()) {
-            found.erase(iterator);
-        }*/
         found.erase(std::remove(found.begin(), found.end(), field), found.end());
     }
 
@@ -288,10 +275,12 @@ bool Board::IsPositionOnBoard(const Position &position) const {
 std::vector<Field> Board::GetNeighbouringFields(const Position &position) const {
     std::vector<Field> neighbouringFields;
     neighbouringFields.reserve(8);
+    int searchX;
+    int searchY;
     for (int x = -1; x <= 1; x++) {
         for (int y = -1; y <= 1; y++) {
-            int searchX = x + position.x;
-            int searchY = y + position.y;
+            searchX = x + position.x;
+            searchY = y + position.y;
             if ((!(searchX == position.x && searchY == position.y)) && searchX >= 0 && searchY >= 0 && searchX < 10 && searchY < 10) {
                 neighbouringFields.push_back(GetField(searchX, searchY));
             }
@@ -303,11 +292,18 @@ std::vector<Field> Board::GetNeighbouringFields(const Position &position) const 
 std::vector<Field> Board::GetNeighbouringFieldsOfType(const Position &position, const std::vector<FieldType> &fieldTypeMask) const {
     std::vector<Field> neighbouringFields;
     neighbouringFields.reserve(8);
+    int searchX;
+    int searchY;
     for (int x = -1; x <= 1; x++) {
         for (int y = -1; y <= 1; y++) {
-            int searchX = x + position.x;
-            int searchY = y + position.y;
-            if ((!(searchX == position.x && searchY == position.y)) && searchX >= 0 && searchY >= 0 && searchX < 10 && searchY < 10) {
+            searchX = x + position.x;
+            searchY = y + position.y;
+            if(searchX == position.x && searchY == position.y) {
+                continue;
+            }
+            if (searchX < 0 || searchY < 0 || searchX > 9 || searchY > 9) {
+                continue;
+            } else {
                 for (FieldType fieldMask : fieldTypeMask) {
                     if (GetField(searchX, searchY).fieldType == fieldMask) {
                         neighbouringFields.push_back(GetField(searchX, searchY));

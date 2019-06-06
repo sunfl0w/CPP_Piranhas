@@ -7,6 +7,7 @@
 #include "Move.hpp"
 #include "Board.hpp"
 #include "GameResult.hpp"
+#include "Constants.hpp"
 
 namespace Piranhas {
     class GameState {
