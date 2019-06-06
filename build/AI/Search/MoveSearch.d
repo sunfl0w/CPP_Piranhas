@@ -23,7 +23,9 @@ build/AI/Search/MoveSearch.o: src/AI/Search/MoveSearch.cpp \
  include/AI/Transposition/TranspositionTable.hpp \
  include/AI/Transposition/TranspositionEntry.hpp \
  include/AI/Transposition/TranspositionFlag.hpp \
- include/AI/Search/SearchAlgorithms/QuiescenceSearch.hpp
+ include/AI/Search/SearchAlgorithms/QuiescenceSearch.hpp \
+ include/AI/Search/SearchAlgorithms/MTDf.hpp \
+ include/AI/Search/SearchAlgorithms/NegaScoutSearch.hpp
 
 include/AI/Search/MoveSearch.hpp:
 
@@ -86,3 +88,7 @@ include/AI/Transposition/TranspositionEntry.hpp:
 include/AI/Transposition/TranspositionFlag.hpp:
 
 include/AI/Search/SearchAlgorithms/QuiescenceSearch.hpp:
+
+include/AI/Search/SearchAlgorithms/MTDf.hpp:
+
+include/AI/Search/SearchAlgorithms/NegaScoutSearch.hpp:

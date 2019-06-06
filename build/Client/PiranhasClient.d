@@ -34,7 +34,9 @@ build/Client/PiranhasClient.o: src/Client/PiranhasClient.cpp \
  include/AI/Transposition/TranspositionTable.hpp \
  include/AI/Transposition/TranspositionEntry.hpp \
  include/AI/Transposition/TranspositionFlag.hpp \
- include/AI/Search/SearchAlgorithms/QuiescenceSearch.hpp
+ include/AI/Search/SearchAlgorithms/QuiescenceSearch.hpp \
+ include/AI/Search/SearchAlgorithms/MTDf.hpp \
+ include/AI/Search/SearchAlgorithms/NegaScoutSearch.hpp
 
 include/Client/PiranhasClient.hpp:
 
@@ -119,3 +121,7 @@ include/AI/Transposition/TranspositionEntry.hpp:
 include/AI/Transposition/TranspositionFlag.hpp:
 
 include/AI/Search/SearchAlgorithms/QuiescenceSearch.hpp:
+
+include/AI/Search/SearchAlgorithms/MTDf.hpp:
+
+include/AI/Search/SearchAlgorithms/NegaScoutSearch.hpp:

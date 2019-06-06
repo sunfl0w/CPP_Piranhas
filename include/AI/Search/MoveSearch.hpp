@@ -8,6 +8,8 @@
 #include "AI/Search/Helpers/EvaluatedGameState.hpp"
 #include "AI/Search/Helpers/SearchInformation.hpp"
 #include "AI/Search/SearchAlgorithms/FullNegamaxSearch.hpp"
+#include "AI/Search/SearchAlgorithms/MTDf.hpp"
+#include "AI/Search/SearchAlgorithms/NegaScoutSearch.hpp"
 #include "AI/Heuristics/KillerHeuristic.hpp"
 #include "AI/Transposition/TranspositionTable.hpp"
 
