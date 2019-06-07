@@ -3,7 +3,7 @@
 using namespace AI::Logic;
 using namespace Piranhas;
 
-Piranhas_Negamax_Logic::Piranhas_Negamax_Logic(int searchTimeInMs) : PiranhasLogic(searchTimeInMs) , moveSearch(searchTimeInMs, 6) {
+Piranhas_Negamax_Logic::Piranhas_Negamax_Logic(int searchTimeInMs) : PiranhasLogic(searchTimeInMs) , moveSearch(searchTimeInMs, 10) {
 }
 
 Move Piranhas_Negamax_Logic::GetNextMove(GameState currentGameState, PlayerColor ownPlayerColor) {

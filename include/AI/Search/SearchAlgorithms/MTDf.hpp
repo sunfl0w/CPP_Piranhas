@@ -15,6 +15,6 @@ namespace AI::Search::SearchAlgorithms {
 
     public:
         MTDfSearch(AI::Heuristics::KillerHeuristic *killerHeuristic, AI::Transposition::TranspositionTable* transpositionTable);
-        AI::Search::Helpers::EvaluatedGameState Search(const Piranhas::GameState &gameState, int depth, float guess, const AI::Search::Helpers::SearchInformation &searchInformation);
+        AI::Search::Helpers::EvaluatedGameState Search(Piranhas::GameState &gameState, int depth, float guess, const AI::Search::Helpers::SearchInformation &searchInformation);
     };
 }

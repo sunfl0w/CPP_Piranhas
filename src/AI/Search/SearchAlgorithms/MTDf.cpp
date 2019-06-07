@@ -8,7 +8,7 @@ MTDfSearch::MTDfSearch(AI::Heuristics::KillerHeuristic *killerHeuristic, AI::Tra
     this->transpositionTable = transpositionTable;
 }
 
-AI::Search::Helpers::EvaluatedGameState MTDfSearch::Search(const Piranhas::GameState &gameState, int depth, float guess, const AI::Search::Helpers::SearchInformation &searchInformation) {
+AI::Search::Helpers::EvaluatedGameState MTDfSearch::Search(Piranhas::GameState &gameState, int depth, float guess, const AI::Search::Helpers::SearchInformation &searchInformation) {
     //FullNegamaxSearch fullNegamaxSearch = FullNegamaxSearch(killerHeuristic, transpositionTable);
     EvaluatedGameState maxEval = EvaluatedGameState(gameState, guess);
 
@@ -30,7 +30,7 @@ AI::Search::Helpers::EvaluatedGameState MTDfSearch::Search(const Piranhas::GameS
         } else {
             lowerBound = maxEval.eval;
         }
-    } while (lowerBound >= upperBound);
+    } while (lowerBound < upperBound);
     //nodesSearched = fullNegamaxSearch.nodesSearched;
     return maxEval;
 }

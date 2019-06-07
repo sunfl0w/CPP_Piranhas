@@ -78,7 +78,7 @@ float Evaluator::EvaluateMidGame(const GameState &gameState) {
     int redCheckerCount = redFields.size();
     int blueCheckerCount = blueFields.size();
 
-    int redInnerCheckerCount = 0;
+    /*int redInnerCheckerCount = 0;
     for (Field field : redFields) {
         if (field.position.x > 0 && field.position.x < 9 && field.position.y > 0 && field.position.y < 9) {
             redInnerCheckerCount++;
@@ -90,7 +90,7 @@ float Evaluator::EvaluateMidGame(const GameState &gameState) {
         if (field.position.x > 0 && field.position.x < 9 && field.position.y > 0 && field.position.y < 9) {
             blueInnerCheckerCount++;
         }
-    }
+    }*/
 
     float concentrationEval = (ConcentrationEvaluation::Evaluate(redFields) - ConcentrationEvaluation::Evaluate(blueFields)) * 0.3f;
     float centralisationEval = (CentralisationEvaluation::Evaluate(redFields) - CentralisationEvaluation::Evaluate(blueFields)) * 2.0f;

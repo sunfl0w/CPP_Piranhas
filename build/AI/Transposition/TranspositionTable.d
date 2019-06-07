@@ -7,6 +7,7 @@ build/AI/Transposition/TranspositionTable.o: \
  include/Piranhas/Player.hpp include/Piranhas/PlayerColor.hpp \
  include/Piranhas/GameState.hpp include/Piranhas/GameResult.hpp \
  include/Piranhas/Constants/Constants.hpp \
+ include/Piranhas/PerformedMove.hpp \
  include/AI/Transposition/TranspositionEntry.hpp \
  include/AI/Transposition/TranspositionFlag.hpp
 
@@ -33,6 +34,8 @@ include/Piranhas/GameState.hpp:
 include/Piranhas/GameResult.hpp:
 
 include/Piranhas/Constants/Constants.hpp:
+
+include/Piranhas/PerformedMove.hpp:
 
 include/AI/Transposition/TranspositionEntry.hpp:
 

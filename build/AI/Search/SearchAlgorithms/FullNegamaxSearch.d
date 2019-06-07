@@ -8,6 +8,7 @@ build/AI/Search/SearchAlgorithms/FullNegamaxSearch.o: \
  include/Piranhas/Direction.hpp include/Piranhas/Board.hpp \
  include/Piranhas/Field.hpp include/Piranhas/GameResult.hpp \
  include/Piranhas/Constants/Constants.hpp \
+ include/Piranhas/PerformedMove.hpp \
  include/AI/Search/SearchAlgorithms/NegamaxSearch.hpp \
  include/AI/Search/Helpers/EvaluatedGameState.hpp \
  include/AI/Search/Helpers/EvaluatedMove.hpp \
@@ -51,6 +52,8 @@ include/Piranhas/Field.hpp:
 include/Piranhas/GameResult.hpp:
 
 include/Piranhas/Constants/Constants.hpp:
+
+include/Piranhas/PerformedMove.hpp:
 
 include/AI/Search/SearchAlgorithms/NegamaxSearch.hpp:
 

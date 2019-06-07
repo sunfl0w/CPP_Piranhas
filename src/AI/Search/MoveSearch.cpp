@@ -48,7 +48,7 @@ Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor)
             guess = lastEvalOdd;
         }
 
-        EvaluatedGameState eval = mtdfSearch.Search(gameState, i, guess, SearchInformation(ownPlayerColor, maxSearchTimeInMs, searchStartTimePoint));
+        EvaluatedGameState eval = mtdfSearch.Search(gameState, i, guess, SearchInformation(ownPlayerColor, maxSearchTimeInMs, searchStartTimePoint, i));
         if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchStartTimePoint).count() < maxSearchTimeInMs - 10) {
             nextBestGameState = eval;
             std::cout << "Reached layer: " << i << " || Time used: " << std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchStartTimePoint).count()) << "\n";
@@ -71,5 +71,5 @@ Move MoveSearch::SearchNextMove(GameState gameState, PlayerColor ownPlayerColor)
     std::cout << "Stored transpositions: " << std::to_string(transpositionTable.GetSize()) << "\n";
     std::cout << "Nodes searched: " << std::to_string(mtdfSearch.nodesSearched) << "\n";
     std::cout << "Average branching: " << std::to_string(std::pow(mtdfSearch.nodesSearched, 1.0f / maxSearchDepthReached)) << "\n";  
-    return nextBestGameState.gameState.lastPerformedMove;
+    return nextBestGameState.gameState.GetLastPerformedMove();
 }

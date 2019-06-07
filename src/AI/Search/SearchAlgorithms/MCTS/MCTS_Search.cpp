@@ -77,5 +77,5 @@ Move MCTS_Search::GetNextMove(GameState currentGameState, int searchTimeInMs) {
 
     std::cout << "Searched " << std::to_string(rootNode.visits - 1) << " nodes" << "\n";
     MCTS_Node bestChildNode = *rootNode.GetBestChildNode();
-    return bestChildNode.gameState.lastPerformedMove;
+    return bestChildNode.gameState.GetLastPerformedMove();
 }

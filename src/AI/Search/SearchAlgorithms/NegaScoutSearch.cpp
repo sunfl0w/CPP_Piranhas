@@ -94,9 +94,9 @@ AI::Search::Helpers::EvaluatedGameState NegaScoutSearch::Search(const Piranhas::
             transpositionEntry.flag = TranspositionFlag::Exact;
         }
         transpositionEntry.depth = depth;
-        transpositionEntry.hashMove = alphaEval.gameState.lastPerformedMove;
+        transpositionEntry.hashMove = alphaEval.gameState.GetLastPerformedMove();
     } else {
-        TranspositionEntry transpositionEntry = TranspositionEntry(0.0f, 0, TranspositionFlag::Exact, Move(alphaEval.gameState.lastPerformedMove));
+        TranspositionEntry transpositionEntry = TranspositionEntry(0.0f, 0, TranspositionFlag::Exact, Move(alphaEval.gameState.GetLastPerformedMove()));
         transpositionEntry.eval = alphaEval.eval;
         if(alphaEval.eval <= originalAlpha) {
             transpositionEntry.flag = TranspositionFlag::UpperBound;

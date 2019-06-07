@@ -7,6 +7,7 @@ build/AI/Search/SearchAlgorithms/MCTS/MCTS_Search.o: \
  include/Piranhas/Position.hpp include/Piranhas/Direction.hpp \
  include/Piranhas/Board.hpp include/Piranhas/Field.hpp \
  include/Piranhas/Constants/Constants.hpp \
+ include/Piranhas/PerformedMove.hpp \
  include/AI/Search/SearchAlgorithms/MCTS/MCTS_Node.hpp
 
 include/AI/Search/SearchAlgorithms/MCTS/MCTS_Search.hpp:
@@ -32,5 +33,7 @@ include/Piranhas/Board.hpp:
 include/Piranhas/Field.hpp:
 
 include/Piranhas/Constants/Constants.hpp:
+
+include/Piranhas/PerformedMove.hpp:
 
 include/AI/Search/SearchAlgorithms/MCTS/MCTS_Node.hpp:

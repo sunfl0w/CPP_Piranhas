@@ -7,7 +7,7 @@ build/AI/Logic/Piranhas_Negamax_Logic.o: \
  include/Piranhas/Position.hpp include/Piranhas/Direction.hpp \
  include/Piranhas/Board.hpp include/Piranhas/Field.hpp \
  include/Piranhas/GameResult.hpp include/Piranhas/Constants/Constants.hpp \
- include/AI/Search/MoveSearch.hpp \
+ include/Piranhas/PerformedMove.hpp include/AI/Search/MoveSearch.hpp \
  include/AI/Search/Helpers/EvaluatedGameState.hpp \
  include/AI/Search/Helpers/SearchInformation.hpp \
  include/AI/Search/SearchAlgorithms/FullNegamaxSearch.hpp \
@@ -55,6 +55,8 @@ include/Piranhas/Field.hpp:
 include/Piranhas/GameResult.hpp:
 
 include/Piranhas/Constants/Constants.hpp:
+
+include/Piranhas/PerformedMove.hpp:
 
 include/AI/Search/MoveSearch.hpp:
 

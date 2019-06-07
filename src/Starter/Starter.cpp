@@ -16,6 +16,7 @@ using namespace boost::program_options;
 void Bench1();
 void Bench2();
 void Bench3();
+void Bench4();
 void Test();
 
 int main(int argc, char *argv[]) {
@@ -102,6 +103,19 @@ void Bench3() {
         count++;
     }
     std::cout << "Cloned GS and performed move " + std::to_string(count) + " times in 1600ms\n";
+}
+
+void Bench4() {
+    int count = 0;
+    Move move = Move(Position(0, 1), Direction::Up);
+    GameState gameState = GameState(PlayerColor::Red);
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    while (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count() < 1600) {
+        gameState.PerformMove(move);
+        gameState.RevertLastPerformedMove();
+        count++;
+    }
+    std::cout << "Performed move and reverted it " + std::to_string(count) + " times in 1600ms\n";
 }
 
 void Test() {

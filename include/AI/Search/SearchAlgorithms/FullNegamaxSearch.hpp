@@ -28,6 +28,6 @@ namespace AI::Search::SearchAlgorithms {
 
     public:
         FullNegamaxSearch(AI::Heuristics::KillerHeuristic *killerHeuristic, AI::Transposition::TranspositionTable* transpositionTable);
-        AI::Search::Helpers::EvaluatedGameState Search(const Piranhas::GameState &gameState, int depth, float alpha, float beta, const AI::Search::Helpers::SearchInformation &searchInformation, bool allownNullMove);
+        AI::Search::Helpers::EvaluatedGameState Search(Piranhas::GameState &gameState, int depth, float alpha, float beta, const AI::Search::Helpers::SearchInformation &searchInformation, bool allownNullMove);
     };
 } // namespace Search::Negamax

@@ -7,6 +7,7 @@ build/Client/PiranhasClient.o: src/Client/PiranhasClient.cpp \
  include/Piranhas/Direction.hpp include/Piranhas/Board.hpp \
  include/Piranhas/Field.hpp include/Piranhas/GameResult.hpp \
  include/Piranhas/Constants/Constants.hpp \
+ include/Piranhas/PerformedMove.hpp \
  include/Piranhas/Communication/SC_Message.hpp \
  include/Piranhas/Communication/SC_MessageType.hpp \
  include/PugiXmlAdditions/XmlStringWriter.hpp \
@@ -65,6 +66,8 @@ include/Piranhas/Field.hpp:
 include/Piranhas/GameResult.hpp:
 
 include/Piranhas/Constants/Constants.hpp:
+
+include/Piranhas/PerformedMove.hpp:
 
 include/Piranhas/Communication/SC_Message.hpp:
 

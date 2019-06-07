@@ -11,7 +11,8 @@ build/AI/Evaluation/Evaluator.o: src/AI/Evaluation/Evaluator.cpp \
  include/Piranhas/PlayerColor.hpp \
  include/AI/Evaluation/UniformityEvaluation.hpp \
  include/Piranhas/GameState.hpp include/Piranhas/GameResult.hpp \
- include/Piranhas/Constants/Constants.hpp
+ include/Piranhas/Constants/Constants.hpp \
+ include/Piranhas/PerformedMove.hpp
 
 include/AI/Evaluation/Evaluator.hpp:
 
@@ -48,3 +49,5 @@ include/Piranhas/GameState.hpp:
 include/Piranhas/GameResult.hpp:
 
 include/Piranhas/Constants/Constants.hpp:
+
+include/Piranhas/PerformedMove.hpp:

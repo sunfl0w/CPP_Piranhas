@@ -26,20 +26,14 @@ GameState::GameState(GameState &gameState) {
     board = Board(gameState.board);
     turnCount = gameState.turnCount;
     currentPlayer = Player(gameState.currentPlayer);
-    //if (&gameState.lastPerformedMove != NULL) {
-    lastPerformedMove = Move(gameState.lastPerformedMove);
-    lastPerformedMoveDestinationPos = Position(gameState.lastPerformedMoveDestinationPos);
-    //}
+    performedMoves = std::array<PerformedMove, 60>(gameState.performedMoves);
 }
 
 GameState::GameState(const GameState &gameState) {
     board = Board(gameState.board);
     turnCount = gameState.turnCount;
     currentPlayer = Player(gameState.currentPlayer);
-    //if (&gameState.lastPerformedMove != NULL) {
-    lastPerformedMove = Move(gameState.lastPerformedMove);
-    lastPerformedMoveDestinationPos = Position(gameState.lastPerformedMoveDestinationPos);
-    //}
+    performedMoves = std::array<PerformedMove, 60>(gameState.performedMoves);
 }
 
 void GameState::SwapPlayers() {
@@ -139,22 +133,27 @@ void GameState::PerformMove(Move &move) {
     if (IsMoveValid(move)) {
         Position destinationPos = board.GetDestinationPositionOfMove(move);
         Position startPos = move.GetStartPosition();
+        performedMoves[turnCount] = PerformedMove(move, destinationPos, board.GetField(destinationPos).fieldType);
         board.SetFieldTypeAtPosition(startPos, FieldType::Empty);
         board.SetFieldTypeAtPosition(destinationPos, currentPlayer.fieldType);
-        lastPerformedMoveDestinationPos = Position(destinationPos);
 
         turnCount++;
         SwapPlayers();
-        lastPerformedMove = Move(move);
         //std::cout << "";
 
     } else {
-        std::cout << "Move is invalid. Move will not be performed."
+        std::cout << "Move is invalid, it will not be performed."
                   << "\n";
     }
 }
 
 void GameState::RevertLastPerformedMove() {
+    PerformedMove performedMove = performedMoves[turnCount - 1];
+    board.SetFieldTypeAtPosition(performedMove.move.GetStartPosition(), currentPlayer.GetOppositePlayer().fieldType);
+    board.SetFieldTypeAtPosition(performedMove.destinationPos, performedMove.formerDestinationFieldType);
+
+    turnCount--;
+    SwapPlayers();
 }
 
 bool GameState::IsGameOver() const {
@@ -170,6 +169,10 @@ bool GameState::IsGameOver() const {
     } else {
         return false;
     }
+}
+
+Move GameState::GetLastPerformedMove() {
+    return performedMoves[turnCount - 1].move;
 }
 
 GameResult GameState::GetGameResult() const {

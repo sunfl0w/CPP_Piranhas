@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <array>
 
 #include "Piranhas/PlayerColor.hpp"
 #include "Piranhas/Player.hpp"
@@ -8,6 +9,7 @@
 #include "Piranhas/Board.hpp"
 #include "Piranhas/GameResult.hpp"
 #include "Piranhas/Constants/Constants.hpp"
+#include "Piranhas/PerformedMove.hpp"
 
 namespace Piranhas {
     class GameState {
@@ -16,8 +18,7 @@ namespace Piranhas {
         int turnCount;
         Player currentPlayer;
         Player startingPlayer;
-        Move lastPerformedMove;
-        Position lastPerformedMoveDestinationPos;
+        std::array<PerformedMove, 60> performedMoves;
 
     public:
         GameState();
@@ -36,6 +37,8 @@ namespace Piranhas {
         std::vector<Move> GetPossibleMoves() const;
         void PerformMove(Move &move);
         void RevertLastPerformedMove();
+
+        Move GetLastPerformedMove();
 
         bool IsGameOver() const;
         GameResult GetGameResult() const;
