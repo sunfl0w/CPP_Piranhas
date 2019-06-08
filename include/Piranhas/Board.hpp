@@ -2,6 +2,7 @@
 
 #include <array>
 #include <unordered_set>
+#include <unordered_map>
 #include <vector>
 #include <iostream>
 #include <memory>
@@ -39,6 +40,8 @@ namespace Piranhas {
 
         std::unordered_set<Field> GetSwarm(std::vector<Field> &found, std::unordered_set<Field> &swarm, int index) const;
         std::unordered_set<Field> GetGreatestSwarmFromParentSet(std::vector<Field> fieldsToSearch) const;
+    public:
+        int GetBiggestSwarmSizeTest(std::vector<Field> &checkers) const;
 
     public:
         Board();
@@ -49,8 +52,8 @@ namespace Piranhas {
 
         void Populate();
 
-        Field GetField(const Position &pos) const;
-        Field GetField(int x, int y) const;
+        const Field& GetField(const Position &pos) const;
+        const Field& GetField(int x, int y) const;
         
         void SetFieldTypeAtPosition(const Position &position, FieldType fieldType);
         void SetFieldTypeAtPosition(int x, int y, FieldType fieldType);

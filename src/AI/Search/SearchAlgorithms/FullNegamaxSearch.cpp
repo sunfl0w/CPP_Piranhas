@@ -38,8 +38,8 @@ EvaluatedGameState FullNegamaxSearch::Search(GameState &gameState, int depth, fl
 
 
     if (depth == 0 || gameState.IsGameOver()) {
-        float eval = Evaluator::EvaluateGameState(gameState);
-        //float eval = QuiescenceSearch::Search(gameState, 10, alpha, beta, searchInformation).eval;
+        //float eval = Evaluator::EvaluateGameState(gameState);
+        float eval = QuiescenceSearch::Search(gameState, 10, alpha, beta, searchInformation).eval;
         return EvaluatedGameState(gameState, eval);
     }
 

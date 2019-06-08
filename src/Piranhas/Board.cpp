@@ -155,9 +155,9 @@ std::vector<Field> Board::GetFieldsDownRightUpLeft(const Position &includedPos) 
 
 std::unordered_set<Field> Board::GetSwarm(std::vector<Field> &found, std::unordered_set<Field> &swarm, int index) const {
     if (swarm.size() == 0 && found.size() > 0) {
-        Field field = found[index];
-        swarm.insert(field);
-        found.erase(std::remove(found.begin(), found.end(), field), found.end());
+        //Field field = found[index];
+        swarm.insert(found[index]);
+        found.erase(std::remove(found.begin(), found.end(), found[index]), found.end());
     }
 
     std::unordered_set<Field> tmpSwarm(swarm);
@@ -203,6 +203,40 @@ std::unordered_set<Field> Board::GetGreatestSwarmFromParentSet(std::vector<Field
         }
     }
     return greatestSwarm;
+}
+
+int Board::GetBiggestSwarmSizeTest(std::vector<Field> &checkers) const {
+    int maxSwarmSize = -100;
+    FieldType fieldType = checkers[0].fieldType;
+    std::unordered_map<int, Position> searchedPositions;
+
+    for (Field checker : checkers) {
+        int checkerCount = checkers.size();
+        if(maxSwarmSize >= checkerCount / 2) {
+            break;
+        }
+        std::vector<Position> searchQueue;
+        int swarmSize = 0;
+        if (checker.fieldType == fieldType && searchedPositions.find(checker.position.y * 10 + checker.position.x) == searchedPositions.end()) {
+            swarmSize++;
+            searchQueue.push_back(checker.position);
+            searchedPositions[checker.position.y * 10 + checker.position.x] = checker.position;
+        }
+        while (!searchQueue.empty()) {
+            Position searchPos = searchQueue[0];
+            searchQueue.erase(searchQueue.begin());
+            std::vector<Field> neighbours = GetNeighbouringFieldsOfType(searchPos, std::vector<FieldType>{fieldType});
+            for (Field neighbour : neighbours) {
+                if (neighbour.fieldType == fieldType && searchedPositions.find(neighbour.position.y * 10 + neighbour.position.x) == searchedPositions.end()) {
+                    swarmSize++;
+                    searchQueue.push_back(neighbour.position);
+                    searchedPositions[neighbour.position.y * 10 + neighbour.position.x] = neighbour.position;
+                }
+            }
+        }
+        maxSwarmSize = std::max(maxSwarmSize, swarmSize);
+    }
+    return maxSwarmSize;
 }
 
 int Board::GetFieldCountOfTypeInDirection(const Position &includedPos, const std::vector<FieldType> &fieldTypeMask, Direction direction) const {
@@ -256,10 +290,10 @@ void Board::Print() const {
     }
 }
 
-Field Board::GetField(const Position &position) const {
+const Field &Board::GetField(const Position &position) const {
     return fields[position.y * 10 + position.x];
 }
-Field Board::GetField(int x, int y) const {
+const Field &Board::GetField(int x, int y) const {
     return fields[y * 10 + x];
 }
 void Board::SetFieldTypeAtPosition(const Position &position, FieldType fieldType) {
@@ -299,7 +333,7 @@ std::vector<Field> Board::GetNeighbouringFieldsOfType(const Position &position, 
         for (int y = -1; y <= 1; y++) {
             searchX = x + position.x;
             searchY = y + position.y;
-            if(searchX == position.x && searchY == position.y) {
+            if (searchX == position.x && searchY == position.y) {
                 continue;
             }
             if (searchX < 0 || searchY < 0 || searchX > 9 || searchY > 9) {
@@ -433,11 +467,13 @@ bool Board::IsMovePathBlocked(const Move &move, FieldType blockingFieldType, con
 int Board::GetBiggestSwarmSize(const Player &player) const {
     std::vector<Field> checkerFields = GetAllFieldsOfSameType(player.fieldType);
     return GetBiggestSwarmSize(checkerFields);
+    //return GetBiggestSwarmSizeTest(checkerFields);
 }
 
 int Board::GetBiggestSwarmSize(std::vector<Field> checkerFields) const {
     std::unordered_set<Field> swarmFields = GetGreatestSwarmFromParentSet(checkerFields);
     return swarmFields.size();
+    //return GetBiggestSwarmSizeTest(checkerFields);
 }
 
 bool Board::IsSwarmComplete(const Player &player) const {

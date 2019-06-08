@@ -17,6 +17,7 @@ void Bench1();
 void Bench2();
 void Bench3();
 void Bench4();
+void Bench5();
 void Test();
 
 int main(int argc, char *argv[]) {
@@ -63,6 +64,8 @@ int main(int argc, char *argv[]) {
         Bench1();
         Bench2();
         Bench3();
+        Bench4();
+        Bench5();
     }*/
     //Test();
     //std::getchar();
@@ -116,6 +119,19 @@ void Bench4() {
         count++;
     }
     std::cout << "Performed move and reverted it " + std::to_string(count) + " times in 1600ms\n";
+}
+
+void Bench5() {
+    int count = 0;
+    GameState gameState = GameState(PlayerColor::Red);
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    while (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count() < 1600) {
+        std::vector<Field> checkers = gameState.board.GetAllFieldsOfSameType(FieldType::Red);
+        int swarmSize = gameState.board.GetBiggestSwarmSizeTest(checkers);
+        //std::cout << "Size: " << swarmSize << "\n";
+        count++;
+    }
+    std::cout << "Searched swarm " + std::to_string(count) + " times in 1600ms\n";
 }
 
 void Test() {
