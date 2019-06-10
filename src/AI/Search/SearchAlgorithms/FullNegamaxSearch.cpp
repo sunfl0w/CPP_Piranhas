@@ -49,9 +49,9 @@ EvaluatedGameState FullNegamaxSearch::Search(GameState &gameState, int depth, fl
     //NullMoveHeuristic
     if (allowNullMove && depth > 2 && gameState.turnCount < 46 && searchInformation.searchDepth != depth) {
         int r = 1;
-        if(depth > 4) {
+        /*if(depth > 4) {
             r = 2;
-        }
+        }*/
 
         GameState nullGameState = GameState(gameState);
         nullGameState.SwapPlayers();
