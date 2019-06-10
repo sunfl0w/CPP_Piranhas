@@ -20,41 +20,44 @@ EvaluatedGameState FullNegamaxSearch::Search(GameState &gameState, int depth, fl
 
     float originalAlpha = alpha;
     //TranspositionTableLookup
-    if(transpositionTable->HasTranspositionEntry(gameState)) {
+    if (transpositionTable->HasTranspositionEntry(gameState)) {
         TranspositionEntry transpositionEntry = transpositionTable->GetTranspositionEntry(gameState);
-        if(transpositionEntry.depth >= depth) {
-            if(transpositionEntry.flag == TranspositionFlag::Exact) {
+        if (transpositionEntry.depth >= depth) {
+            if (transpositionEntry.flag == TranspositionFlag::Exact) {
                 return EvaluatedGameState(gameState, transpositionEntry.eval);
-            } else if(transpositionEntry.flag == TranspositionFlag::LowerBound) {
+            } else if (transpositionEntry.flag == TranspositionFlag::LowerBound) {
                 alpha = std::max(alpha, transpositionEntry.eval);
-            } else if(transpositionEntry.flag == TranspositionFlag::UpperBound) {
+            } else if (transpositionEntry.flag == TranspositionFlag::UpperBound) {
                 beta = std::min(beta, transpositionEntry.eval);
             }
         }
-        if(alpha >= beta) {
+        if (alpha >= beta) {
             return EvaluatedGameState(gameState, transpositionEntry.eval);
         }
     }
 
-
-    if (depth == 0 || gameState.IsGameOver()) {
-        //float eval = Evaluator::EvaluateGameState(gameState);
-        float eval = QuiescenceSearch::Search(gameState, 10, alpha, beta, searchInformation).eval;
-        return EvaluatedGameState(gameState, eval);
+    if (gameState.IsGameOver()) {
+            return EvaluatedGameState(gameState, Evaluator::EvaluateGameState(gameState));
+    }
+    if (depth == 0) {      
+        QuiescenceSearch quiescenceSearch = QuiescenceSearch();
+        float eval = quiescenceSearch.Search(gameState, 8, alpha, beta, searchInformation).eval;
+        nodesSearched += quiescenceSearch.nodesSearched;
+        return EvaluatedGameState(gameState, eval);       
     }
 
     //NullMoveHeuristic
-    if(allowNullMove && depth > 2 && gameState.turnCount < 46 && searchInformation.searchDepth != depth) {
+    if (allowNullMove && depth > 2 && gameState.turnCount < 46 && searchInformation.searchDepth != depth) {
         int r = 1;
-        /*if(depth > 4) {
+        if(depth > 4) {
             r = 2;
-        }*/
+        }
 
         GameState nullGameState = GameState(gameState);
         nullGameState.SwapPlayers();
 
-        EvaluatedGameState nullEval = EvaluatedGameState(gameState, - Search(nullGameState, depth - r - 1, -beta, -beta + 1, searchInformation, false).eval);
-        if(nullEval.eval >= beta) {
+        EvaluatedGameState nullEval = EvaluatedGameState(gameState, -Search(nullGameState, depth - r - 1, -beta, -beta + 1, searchInformation, false).eval);
+        if (nullEval.eval >= beta) {
             return nullEval;
         }
     }
@@ -93,12 +96,12 @@ EvaluatedGameState FullNegamaxSearch::Search(GameState &gameState, int depth, fl
     }
 
     //TranspositionTableLookupAndUpdate
-    if(transpositionTable->HasTranspositionEntry(gameState)) {
+    if (transpositionTable->HasTranspositionEntry(gameState)) {
         TranspositionEntry transpositionEntry = transpositionTable->GetTranspositionEntry(gameState);
         transpositionEntry.eval = maxEval.eval;
-        if(maxEval.eval <= originalAlpha) {
+        if (maxEval.eval <= originalAlpha) {
             transpositionEntry.flag = TranspositionFlag::UpperBound;
-        } else if(maxEval.eval >= beta) {
+        } else if (maxEval.eval >= beta) {
             transpositionEntry.flag = TranspositionFlag::LowerBound;
         } else {
             transpositionEntry.flag = TranspositionFlag::Exact;
@@ -108,9 +111,9 @@ EvaluatedGameState FullNegamaxSearch::Search(GameState &gameState, int depth, fl
     } else {
         TranspositionEntry transpositionEntry = TranspositionEntry(0.0f, 0, TranspositionFlag::Exact, Move(maxEval.gameState.GetLastPerformedMove()));
         transpositionEntry.eval = maxEval.eval;
-        if(maxEval.eval <= originalAlpha) {
+        if (maxEval.eval <= originalAlpha) {
             transpositionEntry.flag = TranspositionFlag::UpperBound;
-        } else if(maxEval.eval >= beta) {
+        } else if (maxEval.eval >= beta) {
             transpositionEntry.flag = TranspositionFlag::LowerBound;
         } else {
             transpositionEntry.flag = TranspositionFlag::Exact;

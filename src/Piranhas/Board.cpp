@@ -350,6 +350,43 @@ std::vector<Field> Board::GetNeighbouringFieldsOfType(const Position &position, 
     return neighbouringFields;
 }
 
+Position Board::GetMoveShiftPosition(Direction moveDir) const {
+    int shiftX = 0;
+    int shiftY = 0;
+
+    switch (moveDir) {
+    case Direction::Up_Right:
+        shiftX = 1;
+        shiftY = 1;
+        break;
+    case Direction::Up:
+        shiftY = 1;
+        break;
+    case Direction::Down_Right:
+        shiftX = 1;
+        shiftY = -1;
+        break;
+    case Direction::Right:
+        shiftX = 1;
+        break;
+    case Direction::Down_Left:
+        shiftX = -1;
+        shiftY = -1;
+        break;
+    case Direction::Down:
+        shiftY = -1;
+        break;
+    case Direction::Up_Left:
+        shiftX = -1;
+        shiftY = 1;
+        break;
+    case Direction::Left:
+        shiftX = -1;
+        break;
+    }
+    return Position(shiftX, shiftY);
+}
+
 std::vector<Field> Board::GetFieldsMovePasses(const Move &move) const {
     Position moveShiftPosition = move.GetShiftPosition();
     int moveDistance = GetMoveDistance(move);
@@ -368,13 +405,29 @@ std::vector<Field> Board::GetFieldsMovePasses(const Move &move) const {
 
 std::vector<Field> Board::GetFieldsMovePasses(const Move &move, const std::vector<Field> &fieldsInMoveDirection) const {
     Position moveShiftPosition = move.GetShiftPosition();
-    int moveDistance = GetMoveDistance(move, fieldsInMoveDirection);
+    int moveDistance = GetMoveDistance(fieldsInMoveDirection);
     std::vector<Field> passedFields;
     passedFields.reserve(moveDistance);
 
     for (int i = 1; i < moveDistance; i++) {
         int x = move.GetStartPosition().x + moveShiftPosition.x * i;
         int y = move.GetStartPosition().y + moveShiftPosition.y * i;
+        if (IsPositionOnBoard(Position(x, y))) {
+            passedFields.push_back(GetField(x, y));
+        }
+    }
+    return passedFields;
+}
+
+std::vector<Field> Board::GetFieldsMovePasses(const Position &moveStartPos, Direction moveDir, const std::vector<Field> &fieldsInMoveDirection) const {
+    Position moveShiftPosition = GetMoveShiftPosition(moveDir);
+    int moveDistance = GetMoveDistance(fieldsInMoveDirection);
+    std::vector<Field> passedFields;
+    passedFields.reserve(moveDistance);
+
+    for (int i = 1; i < moveDistance; i++) {
+        int x = moveStartPos.x + moveShiftPosition.x * i;
+        int y = moveStartPos.y + moveShiftPosition.y * i;
         if (IsPositionOnBoard(Position(x, y))) {
             passedFields.push_back(GetField(x, y));
         }
@@ -401,7 +454,7 @@ int Board::GetMoveDistance(const Move &move) const {
     return GetCheckerCountInDirection(move.GetStartPosition(), move.GetDirection());
 }
 
-int Board::GetMoveDistance(const Move &move, const std::vector<Field> &fieldsInMoveDirection) const {
+int Board::GetMoveDistance(const std::vector<Field> &fieldsInMoveDirection) const {
     return GetCheckerCountInDirection(fieldsInMoveDirection);
 }
 
@@ -409,6 +462,42 @@ Position Board::GetDestinationPositionOfMove(const Move &move, int moveDistance)
     Position destinationPos = move.GetStartPosition();
 
     switch (move.GetDirection()) {
+    case Direction::Up:
+        destinationPos.y += moveDistance;
+        break;
+    case Direction::Down:
+        destinationPos.y -= moveDistance;
+        break;
+    case Direction::Right:
+        destinationPos.x += moveDistance;
+        break;
+    case Direction::Left:
+        destinationPos.x -= moveDistance;
+        break;
+    case Direction::Down_Right:
+        destinationPos.x += moveDistance;
+        destinationPos.y -= moveDistance;
+        break;
+    case Direction::Down_Left:
+        destinationPos.x -= moveDistance;
+        destinationPos.y -= moveDistance;
+        break;
+    case Direction::Up_Right:
+        destinationPos.x += moveDistance;
+        destinationPos.y += moveDistance;
+        break;
+    case Direction::Up_Left:
+        destinationPos.x -= moveDistance;
+        destinationPos.y += moveDistance;
+        break;
+    }
+    return destinationPos;
+}
+
+Position Board::GetDestinationPositionOfMove(const Position &moveStartPos, Direction moveDir, int moveDistance) const {
+    Position destinationPos = moveStartPos;
+
+    switch (moveDir) {
     case Direction::Up:
         destinationPos.y += moveDistance;
         break;
@@ -464,16 +553,61 @@ bool Board::IsMovePathBlocked(const Move &move, FieldType blockingFieldType, con
     return false;
 }
 
+bool Board::IsMovePathBlocked(const Position &moveStartPos, Direction moveDir, FieldType blockingFieldType, const std::vector<Field> &fieldsInMoveDirection) const {
+    for (Field field : GetFieldsMovePasses(moveStartPos, moveDir, fieldsInMoveDirection)) {
+        if (field.fieldType == blockingFieldType) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Board::IsMovePathBlocked(const Move &move, int moveDistance, FieldType enemyFieldType) const {
+    Position shiftPos = move.GetShiftPosition();
+    Position moveStartPos = move.GetStartPosition();
+
+    Field destinationfield = GetField(moveStartPos.x + moveDistance * shiftPos.x, moveStartPos.y + moveDistance * shiftPos.y);
+            if(!(destinationfield.fieldType == FieldType::Empty || destinationfield.fieldType == enemyFieldType)) {
+                return true;
+            } 
+        
+
+    for(int i = 1; i < moveDistance; i++) {
+        /*if(i < moveDistance && GetField(move.GetStartPosition().x + i * shiftPos.x, move.GetStartPosition().y + i * shiftPos.y).fieldType == enemyFieldType) {
+            return true;
+        }
+        if(i == moveDistance) {
+            if(GetField(move.GetStartPosition().x + i * shiftPos.x, move.GetStartPosition().y + i * shiftPos.y).fieldType == FieldType::Empty || GetField(move.GetStartPosition().x + i * shiftPos.x, move.GetStartPosition().y + i * shiftPos.y).fieldType == enemyFieldType) {
+                return false;
+            } else {
+                return true;
+            }
+        }*/
+        Field field = GetField(moveStartPos.x + i * shiftPos.x, moveStartPos.y + i * shiftPos.y);
+        if(i < moveDistance && field.fieldType == enemyFieldType) {
+            return true;
+        }
+        /*if(i == moveDistance) {
+            if(field.fieldType == FieldType::Empty || field.fieldType == enemyFieldType) {
+                return false;
+            } else {
+                return true;
+            }
+        }*/
+    }
+    return false;
+}
+
 int Board::GetBiggestSwarmSize(const Player &player) const {
     std::vector<Field> checkerFields = GetAllFieldsOfSameType(player.fieldType);
-    return GetBiggestSwarmSize(checkerFields);
-    //return GetBiggestSwarmSizeTest(checkerFields);
+    //return GetBiggestSwarmSize(checkerFields);
+    return GetBiggestSwarmSizeTest(checkerFields);
 }
 
 int Board::GetBiggestSwarmSize(std::vector<Field> checkerFields) const {
-    std::unordered_set<Field> swarmFields = GetGreatestSwarmFromParentSet(checkerFields);
-    return swarmFields.size();
-    //return GetBiggestSwarmSizeTest(checkerFields);
+    //std::unordered_set<Field> swarmFields = GetGreatestSwarmFromParentSet(checkerFields);
+    //return swarmFields.size();
+    return GetBiggestSwarmSizeTest(checkerFields);
 }
 
 bool Board::IsSwarmComplete(const Player &player) const {

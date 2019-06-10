@@ -56,7 +56,8 @@ const TranspositionEntry &TranspositionTable::GetTranspositionEntry(const Piranh
     if (iterator != table.end()) {
         return iterator->second;
     } else {
-        return TranspositionEntry(0.0f, 0, TranspositionFlag::Exact, Piranhas::Move(Piranhas::Position(0, 0), Piranhas::Direction::Up));
+        TranspositionEntry transpositionEntry = TranspositionEntry(0.0f, 0, TranspositionFlag::Exact, Piranhas::Move(Piranhas::Position(0, 0), Piranhas::Direction::Up));
+        return transpositionEntry;
     }
 }
 

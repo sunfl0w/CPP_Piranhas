@@ -10,12 +10,14 @@ namespace Piranhas {
         Move move;
         Position destinationPos;
         FieldType formerDestinationFieldType;
+        bool isCapture;
 
         PerformedMove() {}
-        PerformedMove(const Move &move, const Position &destinationPos, FieldType formerDestinationFieldType) {
+        PerformedMove(const Move &move, const Position &destinationPos, FieldType formerDestinationFieldType, bool isCapture) {
             this->move = move;
             this->destinationPos = destinationPos;
             this->formerDestinationFieldType = formerDestinationFieldType;
+            this->isCapture = isCapture;
         }
     };
 }

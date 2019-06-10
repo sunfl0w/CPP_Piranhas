@@ -201,6 +201,7 @@ GameState SC_MessageHandler::GetGameStateFromGameStateMessage(SC_Message message
             gameState.board.SetFieldTypeAtPosition(fieldPos, fieldType);
         }
     }
+    gameState.moveDistanceBoard = MoveDistanceBoard(gameState.board);
 
     return gameState;
 }

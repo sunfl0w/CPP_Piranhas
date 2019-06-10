@@ -9,6 +9,7 @@ build/AI/Search/SearchAlgorithms/NegaScoutSearch.o: \
  include/Piranhas/Field.hpp include/Piranhas/GameResult.hpp \
  include/Piranhas/Constants/Constants.hpp \
  include/Piranhas/PerformedMove.hpp \
+ include/Piranhas/MoveDistanceBoard.hpp \
  include/AI/Search/Helpers/SearchInformation.hpp \
  include/AI/Heuristics/KillerHeuristic.hpp \
  include/AI/Transposition/TranspositionTable.hpp \
@@ -55,6 +56,8 @@ include/Piranhas/GameResult.hpp:
 include/Piranhas/Constants/Constants.hpp:
 
 include/Piranhas/PerformedMove.hpp:
+
+include/Piranhas/MoveDistanceBoard.hpp:
 
 include/AI/Search/Helpers/SearchInformation.hpp:
 

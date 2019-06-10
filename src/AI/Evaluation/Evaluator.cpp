@@ -97,16 +97,21 @@ float Evaluator::EvaluateMidGame(const GameState &gameState) {
     float centerOfMassEval = (CenterOfMassEvaluation::Evaluate(redFields) - CenterOfMassEvaluation::Evaluate(blueFields)) * 1.0f;
     float connectednessEval = (ConnectednessEvaluation::Evaluate(redFields, gameState.board) - ConnectednessEvaluation::Evaluate(blueFields, gameState.board)) * 0.5f;
     float uniformityEval = (UniformityEvaluation::Evaluate(redFields) - UniformityEvaluation::Evaluate(blueFields)) * 5.0f;
-    float materialEval = (redCheckerCount - blueCheckerCount) * 5.0f;
+    float materialEval = (redCheckerCount - blueCheckerCount) * 4.0f;
 
     int redSwarmSize = gameState.board.GetBiggestSwarmSize(redFields);
     int blueSwarmSize = gameState.board.GetBiggestSwarmSize(blueFields);
 
     float swarmEval = 0.0f;
     if (gameState.turnCount > 42) {
-        swarmEval = (float)((float)redSwarmSize / redCheckerCount - (float)blueSwarmSize / blueCheckerCount) * 100.0f;
-        if (gameState.turnCount > 26) {
-            swarmEval += (redSwarmSize - blueSwarmSize) * 1.0f;
+        swarmEval = (float)((float)redSwarmSize / redCheckerCount - (float)blueSwarmSize / blueCheckerCount) * 100.0f;        
+        swarmEval += (redSwarmSize - blueSwarmSize) * 1.0f;
+        
+        if(redSwarmSize == redCheckerCount) {
+            swarmEval += 100.0f;
+        }
+        if(blueSwarmSize == blueCheckerCount) {
+            swarmEval += -100.0f;
         }
     }
 

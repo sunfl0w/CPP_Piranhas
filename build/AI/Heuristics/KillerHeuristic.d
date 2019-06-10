@@ -6,7 +6,8 @@ build/AI/Heuristics/KillerHeuristic.o: \
  include/Piranhas/PlayerColor.hpp include/Piranhas/Player.hpp \
  include/Piranhas/Board.hpp include/Piranhas/Field.hpp \
  include/Piranhas/GameResult.hpp include/Piranhas/Constants/Constants.hpp \
- include/Piranhas/PerformedMove.hpp
+ include/Piranhas/PerformedMove.hpp \
+ include/Piranhas/MoveDistanceBoard.hpp
 
 include/AI/Heuristics/KillerHeuristic.hpp:
 
@@ -33,3 +34,5 @@ include/Piranhas/GameResult.hpp:
 include/Piranhas/Constants/Constants.hpp:
 
 include/Piranhas/PerformedMove.hpp:
+
+include/Piranhas/MoveDistanceBoard.hpp:

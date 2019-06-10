@@ -12,11 +12,13 @@ using namespace Piranhas::Constants;
 
 GameState::GameState() {
     board = Board();
+    moveDistanceBoard = MoveDistanceBoard();
     turnCount = 0;
 }
 
 GameState::GameState(PlayerColor startingPlayerColor) {
     board = Board();
+    moveDistanceBoard = MoveDistanceBoard();
     board.Populate();
     turnCount = 0;
     currentPlayer = Player(startingPlayerColor);
@@ -24,6 +26,7 @@ GameState::GameState(PlayerColor startingPlayerColor) {
 
 GameState::GameState(GameState &gameState) {
     board = Board(gameState.board);
+    moveDistanceBoard = MoveDistanceBoard(gameState.moveDistanceBoard);
     turnCount = gameState.turnCount;
     currentPlayer = Player(gameState.currentPlayer);
     performedMoves = std::array<PerformedMove, 60>(gameState.performedMoves);
@@ -31,6 +34,7 @@ GameState::GameState(GameState &gameState) {
 
 GameState::GameState(const GameState &gameState) {
     board = Board(gameState.board);
+    moveDistanceBoard = MoveDistanceBoard(gameState.moveDistanceBoard);
     turnCount = gameState.turnCount;
     currentPlayer = Player(gameState.currentPlayer);
     performedMoves = std::array<PerformedMove, 60>(gameState.performedMoves);
@@ -61,14 +65,14 @@ bool GameState::IsMoveValid(Move &move) const {
         //std::cout << "NotOfOwnPlayer" << "\n";
         return false;
     }
-    int moveDistance = board.GetMoveDistance(move);
+    int moveDistance = moveDistanceBoard.GetMoveDistance(move);//board.GetMoveDistance(move);
     Position destinationPos = board.GetDestinationPositionOfMove(move, moveDistance);
     if (!board.IsPositionOnBoard(destinationPos)) {
         //std::cout << "DestNotOnBoard" << "\n";
         return false;
     }
     FieldType otherPlayerFieldType = GetOtherPlayer().fieldType;
-    if (board.IsMovePathBlocked(move, otherPlayerFieldType)) {
+    /*if (board.IsMovePathBlocked(move, otherPlayerFieldType)) {
         //std::cout << "Blocked" << "\n";
         return false;
     }
@@ -77,7 +81,11 @@ bool GameState::IsMoveValid(Move &move) const {
     } else {
         //std::cout << "DestBlocked" << "\n";
         return false;
+    }*/
+    if(board.IsMovePathBlocked(move, moveDistance, otherPlayerFieldType)) {
+        return false;
     }
+    return true;
 }
 
 bool GameState::IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirection) const {
@@ -87,13 +95,37 @@ bool GameState::IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirectio
     if (board.GetField(move.GetStartPosition()).fieldType != currentPlayer.fieldType) {
         return false;
     }
-    int moveDistance = board.GetCheckerCountInDirection(fieldsInMoveDirection);
+    int moveDistance = moveDistanceBoard.GetMoveDistance(move);//board.GetCheckerCountInDirection(fieldsInMoveDirection);
     Position destinationPos = board.GetDestinationPositionOfMove(move, moveDistance);
     if (!board.IsPositionOnBoard(destinationPos)) {
         return false;
     }
     FieldType otherPlayerFieldType = GetOtherPlayer().fieldType;
     if (board.IsMovePathBlocked(move, otherPlayerFieldType, fieldsInMoveDirection)) {
+        return false;
+    }
+    if (board.GetField(destinationPos).fieldType == otherPlayerFieldType || board.GetField(destinationPos).fieldType == FieldType::Empty) {
+        return true;
+    } else {
+        return false;
+    }
+    return true;
+}
+
+bool GameState::IsMoveValid(Position &moveStartPos, Direction moveDir, std::vector<Field> &fieldsInMoveDirection) const {
+    if (!board.IsPositionOnBoard(moveStartPos)) {
+        return false;
+    }
+    if (board.GetField(moveStartPos).fieldType != currentPlayer.fieldType) {
+        return false;
+    }
+    int moveDistance = moveDistanceBoard.GetMoveDistance(Move(moveStartPos, moveDir));//board.GetCheckerCountInDirection(fieldsInMoveDirection);
+    Position destinationPos = board.GetDestinationPositionOfMove(moveStartPos, moveDir, moveDistance);
+    if (!board.IsPositionOnBoard(destinationPos)) {
+        return false;
+    }
+    FieldType otherPlayerFieldType = GetOtherPlayer().fieldType;
+    if (board.IsMovePathBlocked(moveStartPos, moveDir, otherPlayerFieldType, fieldsInMoveDirection)) {
         return false;
     }
     if (board.GetField(destinationPos).fieldType == otherPlayerFieldType || board.GetField(destinationPos).fieldType == FieldType::Empty) {
@@ -112,12 +144,15 @@ std::vector<Move> GameState::GetPossibleMoves() const {
             Field field = board.GetField(x, y);
             if (field.fieldType == currentPlayer.fieldType) {
                 for (Direction dir : directions) {
-                    std::vector<Field> fieldsInMoveDirection = board.GetFieldsInDirection(field.position, dir);
-                    int moveDistance = board.GetCheckerCountInDirection(fieldsInMoveDirection);
+                    //std::vector<Field> fieldsInMoveDirection = board.GetFieldsInDirection(field.position, dir);
+                    //int moveDistance = board.GetCheckerCountInDirection(fieldsInMoveDirection);
                     Move possibleMove = Move(field.position, dir);
-                    if (IsMoveValid(possibleMove, fieldsInMoveDirection)) {
+                    if (IsMoveValid(possibleMove)) {
                         possibleMoves.push_back(possibleMove);
                     }
+                    /*if (IsMoveValid(field.position, dir, fieldsInMoveDirection)) {
+                        possibleMoves.push_back(Move(field.position, dir));
+                    }*/
                 }
             }
         }
@@ -126,19 +161,23 @@ std::vector<Move> GameState::GetPossibleMoves() const {
 }
 
 void GameState::PerformMove(Move &move) {
-    if (IsGameOver()) {
+    /*if (IsGameOver()) {
         std::cout << "Game is over. Move will not be performed."
                   << "\n";
-    }
+    }*/
     if (IsMoveValid(move)) {
         Position destinationPos = board.GetDestinationPositionOfMove(move);
         Position startPos = move.GetStartPosition();
-        performedMoves[turnCount] = PerformedMove(move, destinationPos, board.GetField(destinationPos).fieldType);
+        bool isMoveCaptue = IsCapture(destinationPos);
+        performedMoves[turnCount] = PerformedMove(move, destinationPos, board.GetField(destinationPos).fieldType, isMoveCaptue);
         board.SetFieldTypeAtPosition(startPos, FieldType::Empty);
         board.SetFieldTypeAtPosition(destinationPos, currentPlayer.fieldType);
 
+        moveDistanceBoard.PerformMove(startPos, destinationPos, isMoveCaptue);
+
         turnCount++;
         SwapPlayers();
+        
         //std::cout << "";
 
     } else {
@@ -152,23 +191,34 @@ void GameState::RevertLastPerformedMove() {
     board.SetFieldTypeAtPosition(performedMove.move.GetStartPosition(), currentPlayer.GetOppositePlayer().fieldType);
     board.SetFieldTypeAtPosition(performedMove.destinationPos, performedMove.formerDestinationFieldType);
 
+    moveDistanceBoard.RevertMove(performedMove);
+
     turnCount--;
     SwapPlayers();
 }
 
-bool GameState::IsGameOver() const {
-    if (turnCount >= 60) {
-        //std::cout << "Turn limit." << "”\n";
-        return true;
-    } else if (currentPlayer.color == PlayerColor::Red && board.IsSwarmComplete(PlayerColor::Red)) {
-        //std::cout << "RED." << "”\n";
-        return true;
-    } else if (board.IsSwarmComplete(PlayerColor::Blue)) {
-        //std::cout << "BLUE." << "”\n";
+bool GameState::IsCapture(const Position &moveDestinationPos) const {
+    if(board.GetField(moveDestinationPos).fieldType == currentPlayer.GetOppositePlayer().fieldType) {
         return true;
     } else {
         return false;
     }
+}
+
+bool GameState::IsGameOver() const {
+    if(turnCount % 2 == 1) {
+        return false;
+    }
+    if (turnCount >= 60) {
+        //std::cout << "Turn limit." << "”\n";
+        return true;
+    } 
+    
+    if(board.IsSwarmComplete(PlayerColor::Red) || board.IsSwarmComplete(PlayerColor::Blue)) {
+        return true;
+    }
+        
+    return false;   
 }
 
 Move GameState::GetLastPerformedMove() {

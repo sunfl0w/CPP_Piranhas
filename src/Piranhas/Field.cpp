@@ -15,7 +15,7 @@ Field::Field(FieldType fieldType, Position position) {
     this->position = position;
 }
 
-bool Field::IsChecker() {
+bool Field::IsChecker() const {
     if(fieldType == FieldType::Red || fieldType == FieldType::Blue) {
         return true;
     } else {

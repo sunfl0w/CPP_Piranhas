@@ -9,6 +9,7 @@ build/AI/Logic/Piranhas_MCTS_Logic.o: \
  include/Piranhas/Board.hpp include/Piranhas/Field.hpp \
  include/Piranhas/Constants/Constants.hpp \
  include/Piranhas/PerformedMove.hpp \
+ include/Piranhas/MoveDistanceBoard.hpp \
  include/AI/Search/SearchAlgorithms/MCTS/MCTS_Node.hpp \
  include/AI/Logic/PiranhasLogic.hpp
 
@@ -39,6 +40,8 @@ include/Piranhas/Field.hpp:
 include/Piranhas/Constants/Constants.hpp:
 
 include/Piranhas/PerformedMove.hpp:
+
+include/Piranhas/MoveDistanceBoard.hpp:
 
 include/AI/Search/SearchAlgorithms/MCTS/MCTS_Node.hpp:
 

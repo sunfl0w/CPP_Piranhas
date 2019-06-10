@@ -10,11 +10,13 @@
 #include "Piranhas/GameResult.hpp"
 #include "Piranhas/Constants/Constants.hpp"
 #include "Piranhas/PerformedMove.hpp"
+#include "Piranhas/MoveDistanceBoard.hpp"
 
 namespace Piranhas {
     class GameState {
     public:
         Board board;
+        MoveDistanceBoard moveDistanceBoard;
         int turnCount;
         Player currentPlayer;
         Player startingPlayer;
@@ -33,10 +35,13 @@ namespace Piranhas {
 
         bool IsMoveValid(Move &move) const;
         bool IsMoveValid(Move &move, std::vector<Field> &fieldsInMoveDirection) const;
+        bool IsMoveValid(Position &moveStartPos, Direction moveDir, std::vector<Field> &fieldsInMoveDirection) const;
 
         std::vector<Move> GetPossibleMoves() const;
         void PerformMove(Move &move);
         void RevertLastPerformedMove();
+
+        bool IsCapture(const Position &moveDestinationPos) const;
 
         Move GetLastPerformedMove();
 

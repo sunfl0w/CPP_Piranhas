@@ -63,8 +63,11 @@ namespace Piranhas {
         std::vector<Field> GetNeighbouringFields(const Position &pos) const;
         std::vector<Field> GetNeighbouringFieldsOfType(const Position &pos, const std::vector<FieldType> &fieldTypeMask) const;
 
+        Position GetMoveShiftPosition(Direction moveDir) const;
+
         std::vector<Field> GetFieldsMovePasses(const Move &move) const;
         std::vector<Field> GetFieldsMovePasses(const Move &move, const std::vector<Field> &fieldsInMoveDirection) const;
+        std::vector<Field> GetFieldsMovePasses(const Position &moveStartPos, Direction moveDir, const std::vector<Field> &fieldsInMoveDirection) const;
 
         std::vector<Field> GetFieldsInDirection(const Position &includedPos, Direction direction) const;
         int GetFieldCountOfTypeInDirection(const Position &includedPos, const std::vector<FieldType> &fieldTypeMask, Direction direction) const;
@@ -74,12 +77,16 @@ namespace Piranhas {
         std::vector<Field> GetAllFieldsOfSameType(FieldType fieldType) const;
 
         int GetMoveDistance(const Move &move) const;
-        int GetMoveDistance(const Move &move, const std::vector<Field> &fieldsInMoveDirection) const;
+        int GetMoveDistance(const std::vector<Field> &fieldsInMoveDirection) const;
+
         Position GetDestinationPositionOfMove(const Move &move, int moveDistance) const;
+        Position GetDestinationPositionOfMove(const Position &moveStartPos, Direction moveDir, int moveDistance) const;
         Position GetDestinationPositionOfMove(const Move &move) const;
 
         bool IsMovePathBlocked(const Move &move, FieldType blockingFieldType) const;
         bool IsMovePathBlocked(const Move &move, FieldType blockingFieldType, const std::vector<Field> &fieldsInMoveDirection) const;
+        bool IsMovePathBlocked(const Position &moveStartPos, Direction moveDir, FieldType blockingFieldType, const std::vector<Field> &fieldsInMoveDirection) const;
+        bool IsMovePathBlocked(const Move &move, int moveDistance, FieldType enemyFieldType) const;
 
         int GetBiggestSwarmSize(const Player &player) const;
         int GetBiggestSwarmSize(std::vector<Field> checkerFields) const;

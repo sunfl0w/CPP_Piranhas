@@ -5,7 +5,8 @@ build/AI/Logic/PiranhasLogic.o: src/AI/Logic/PiranhasLogic.cpp \
  include/Piranhas/Position.hpp include/Piranhas/Direction.hpp \
  include/Piranhas/Board.hpp include/Piranhas/Field.hpp \
  include/Piranhas/GameResult.hpp include/Piranhas/Constants/Constants.hpp \
- include/Piranhas/PerformedMove.hpp
+ include/Piranhas/PerformedMove.hpp \
+ include/Piranhas/MoveDistanceBoard.hpp
 
 include/AI/Logic/PiranhasLogic.hpp:
 
@@ -32,3 +33,5 @@ include/Piranhas/GameResult.hpp:
 include/Piranhas/Constants/Constants.hpp:
 
 include/Piranhas/PerformedMove.hpp:
+
+include/Piranhas/MoveDistanceBoard.hpp:

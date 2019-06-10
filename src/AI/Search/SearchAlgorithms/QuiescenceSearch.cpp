@@ -7,21 +7,19 @@ using namespace Piranhas;
 
 QuiescenceSearch::QuiescenceSearch() {}
 
-std::vector<GameState> QuiescenceSearch::GetChildGameStatesWithCaptures(const GameState &gameState) {
+std::vector<Move> QuiescenceSearch::GetMovesWithCaptures(const GameState &gameState) {
     std::vector<Move> possibleMoves = gameState.GetPossibleMoves();
-    std::vector<GameState> childGameStatesPreviousCaptureMove;
+    std::vector<Move> captureMoves;
     for (Move move : possibleMoves) {
         Position moveDestinationPos = gameState.board.GetDestinationPositionOfMove(move);
         if (gameState.board.GetField(moveDestinationPos).fieldType == gameState.currentPlayer.GetOppositePlayer().fieldType) {
-            GameState childGameState = GameState(gameState);
-            childGameState.PerformMove(move);
-            childGameStatesPreviousCaptureMove.push_back(childGameState);
+            captureMoves.push_back(move);
         }
     }
-    return childGameStatesPreviousCaptureMove;
+    return captureMoves;
 }
 
-EvaluatedGameState QuiescenceSearch::Search(const GameState &gameState, unsigned int depth, float alpha, float beta, const SearchInformation &searchInformation) {
+EvaluatedGameState QuiescenceSearch::Search(GameState &gameState, unsigned int depth, float alpha, float beta, const SearchInformation &searchInformation) {
     float eval = Evaluator::EvaluateGameState(gameState);
 
     if(depth == 0 || gameState.IsGameOver() || std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - searchInformation.searchStartTimePoint).count() > searchInformation.maxSearchTimeInMs) {
@@ -35,8 +33,11 @@ EvaluatedGameState QuiescenceSearch::Search(const GameState &gameState, unsigned
         alpha = eval;
     }
 
-    for(GameState childGameState : GetChildGameStatesWithCaptures(gameState)) {
-        float captureEval = -Search(childGameState, depth - 1, -beta, -alpha, searchInformation).eval;
+    for(Move move : GetMovesWithCaptures(gameState)) {
+        gameState.PerformMove(move);
+        float captureEval = -Search(gameState, depth - 1, -beta, -alpha, searchInformation).eval;
+        gameState.RevertLastPerformedMove();
+        nodesSearched++;
 
         if(captureEval >= beta) {
             return EvaluatedGameState(gameState, beta);

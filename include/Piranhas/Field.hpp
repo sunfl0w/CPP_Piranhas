@@ -14,7 +14,7 @@ namespace Piranhas {
         Field();
         Field(FieldType fieldType, Position position);
 
-        bool IsChecker();
+        bool IsChecker() const;
 
         bool operator==(const Field &field) const;
     };

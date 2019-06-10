@@ -12,7 +12,8 @@ build/AI/Evaluation/Evaluator.o: src/AI/Evaluation/Evaluator.cpp \
  include/AI/Evaluation/UniformityEvaluation.hpp \
  include/Piranhas/GameState.hpp include/Piranhas/GameResult.hpp \
  include/Piranhas/Constants/Constants.hpp \
- include/Piranhas/PerformedMove.hpp
+ include/Piranhas/PerformedMove.hpp \
+ include/Piranhas/MoveDistanceBoard.hpp
 
 include/AI/Evaluation/Evaluator.hpp:
 
@@ -51,3 +52,5 @@ include/Piranhas/GameResult.hpp:
 include/Piranhas/Constants/Constants.hpp:
 
 include/Piranhas/PerformedMove.hpp:
+
+include/Piranhas/MoveDistanceBoard.hpp:

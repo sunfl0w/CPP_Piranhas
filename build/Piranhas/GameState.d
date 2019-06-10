@@ -5,7 +5,8 @@ build/Piranhas/GameState.o: src/Piranhas/GameState.cpp \
  include/Piranhas/Direction.hpp include/Piranhas/Board.hpp \
  include/Piranhas/Field.hpp include/Piranhas/GameResult.hpp \
  include/Piranhas/Constants/Constants.hpp \
- include/Piranhas/PerformedMove.hpp
+ include/Piranhas/PerformedMove.hpp \
+ include/Piranhas/MoveDistanceBoard.hpp
 
 include/Piranhas/GameState.hpp:
 
@@ -30,3 +31,5 @@ include/Piranhas/GameResult.hpp:
 include/Piranhas/Constants/Constants.hpp:
 
 include/Piranhas/PerformedMove.hpp:
+
+include/Piranhas/MoveDistanceBoard.hpp:

@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
         Bench5();
     }*/
     //Test();
-    //std::getchar();
+    //std::getchar();ZZ
 
     return 0;
 }
@@ -79,6 +79,7 @@ void Bench1() {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     while (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count() < 1600) {
         std::vector<Move> possibleMoves = gameState.GetPossibleMoves();
+        //std::cout << "Size: " << possibleMoves.size() << "\n";
         searchCount++;
     }
     std::cout << "Searched moves " + std::to_string(searchCount) + " times in 1600ms\n";
